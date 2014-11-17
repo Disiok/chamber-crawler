@@ -1,0 +1,36 @@
+Class:
+
+(@)Player:
+	Fields:
+		HP
+		Atk
+		Def
+		Special Effect
+
+	Subclass:
+		Shade: None
+		Drow: Magnified potion
+		Vampire: Life steal
+		Troll: Life regen
+		Goblin: Gold steal
+
+Enemies:
+	Fields:
+		HP
+		Atk
+		Def
+	Behaviours:
+		Drop gold: small or normal pile
+			Override by Human, merchant and dragon 
+		Move: 1 floor tile
+			Cannot leave room
+			Override by dragon
+	Subclass:
+		(H)uman: Drop 2 normal piles of gold
+		(D)rawf: Anti-vampire, reverse effect
+		(E)lf: Double attack, except against drow
+		(O)rc: Anti-goblin, 1.5X attack
+		(M)erchant: Neutral until attack, hostile afterwards
+		(D)ragon: Guards a treasure hoard, always spawned
+			Stationary
+		(L)Halfling: 50% dodge
