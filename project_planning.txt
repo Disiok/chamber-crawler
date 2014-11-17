@@ -13,9 +13,12 @@ same techniques as for the player character races? Explain.
 [Question] What design pattern could you use to model the effects of temporary potions (Wound/Boost
 Atk/Def) so that you do not need to explicitly track which potions the player character has consumed on
 any particular floor?
-[Answer]
+[Answer] We will use the Decorator Design pattern so that the potion itself will wrap around the original player. Thus, multiple effects can be implicitly tracked.
 
-
+[Question] How could you generate items so that the generation of Treasure and Potions reuses as much
+code as possible? That is, how would you structure your system so that the generation of a potion and then
+generation of treasure does not duplicate code?
+[Answer] ???
 
 
 Class:
