@@ -1,5 +1,24 @@
-Class:
+Questions:
+[Question] How could your design your system so that each race could be easily generated? Additionally, how difficult does such a solution make adding additional classes?
+[Answer] Our system will have classes representing each race that extend off a superclass. The superclass will contain fields common to all the races, as well as a method that returns a certain race based off the user's input. This will make race generation easy as the mapping between 's' to Shade for example, will be encapsulated in one method. It will also be easy to add additional classes by simply inheriting off the superclass.
 
+[Question] How does your system handle generating different enemies? Is it different from how you generate
+the player character? Why or why not?
+[Answer] Our system will use the Factory Design Pattern to generate enemies as there can be multiple instances of them. The player character will be generated differently with the Singleton Design Pattern as there is only one instance of the PC.
+
+[Question] How could you implement the various abilities for the enemy characters? Do you use the
+same techniques as for the player character races? Explain.
+[Answer] We will use the Visitor Design Pattern implement the abilities for both the enemies and player races, basing effects on the attacker and defender. Other effects such as Drow's potion multiplier or Human's gold drop will be implemented through overring method in their respective classes. Thus the techniques used for both the enemies and the player will be similar in nature.
+
+[Question] What design pattern could you use to model the effects of temporary potions (Wound/Boost
+Atk/Def) so that you do not need to explicitly track which potions the player character has consumed on
+any particular floor?
+[Answer]
+
+
+
+
+Class:
 (@)Player:
 	Note:
 		Singleton pattern
@@ -10,27 +29,27 @@ Class:
 		Special Effect
 
 	Subclass:
-		Shade: 
+		Shade:
 			125
 			25
 			25
 			None
-		Drow: 
+		Drow:
 			150
 			25
 			15
 			Magnified potion 1.5X
-		Vampire: 
+		Vampire:
 			50
 			25
 			25
 			Life steal, 5HP per attack, no max HP
-		Troll: 
+		Troll:
 			120
 			25
 			15
 			Life regen, 5HP per turn, max 120 HP
-		Goblin: 
+		Goblin:
 			110
 			15
 			20
@@ -44,7 +63,7 @@ Enemies:
 		Spawn chance
 	Behaviours:
 		Drop gold: small or normal pile
-			Override by Human, merchant and dragon 
+			Override by Human, merchant and dragon
 		Move: 1 floor tile
 			Cannot leave room
 			Override by dragon
@@ -57,3 +76,9 @@ Enemies:
 		(D)ragon: Guards a treasure hoard, always spawned
 			Stationary
 		(L)Halfling: 50% dodge
+
+
+Possible DLC:
+- random level gen
+- darkness
+- ASCII monsters
