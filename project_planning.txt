@@ -1,6 +1,8 @@
 Class:
 
 (@)Player:
+	Note:
+		Singleton pattern
 	Fields:
 		HP
 		Atk
@@ -8,17 +10,38 @@ Class:
 		Special Effect
 
 	Subclass:
-		Shade: None
-		Drow: Magnified potion
-		Vampire: Life steal
-		Troll: Life regen
-		Goblin: Gold steal
+		Shade: 
+			125
+			25
+			25
+			None
+		Drow: 
+			150
+			25
+			15
+			Magnified potion 1.5X
+		Vampire: 
+			50
+			25
+			25
+			Life steal, 5HP per attack, no max HP
+		Troll: 
+			120
+			25
+			15
+			Life regen, 5HP per turn, max 120 HP
+		Goblin: 
+			110
+			15
+			20
+			Gold steal, 5 per slain enemy
 
 Enemies:
 	Fields:
 		HP
 		Atk
 		Def
+		Spawn chance
 	Behaviours:
 		Drop gold: small or normal pile
 			Override by Human, merchant and dragon 
@@ -27,7 +50,7 @@ Enemies:
 			Override by dragon
 	Subclass:
 		(H)uman: Drop 2 normal piles of gold
-		(D)rawf: Anti-vampire, reverse effect
+		(D)warf: Anti-vampire, reverse effect
 		(E)lf: Double attack, except against drow
 		(O)rc: Anti-goblin, 1.5X attack
 		(M)erchant: Neutral until attack, hostile afterwards
