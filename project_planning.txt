@@ -57,3 +57,5 @@ Enemies:
 		(D)ragon: Guards a treasure hoard, always spawned
 			Stationary
 		(L)Halfling: 50% dodge
+
+Items
