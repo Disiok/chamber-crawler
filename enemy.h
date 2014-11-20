@@ -2,11 +2,18 @@
 #define ___ENEMY_H___
 #include "character.h"
 #include <string>
+
+/**
+ * Enemy:
+ * 	uncontrollable Character
+ */
 class Enemy: public Character {
 	private:
-		char typeIdentifier;
-		std::string typeName;
-		float spawnRate;
+	
 	public:
+		void move();
+		void performAction();
+		void die();
+		bool isAttacked(Character *character);
 };
 #endif
