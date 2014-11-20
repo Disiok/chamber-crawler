@@ -15,9 +15,9 @@ class Character: public Entity {
 		char typeIdentifier;
 		std::string typeName;
 		
-		int healthPoint;
-		int attack;
-		int defense;
+		int hp;
+		int atk;
+		int def;
 
 		int gold;
 
@@ -33,12 +33,12 @@ class Character: public Entity {
 		virtual void die();
 
 		// Accessors
-		int getHealthPoint();
-		int getAttack();
-		int getDefense();
+		int getHP();
+		int getAtk();
+		int getDef();
 
 		// Mutators
-		int modifyHealthPoint(int change);
+		int modifyHP(int change);
 		int modifyGold(int change);
 };
 #endif

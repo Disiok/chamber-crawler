@@ -10,6 +10,7 @@ Entity::Entity(Tile *tile): tile(tile) {
 Entity::~Entity() {}
 
 void Entity::destroy() {
+	tile->destroyEntity();
 	tile->clearEntity();
 }
 

@@ -4,8 +4,8 @@
 class Player;
 class Enemy;
 
-Cell::Cell(int i, int j):
-	i(i), j(j) {}
+Cell::Cell(int i, int j, char symbol):
+	i(i), j(j), symbol(symbol) {}
 
 Cell::~Cell() {}
 

@@ -10,9 +10,12 @@ class Cell {
 		// Coordinates
 		int i;
 		int j;
+
+		// Representation
+		char symbol;
 	public:
 		// Constructor & Destructor
-		Cell(int i, int j);
+		Cell(int i, int j, char symbol);
 		virtual ~Cell() = 0;
 		
 		// Methods
