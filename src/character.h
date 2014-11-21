@@ -18,7 +18,6 @@ class Character: public Entity {
 		int hp;
 		int atk;
 		int def;
-
 		int gold;
 
 	public:
@@ -27,18 +26,23 @@ class Character: public Entity {
 		virtual ~Character() = 0;
 
 		// Methods
-		virtual void attack(Character *character);
-		bool isAttacked(Character *character);
+		virtual void attack(Character *other);
+		virtual bool attackedBy(Character *other);
 		virtual void move();
-		virtual void die();
+		virtual void killedBy(Character *other);
+
+		virtual bool isDead();
 
 		// Accessors
-		int getHP();
-		int getAtk();
-		int getDef();
+		virtual int getHP();
+		virtual int getAtk();
+		virtual int getDef();
+		virtual int getGold();
 
 		// Mutators
-		int modifyHP(int change);
-		int modifyGold(int change);
+		virtual void setHP(int hp);
+		virtual void setAtk(int atk);
+		virtual void setDef(int def);
+		virtual void setGold(int gold);
 };
 #endif

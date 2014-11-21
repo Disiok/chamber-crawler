@@ -16,22 +16,26 @@ void Entity::destroy() {
 
 void Entity::performAction() {}
 
-bool Entity::isSteppedOn(Character *character) {
+bool Entity::steppedOnBy(Character *character) {
 	return false;
 }
 
-bool Entity::isAttacked(Character *character) {
+bool Entity::attackedBy(Character *character) {
 	return false;
 }
 
-bool Entity::isPickedUp(Character *character) {
+bool Entity::pickedUpBy(Character *character) {
 	return false;
 }
 
-bool Entity::isOccupied(Player *player) {
+bool Entity::isSteppable(Player *player) {
 	return true;
 }
 
-bool Entity::isOccupied(Enemy *enemy) {
+bool Entity::isSteppable(Enemy *enemy) {
 	return true;
+}
+
+Tile *Entity::getTile() {
+	return tile;
 }

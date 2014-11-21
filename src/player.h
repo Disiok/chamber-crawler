@@ -14,9 +14,9 @@ class Player: public Character {
 		Player(Tile *tile, int healthPoint, int attack, int defense, char typeIdentifier, std::string typeName);
 		virtual ~Player() = 0;
 		
-		void move(int direction);
-		void pickUp(int direction);
-		void die();
+		virtual void move(int direction);
+		virtual void pickUp(int direction);
+		virtual void killedBy(Character *other);
 
 };
 #endif

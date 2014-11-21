@@ -5,10 +5,13 @@
 // Forward declaration
 class Character;
 class Player;
+class Tile;
 
 class Stair: public Entity {
 	public:
-		bool isSteppedOn(Character *character);
-		bool isOccupied(Player *player);
+		Stair(Tile *tile);
+		
+		bool steppedOnBy(Character *character);
+		bool isSteppable(Player *player);
 };
 #endif

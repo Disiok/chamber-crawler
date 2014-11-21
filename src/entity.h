@@ -20,11 +20,13 @@ class Entity {
 
 		void destroy();
 		virtual void performAction();
-		virtual bool isAttacked(Character *character);
-		virtual bool isPickedUp(Character *character);
-		virtual bool isSteppedOn(Character *character);
-		virtual bool isOccupied(Player *player);
-		virtual bool isOccupied(Enemy *enemy);
+		virtual bool attackedBy(Character *character);
+		virtual bool pickedUpBy(Character *character);
+		virtual bool steppedOnBy(Character *character);
+		virtual bool isSteppable(Player *player);
+		virtual bool isSteppable(Enemy *enemy);
+
+		virtual Tile *getTile();
 
 };
 #endif

@@ -4,6 +4,9 @@
 
 // Forward declaration
 class Entity;
+class Character;
+class Player;
+class Enemy;
 
 class Tile: public Cell {
 	private:
@@ -18,5 +21,12 @@ class Tile: public Cell {
 		void clearEntity();
 		void destroyEntity();
 		void setEntity(Entity *entity);	
+
+		bool steppedOnBy(Character *other);
+		bool pickedUpBy(Character *other);
+		bool attackedBy(Character *other);
+		
+		bool isSteppable(Player *player);
+		bool isSteppable(Enemy *enemy);
 };
 #endif
