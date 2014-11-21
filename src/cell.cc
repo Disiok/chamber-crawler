@@ -1,4 +1,10 @@
 #include "cell.h"
+#include "wall.h"
+#include "door.h"
+#include "passage.h"
+#include "tile.h"
+#include <iostream>
+using namespace std;
 
 // Forward Declaration
 class Player;
@@ -9,10 +15,28 @@ Cell::Cell(int i, int j, char symbol):
 
 Cell::~Cell() {}
 
-bool Cell::isOccupied(Player *player) {
+bool Cell::isSteppable(Player *player) {
 	return false;
 }
 
-bool Cell::isOccupied(Enemy *enemy) {
+bool Cell::isSteppable(Enemy *enemy) {
 	return true;
+}
+
+Cell *Cell::getInstance(int i, int j, char id) {
+	if (id == '|' || id == '-') {
+		return new Wall(i, j, id);
+	} else if (id == '.') {
+		return new Tile(i, j);
+	} else if (id == '#') {
+		return new Passage(i, j);
+	} else if (id == '+') {
+		return new Door(i, j);
+	} else {
+		return NULL;
+	}
+}
+
+char Cell::getSymbol() {
+	return symbol;
 }

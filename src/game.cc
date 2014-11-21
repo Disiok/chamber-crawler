@@ -31,6 +31,7 @@ void Game::start() {
 #endif
 	floor = new Floor();
 	floor->loadFromFile(DEFAULT_FLOOR);
+	floor->displayFloor();
 }
 
 void Game::cleanup() {

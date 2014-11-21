@@ -16,8 +16,9 @@ class Floor {
 		~Floor();
 
 		void loadFromFile(std::string fileName);
+		void displayFloor();
 	private:
-		Cell ***map;
+		Cell *map[MAX_ROW][MAX_COLUMN];
 		Chamber *chambers[MAX_CHAMBERS];
 		
 };

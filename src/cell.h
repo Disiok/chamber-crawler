@@ -14,13 +14,15 @@ class Cell {
 		// Representation
 		char symbol;
 	public:
+		static Cell *getInstance(int i, int j, char id);
 		// Constructor & Destructor
 		Cell(int i, int j, char symbol);
 		virtual ~Cell() = 0;
 		
 		// Methods
-		virtual bool isOccupied(Player *player);
-		virtual bool isOccupied(Enemy *enemy);
+		virtual bool isSteppable(Player *player);
+		virtual bool isSteppable(Enemy *enemy);
+		virtual char getSymbol();
 
 };
 #endif

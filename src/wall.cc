@@ -1,8 +1,8 @@
 #include "wall.h"
 
-Wall::Wall(int i, int j):
-	Cell(i, j, SYMBOL_WALL) {}
+Wall::Wall(int i, int j, char symbol):
+	Cell(i, j, symbol) {}
 	
-bool Wall::isOccupied(Player *player) {
+bool Wall::isSteppable(Player *player) {
 	return true;
 }
