@@ -13,6 +13,14 @@ class Game {
 		Floor *floor;
 		
 		Game();
+
+		void chooseRace();
+		void runGameLoop();
+
+		void runPlayerTurn();
+		void runEnemyTurn();
+
+		void setupFloor();
 	public:
 		static const std::string DEFAULT_FLOOR;
 		static Game *getInstance();

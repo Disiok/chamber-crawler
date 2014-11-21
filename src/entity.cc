@@ -4,7 +4,9 @@
 #include "player.h"
 
 Entity::Entity(Tile *tile): tile(tile) {
-	tile->setEntity(this);	
+	if (tile) {
+		tile->setEntity(this);	
+	}
 }
 
 Entity::~Entity() {}

@@ -12,8 +12,8 @@ class Tile;
  */
 class Character: public Entity {
 	private:
-		char typeIdentifier;
-		std::string typeName;
+		const char typeIdentifier;
+		const std::string typeName;
 		
 		int hp;
 		int atk;
@@ -22,7 +22,7 @@ class Character: public Entity {
 
 	public:
 		// Constructor & Destructor
-		Character(Tile *tile, int healthPoint, int attack, int defense, int gold, char typeIdentifier, std::string typeName);
+		Character(Tile *tile, int hp, int atk, int def, int gold, const char typeIdentifier, const std::string typeName);
 		virtual ~Character() = 0;
 
 		// Methods

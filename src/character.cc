@@ -5,7 +5,7 @@
 #include <string>
 using namespace std;
 
-Character::Character(Tile *tile, int hp, int atk, int def, int gold, char typeIdentifier, string typeName):
+Character::Character(Tile *tile, int hp, int atk, int def, int gold, const char typeIdentifier, const string typeName):
 	Entity(tile),
 	typeIdentifier(typeIdentifier),
 	typeName(typeName),

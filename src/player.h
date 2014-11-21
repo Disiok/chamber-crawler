@@ -8,10 +8,9 @@
  * 	controllable Character
  */
 class Player: public Character {
-	private:
-
 	public:
-		Player(Tile *tile, int healthPoint, int attack, int defense, char typeIdentifier, std::string typeName);
+		static Player *getInstance(char type);
+		Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
 		virtual ~Player() = 0;
 		
 		virtual void move(int direction);

@@ -66,3 +66,7 @@ void Floor::displayFloor() {
 	}
 
 }
+
+void Floor::spawn() {
+
+}

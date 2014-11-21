@@ -1,6 +1,7 @@
 #include "game.h"
 #include "floor.h"
 #include <cstdlib>
+#include "player.h"
 #include <iostream>
 using namespace std;
 
@@ -29,9 +30,24 @@ void Game::start() {
 #ifdef DEBUG
 	cout << "Game::start" << endl;
 #endif
+	chooseRace();
+	setupFloor();
+	runGameLoop();
+}
+
+void Game::setupFloor() {
 	floor = new Floor();
 	floor->loadFromFile(DEFAULT_FLOOR);
-	floor->displayFloor();
+}
+
+void Game::chooseRace() {
+	// TODO: Actually choose the race
+	char race = 'S';
+	Player *p = Player::getInstance(race);
+}
+
+void Game::runGameLoop() {
+
 }
 
 void Game::cleanup() {
