@@ -18,7 +18,7 @@ any particular floor?
 [Question] How could you generate items so that the generation of Treasure and Potions reuses as much
 code as possible? That is, how would you structure your system so that the generation of a potion and then
 generation of treasure does not duplicate code?
-[Answer] ???
+[Answer] The generation of items will be done by the individual cells themselves. Each of these cells will have methods to spawn treasures and potions. Code will be reused as finding the random cell to spawn an item will be the same for any item.
 
 
 Class:
