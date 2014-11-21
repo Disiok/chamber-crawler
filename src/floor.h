@@ -9,7 +9,7 @@ class Chamber;
 class Floor {
 	public:
 		static const int MAX_CHAMBERS = 5;
-		static const int MAX_ROW = 30;
+		static const int MAX_ROW = 25;
 		static const int MAX_COLUMN = 79;
 		
 		Floor();
