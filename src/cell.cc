@@ -9,10 +9,10 @@ Cell::Cell(int i, int j, char symbol):
 
 Cell::~Cell() {}
 
-bool isOccupied(Player *player) {
+bool Cell::isOccupied(Player *player) {
 	return false;
 }
 
-bool isOccupied(Enemy *enemy) {
+bool Cell::isOccupied(Enemy *enemy) {
 	return true;
 }
