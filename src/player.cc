@@ -2,6 +2,8 @@
 #include "tile.h"
 #include "character.h"
 #include "shade.h"
+#include "drow.h"
+#include "vampire.h"
 #include <string>
 #include <iostream>
 using namespace std;
