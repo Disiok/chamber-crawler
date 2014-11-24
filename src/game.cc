@@ -35,6 +35,13 @@ void Game::start() {
 	runGameLoop();
 }
 
+void Game::nextFloor() {
+#ifdef DEBUG
+	cout << "Game::nextFloor" << endl;
+#endif
+	//TODO: Implement next floor logic
+}
+
 void Game::setupFloor() {
 	floor = new Floor();
 	floor->loadFromFile(DEFAULT_FLOOR);
@@ -49,6 +56,14 @@ void Game::chooseRace() {
 }
 
 void Game::runGameLoop() {
+
+}
+
+void Game::runPlayerTurn() {
+
+}
+
+void Game::runEnemyTurn() {
 
 }
 

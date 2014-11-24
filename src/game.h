@@ -28,5 +28,6 @@ class Game {
 		~Game();
 		
 		void start();
+		void nextFloor();
 };
 #endif

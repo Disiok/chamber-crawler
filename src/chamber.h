@@ -8,9 +8,9 @@ class Cell;
 class Chamber {
 	private:
 		std::vector<Cell *> chamberCells;
-        int numCells;
+		int numCells;
 	public:
-        Chamber(std::vector<Cell *>& cells);
-        Cell *getRandomCell();
+		Chamber(std::vector<Cell *>& cells);
+		Cell *getRandomCell();
 };
 #endif

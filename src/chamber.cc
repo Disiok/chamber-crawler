@@ -7,7 +7,7 @@ Chamber::Chamber(vector<Cell *>& cells) {
     chamberCells = cells;
     numCells = cells.size();
 #ifdef DEBUG
-    cout<<"Chamber with "<<numCells<<" created."<<endl;
+    cout<<"Chamber with "<<numCells<<" tiles created."<<endl;
 #endif
 }
 
