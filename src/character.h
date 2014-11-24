@@ -22,7 +22,7 @@ class Character: public Entity {
 
 	public:
 		// Constructor & Destructor
-		Character(Tile *tile, int hp, int atk, int def, int gold, const char typeIdentifier, const std::string typeName);
+		Character(Tile *tile, char symbol, int hp, int atk, int def, int gold, const char typeIdentifier, const std::string typeName);
 		virtual ~Character() = 0;
 
 		// Methods

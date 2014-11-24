@@ -14,8 +14,9 @@ class Enemy;
 class Entity {
 	private:
 		Tile *tile;
+		char symbol;
 	public:
-		Entity(Tile *tile);
+		Entity(Tile *tile, char symbol);
 		virtual ~Entity() = 0;
 
 		void destroy();

@@ -7,7 +7,7 @@
 
 Stair *Stair::stair = NULL;
 
-Stair::Stair(Tile *tile): Entity(tile) {}
+Stair::Stair(Tile *tile): Entity(tile, SYMBOL_STAIR) {}
 
 Stair *Stair::getInstance(Tile *tile) {
     if (!stair) {

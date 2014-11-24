@@ -5,7 +5,7 @@
 #include <iostream>
 using namespace std;
 
-Entity::Entity(Tile *tile): tile(tile) {
+Entity::Entity(Tile *tile, char symbol): tile(tile), symbol(symbol) {
 	if (tile) {
 		tile->setEntity(this);	
 	}
@@ -37,7 +37,7 @@ bool Entity::isSteppable(Player *player) {
 }
 
 bool Entity::isSteppable(Enemy *enemy) {
-	return true;
+	return false;
 }
 
 Tile *Entity::getTile() {
@@ -45,6 +45,5 @@ Tile *Entity::getTile() {
 }
 
 char Entity::getSymbol() {
-	// TODO: Implement proper representation
-	return 'E';
+	return symbol;
 }

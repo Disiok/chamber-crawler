@@ -5,6 +5,9 @@
 #include "tile.h"
 #include "shade.h"
 #include "stair.h"
+#include "normalTreasure.h"
+#include "smallTreasure.h"
+#include "dragonTreasure.h"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -108,13 +111,13 @@ void Cell::spawnPotion() {
 
 /* *
  * spawnTreasure
- *     Normal:	5/8
- * 	   Dragon: 	1/8
- *	   Small: 	1/4 = 2/8
+ * 	Normal:	5/8
+ * 	Dragon: 1/8
+ *	Small: 	1/4 = 2/8
  */
 void Cell::spawnTreasure() {
 	// TODO: uncomment when .h and .cc are added
-	/*int roll = rand() % 8 + 1;
+	int roll = rand() % 8 + 1;
 	Tile *t = dynamic_cast<Tile *>(this);
 	if (roll >= 1 && roll < 6) {
 		t->setEntity(new NormalTreasure(t));
@@ -122,7 +125,7 @@ void Cell::spawnTreasure() {
 		t->setEntity(new DragonTreasure(t));
 	} else {
 		t->setEntity(new SmallTreasure(t));
-	}*/
+	}
 }
 
 /* *

@@ -60,7 +60,7 @@ Player *Player::getInstance() {
 }
 
 Player::Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName):
-	Character(tile, hp, atk, def, 0, typeIdentifier, typeName) {}
+	Character(tile, SYMBOL_PLAYER, hp, atk, def, 0, typeIdentifier, typeName) {}
 
 Player::~Player() {}
 

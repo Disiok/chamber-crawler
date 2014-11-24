@@ -5,8 +5,8 @@
 #include <string>
 using namespace std;
 
-Character::Character(Tile *tile, int hp, int atk, int def, int gold, const char typeIdentifier, const string typeName):
-	Entity(tile),
+Character::Character(Tile *tile, char symbol, int hp, int atk, int def, int gold, const char typeIdentifier, const string typeName):
+	Entity(tile, symbol),
 	typeIdentifier(typeIdentifier),
 	typeName(typeName),
 	hp(hp),

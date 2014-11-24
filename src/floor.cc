@@ -120,6 +120,9 @@ void Floor::spawn() {
 #ifdef DEBUG
 	cout<<"Floor::spawn"<<endl;
 #endif
+
+	//TODO: Fix random chamber logic, make sure all entities are spawned when collision happens
+
 	// Player
 	int playerChamber = rand() % MAX_CHAMBERS;
 	chambers[playerChamber]->getRandomCell()->spawnPlayer();

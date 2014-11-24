@@ -16,6 +16,8 @@ class Player: public Character {
 		static void cleanup();
 
 	public:
+		static const char SYMBOL_PLAYER = '@';
+		
 		static void setRace(char race); 
 		static Player *getInstance(Tile *tile);
         	static Player *getInstance();

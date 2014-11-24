@@ -9,6 +9,8 @@ class Tile;
 
 class Stair: public Entity {
 	private:
+		static const char SYMBOL_STAIR = '\\';
+		
 		static Stair *stair;
 		static void cleanup();
 
