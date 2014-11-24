@@ -8,6 +8,10 @@ using namespace std;
 
 Player *Player::curPlayer = NULL;
 
+/* *
+ * getInstance(char)
+ * Sets current player to type based on char and returns the curPlayer
+ */
 Player *Player::getInstance(char type) {
 #ifdef DEBUG
 	cout << "Player::getInstance(char)" << endl;
@@ -22,6 +26,10 @@ Player *Player::getInstance(char type) {
 	}
 }
 
+/* *
+ * getInstance(char)
+ * Returns the curPlayer
+ */
 Player *Player::getInstance() {
 #ifdef DEBUG
     cout << "Player::getInstance()" << endl;
@@ -35,7 +43,6 @@ Player *Player::getInstance() {
 
 Player::Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName):
 	Character(tile, hp, atk, def, 0, typeIdentifier, typeName) {}
-
 
 Player::~Player() {}
 

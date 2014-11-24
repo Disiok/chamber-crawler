@@ -14,7 +14,7 @@ class Stair: public Entity {
 
 	public:
 		Stair(Tile *tile);
-        Stair *getInstance();
+        static Stair *getInstance(Tile *tile);
 		bool steppedOnBy(Character *character);
 		bool isSteppable(Player *player);
 };

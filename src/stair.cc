@@ -7,9 +7,9 @@ Stair *Stair::stairs = NULL;
 
 Stair::Stair(Tile *tile): Entity(tile) {}
 
-Stair *Stair::getInstance() {
+Stair *Stair::getInstance(Tile *tile) {
     if (!stairs) {
-        stairs = new Stairs();
+        stairs = new Stair(tile);
     }
 }
 

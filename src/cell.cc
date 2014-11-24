@@ -4,6 +4,7 @@
 #include "passage.h"
 #include "tile.h"
 #include "shade.h"
+#include "stair.h"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -59,18 +60,19 @@ char Cell::getSymbol() {
 void Cell::spawnEnemy() {
 	// TODO: uncomment when .h and .cc are added
 	int roll = rand() % 18 + 1;
-	if (true || roll >= 1 && roll < 5) {
-		dynamic_cast<Tile *>(this)->setEntity(new Shade(dynamic_cast<Tile *>(this)));
-	} /*else if (roll >= 5 && roll < 8) {
-		dynamic_cast<Tile *>(this)->setEntity(new Dwarf());
+	Tile *t = dynamic_cast<Tile *>(this);
+	/*if (true || roll >= 1 && roll < 5) {
+		t->setEntity(new Shade(t));
+	} else if (roll >= 5 && roll < 8) {
+		t->setEntity(new Dwarf(t));
 	} else if (roll >= 8 && roll < 13) {
-		dynamic_cast<Tile *>(this)->setEntity(new Halfling());
+		t->setEntity(new Halfling(t));
 	} else if (roll >= 13 && roll < 15) {
-		dynamic_cast<Tile *>(this)->setEntity(new Elf());
+		t->setEntity(new Elf(t));
 	} else if (roll >= 15 && roll < 17) {
-		dynamic_cast<Tile *>(this)->setEntity(new Orc());
+		t->setEntity(new Orc(t));
 	} else {
-		dynamic_cast<Tile *>(this)->setEntity(new Merchant());
+		t->setEntity(new Merchant(t));
 	}*/
 }
 
@@ -81,24 +83,25 @@ void Cell::spawnEnemy() {
 void Cell::spawnPotion() {
 	// TODO: uncomment once .h and .cc for each potion is added
 	/*int roll = rand() % 6 + 1;
+	Tile *t = dynamic_cast<Tile *>(this);
 	switch(roll) {
 		case: 1
-			dynamic_cast<Tile *>(this)->setEntity(new RestoreHealth());
+			t->setEntity(new RestoreHealth(t));
 			break;
 		case: 2
-			dynamic_cast<Tile *>(this)->setEntity(new PoisonHealth());
+			t->setEntity(new PoisonHealth(t));
 			break;
 		case: 3
-			dynamic_cast<Tile *>(this)->setEntity(new BoostAtk());
+			t->setEntity(new BoostAtk(t));
 			break;
 		case: 4
-			dynamic_cast<Tile *>(this)->setEntity(new BoostDef());
+			t->setEntity(new BoostDef(t));
 			break;
 		case: 5
-			dynamic_cast<Tile *>(this)->setEntity(new WoundDef());
+			t->setEntity(new WoundDef(t));
 			break;
 		default:
-			dynamic_cast<Tile *>(this)->setEntity(new WoundAtk());
+			t->setEntity(new WoundAtk(t));
 			break;
 	} */
 }
@@ -112,13 +115,13 @@ void Cell::spawnPotion() {
 void Cell::spawnTreasure() {
 	// TODO: uncomment when .h and .cc are added
 	/*int roll = rand() % 8 + 1;
-	cout<<"Spawning Enemy"<<endl;
+	Tile *t = dynamic_cast<Tile *>(this);
 	if (roll >= 1 && roll < 6) {
-		dynamic_cast<Tile *>(this)->setEntity(new NormalTreasure());
+		t->setEntity(new NormalTreasure(t));
 	} else if (roll == 6) {
-		dynamic_cast<Tile *>(this)->setEntity(new DragonTreasure());
+		t->setEntity(new DragonTreasure(t));
 	} else {
-		dynamic_cast<Tile *>(this)->setEntity(new SmallTreasure());
+		t->setEntity(new SmallTreasure(t));
 	}*/
 }
 
@@ -127,7 +130,8 @@ void Cell::spawnTreasure() {
  * Spawns stair entity in a room without the Player
  */
 void Cell::spawnStair() {
-	dynamic_cast<Tile *>(this)->setEntity(Stair::getInstance());
+	Tile *t = dynamic_cast<Tile *>(this);
+	t->setEntity(Stair::getInstance(t));
 }
 
 /* *
@@ -135,5 +139,7 @@ void Cell::spawnStair() {
  * Spawn player singleton in any room
  */
 void Cell::spawnPlayer() {
-	dynamic_cast<Tile *>(this)->setEntity(Player::getInstance());
+	Tile *t = dynamic_cast<Tile *>(this);
+	// TODO: uncomment once we figure out how to set initial tile for player
+	//t->setEntity(Player::getInstance(t));
 }

@@ -117,16 +117,32 @@ void Floor::displayFloor() {
  * Spawns player, stairs and all potions, gold, enemies on floor.
  */
 void Floor::spawn() {
+#ifdef DEBUG
+	cout<<"Floor::spawn"<<endl;
+#endif
 	// Player
-	chambers[rand() % 5]->getRandomCell()->spawnPlayer();
+	int playerChamber = rand() % MAX_CHAMBERS;
+	chambers[playerChamber]->getRandomCell()->spawnPlayer();
 
 	// Stairs
-
+	int stairsChamber = rand() % MAX_CHAMBERS;
+	while (stairsChamber == playerChamber) {
+		stairsChamber = rand() % MAX_CHAMBERS;
+	}
+	chambers[stairsChamber]->getRandomCell()->spawnStair();
 
 	// Potions
+	for (int i = 0 ; i < NUM_POTION ; i++) {
+		chambers[stairsChamber]->getRandomCell()->spawnPotion();
+	}
 
 	// Gold
+	for (int i = 0 ; i < NUM_GOLD ; i++) {
+		chambers[stairsChamber]->getRandomCell()->spawnTreasure();
+	}
 
 	// Enemies
-	target->spawnEnemy();
+	for (int i = 0 ; i < NUM_ENEMY ; i++) {
+		chambers[stairsChamber]->getRandomCell()->spawnEnemy();
+	}
 }
