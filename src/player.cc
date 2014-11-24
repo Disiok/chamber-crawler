@@ -4,6 +4,8 @@
 #include "shade.h"
 #include "drow.h"
 #include "vampire.h"
+#include "troll.h"
+#include "goblin.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -15,6 +17,14 @@ Player *Player::getInstance(char type) {
 	switch (type) {
 		case Shade::TYPE_ID:
 			return new Shade();
+		case Drow::TYPE_ID:
+			return new Drow();
+		case Vampire::TYPE_ID:
+			return new Vampire();
+		case Troll::TYPE_ID:
+			return new Troll();
+		case Goblin::TYPE_ID:
+			return new Goblin();
 		default:
 			return NULL;
 	}

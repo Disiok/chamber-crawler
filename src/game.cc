@@ -41,8 +41,9 @@ void Game::setupFloor() {
 }
 
 void Game::chooseRace() {
-	// TODO: Actually choose the race
-	char race = 'S';
+	cout << "Choose race: ";
+	char race;
+	cin >> race;
 	Player *p = Player::getInstance(race);
 }
 
