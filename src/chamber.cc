@@ -1,4 +1,5 @@
 #include "chamber.h"
+#include "tile.h"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -12,5 +13,9 @@ Chamber::Chamber(vector<Tile *>& tiles) {
 }
 
 Tile *Chamber::getRandomTile() {
-    return chamberTiles.at(rand() % numTiles);
+	Tile *tile = chamberTiles.at(rand() % numTiles);
+	while (tile->hasEntity()) {
+		tile = chamberTiles.at(rand() % numTiles);
+	}
+	return tile;
 }

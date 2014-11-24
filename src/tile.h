@@ -18,6 +18,7 @@ class Tile: public Cell {
 		Tile(int i, int j);
 
 		// Tile methods
+		bool hasEntity();
 		void clearEntity();
 		void destroyEntity();
 		void setEntity(Entity *entity);	

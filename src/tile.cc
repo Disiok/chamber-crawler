@@ -17,6 +17,13 @@ using namespace std;
 Tile::Tile(int i, int j):
 	Cell(i, j, SYMBOL_TILE), entity(NULL) {}
 
+bool Tile::hasEntity() {
+	if (entity) {
+		return true;
+	} else {
+		return false;
+	}
+}
 void Tile::destroyEntity() {
 	delete entity;
 }
