@@ -17,16 +17,18 @@ class Tile: public Cell {
 		// Constructor
 		Tile(int i, int j);
 
-		// Methods
+		// Tile methods
 		void clearEntity();
 		void destroyEntity();
 		void setEntity(Entity *entity);	
-
+		
 		bool steppedOnBy(Character *other);
 		bool pickedUpBy(Character *other);
 		bool attackedBy(Character *other);
 		
+		// Override methods
 		bool isSteppable(Player *player);
 		bool isSteppable(Enemy *enemy);
+		char getSymbol();
 };
 #endif

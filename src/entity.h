@@ -27,6 +27,7 @@ class Entity {
 		virtual bool isSteppable(Enemy *enemy);
 
 		virtual Tile *getTile();
+		virtual char getSymbol();
 
 };
 #endif

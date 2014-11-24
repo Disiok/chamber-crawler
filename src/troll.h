@@ -3,6 +3,9 @@
 #include <string>
 #include "player.h"
 
+// Forward declaration
+class Tile;
+
 class Troll: public Player {
 	public:
 		static const std::string TYPE_NAME;
@@ -11,7 +14,7 @@ class Troll: public Player {
 		static const int ATK = 25;
 		static const int DEF = 15;
 
-		Troll();
+		Troll(Tile *tile);
 
 		void invokeAbility();
 

@@ -5,7 +5,7 @@ using namespace std;
 
 const string Vampire::TYPE_NAME = "Vampire";
 
-Vampire::Vampire(): Player(NULL, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
+Vampire::Vampire(Tile *tile): Player(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
 #ifdef DEBUG
 	cout << "Vampire::Vampire" << endl;
 #endif 

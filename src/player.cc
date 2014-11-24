@@ -11,30 +11,35 @@
 using namespace std;
 
 Player *Player::curPlayer = NULL;
+char Player::race = '\0';
+
+void Player::setRace(char race) {
+	Player::race = race;
+}
 
 /* *
- * getInstance(char)
+ * getInstance(Tile *)
  * Sets current player to type based on char and returns the curPlayer
  */
-Player *Player::getInstance(char type) {
+Player *Player::getInstance(Tile *tile) {
 #ifdef DEBUG
-	cout << "Player::getInstance(char)" << endl;
+	cout << "Player::getInstance(Tile *)" << endl;
 #endif
-	switch (type) {
+	switch (race) {
 		case Shade::TYPE_ID:
-			curPlayer = new Shade();
+			curPlayer = new Shade(tile);
 			break;
 		case Drow::TYPE_ID:
-			curPlayer = new Drow();
+			curPlayer = new Drow(tile);
 			break;
 		case Vampire::TYPE_ID:
-			curPlayer = new Vampire();
+			curPlayer = new Vampire(tile);
 			break;
 		case Troll::TYPE_ID:
-			curPlayer =  new Troll();
+			curPlayer =  new Troll(tile);
 			break;
 		case Goblin::TYPE_ID:
-			curPlayer =  new Goblin();
+			curPlayer =  new Goblin(tile);
 			break;
 		default:
 			break;
@@ -44,18 +49,14 @@ Player *Player::getInstance(char type) {
 }
 
 /* *
- * getInstance(char)
+ * getInstance()
  * Returns the curPlayer
  */
 Player *Player::getInstance() {
 #ifdef DEBUG
     cout << "Player::getInstance()" << endl;
 #endif
-    if (curPlayer) {
-        return curPlayer;
-    } else {
-        return NULL;
-    }
+    return curPlayer;
 }
 
 Player::Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName):

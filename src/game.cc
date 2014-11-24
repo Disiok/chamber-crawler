@@ -46,13 +46,14 @@ void Game::setupFloor() {
 	floor = new Floor();
 	floor->loadFromFile(DEFAULT_FLOOR);
 	floor->spawn();
+	floor->displayFloor();
 }
 
 void Game::chooseRace() {
 	cout << "Choose race: ";
 	char race;
 	cin >> race;
-	Player *p = Player::getInstance(race);
+	Player::setRace(race);
 }
 
 void Game::runGameLoop() {

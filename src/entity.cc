@@ -2,6 +2,8 @@
 #include "tile.h"
 #include "character.h"
 #include "player.h"
+#include <iostream>
+using namespace std;
 
 Entity::Entity(Tile *tile): tile(tile) {
 	if (tile) {
@@ -40,4 +42,9 @@ bool Entity::isSteppable(Enemy *enemy) {
 
 Tile *Entity::getTile() {
 	return tile;
+}
+
+char Entity::getSymbol() {
+	// TODO: Implement proper representation
+	return 'E';
 }

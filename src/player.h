@@ -1,6 +1,7 @@
 #ifndef ___PLAYER_H___
 #define ___PLAYER_H___
 #include "character.h"
+#include "tile.h"
 #include <string>
 
 /**
@@ -8,13 +9,17 @@
  * 	controllable Character
  */
 class Player: public Character {
-    private:
-        static Player *curPlayer;
-        static void cleanup();
+	private:
+		static Player *curPlayer;
+		static char race;
+		
+		static void cleanup();
 
 	public:
-		static Player *getInstance(char type);
-        static Player *getInstance();
+		static void setRace(char race); 
+		static Player *getInstance(Tile *tile);
+        	static Player *getInstance();
+		
 		Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
 		virtual ~Player() = 0;
 

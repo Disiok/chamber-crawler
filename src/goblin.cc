@@ -6,7 +6,7 @@ using namespace std;
 
 const string Goblin::TYPE_NAME = "Goblin";
 
-Goblin::Goblin(): Player(NULL, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
+Goblin::Goblin(Tile *tile): Player(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
 #ifdef DEBUG
 	cout << "Goblin::Goblin" << endl;
 #endif

@@ -140,6 +140,5 @@ void Cell::spawnStair() {
  */
 void Cell::spawnPlayer() {
 	Tile *t = dynamic_cast<Tile *>(this);
-	// TODO: uncomment once we figure out how to set initial tile for player
-	//t->setEntity(Player::getInstance(t));
+	t->setEntity(Player::getInstance(t));
 }

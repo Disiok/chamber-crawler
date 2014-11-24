@@ -59,3 +59,11 @@ bool Tile::isSteppable(Enemy *enemy) {
 		return true;
 	}
 }
+
+char Tile::getSymbol() {
+	if (entity) {
+		return entity->getSymbol();
+	} else {
+		return Cell::getSymbol();
+	}
+}

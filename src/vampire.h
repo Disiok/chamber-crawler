@@ -12,7 +12,7 @@ class Vampire: public Player {
 		static const int ATK = 25;
 		static const int DEF = 25;
 
-		Vampire();
+		Vampire(Tile *tile);
 		void attack(Character *other);
 };
 #endif
