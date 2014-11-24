@@ -24,11 +24,5 @@ class Cell {
 		virtual bool isSteppable(Player *player);
 		virtual bool isSteppable(Enemy *enemy);
 		virtual char getSymbol();
-		void spawnEnemy();
-		void spawnPotion();
-		void spawnTreasure();
-		void spawnStair();
-		void spawnPlayer();
-
 };
 #endif

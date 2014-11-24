@@ -3,14 +3,14 @@
 #include <vector>
 
 // Forward declaration
-class Cell;
+class Tile;
 
 class Chamber {
 	private:
-		std::vector<Cell *> chamberCells;
-		int numCells;
+		std::vector<Tile *> chamberTiles;
+		int numTiles;
 	public:
-		Chamber(std::vector<Cell *>& cells);
-		Cell *getRandomCell();
+		Chamber(std::vector<Tile *>& tiles);
+		Tile *getRandomTile();
 };
 #endif

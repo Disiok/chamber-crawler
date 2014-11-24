@@ -3,14 +3,14 @@
 #include <cstdlib>
 using namespace std;
 
-Chamber::Chamber(vector<Cell *>& cells) {
-    chamberCells = cells;
-    numCells = cells.size();
+Chamber::Chamber(vector<Tile *>& tiles) {
+    chamberTiles = tiles;
+    numTiles = tiles.size();
 #ifdef DEBUG
-    cout<<"Chamber with "<<numCells<<" tiles created."<<endl;
+    cout<<"Chamber with "<<numTiles<<" tiles created."<<endl;
 #endif
 }
 
-Cell *Chamber::getRandomCell() {
-    return chamberCells.at(rand() % numCells);
+Tile *Chamber::getRandomTile() {
+    return chamberTiles.at(rand() % numTiles);
 }

@@ -1,6 +1,15 @@
 #include "tile.h"
 #include "entity.h"
 #include "enemy.h"
+#include "shade.h"
+#include "stair.h"
+// Treasures
+#include "normalTreasure.h"
+#include "smallTreasure.h"
+#include "dragonTreasure.h"
+
+// Player
+
 #include "character.h"
 #include <iostream>
 using namespace std;
@@ -45,8 +54,7 @@ bool Tile::attackedBy(Character *other) {
 }
 
 bool Tile::isSteppable(Player *player) {
-	if (entity) {
-		return entity->isSteppable(player);
+	if (entity) 		return entity->isSteppable(player);
 	} else {
 		return true;
 	}
@@ -66,4 +74,97 @@ char Tile::getSymbol() {
 	} else {
 		return Cell::getSymbol();
 	}
+}
+
+
+/* *
+ * spawnEnemy
+ * 	  Human: 	2/9 = 4/18
+ * 	  Dwarf: 	3/18
+ * 	  Halfling:	5/18
+ * 	  Elf:		1/9 = 2/18
+ * 	  Orc: 		1/9 = 2/18
+ * 	  Merchant: 1/9 = 2/18
+ */
+void Tile::spawnEnemy() {
+	// TODO: uncomment when .h and .cc are added
+	int roll = rand() % 18 + 1;
+	Tile *t = dynamic_cast<Tile *>(this);
+	/*if (true || roll >= 1 && roll < 5) {
+		t->setEntity(new Shade(t));
+	} else if (roll >= 5 && roll < 8) {
+		t->setEntity(new Dwarf(t));
+	} else if (roll >= 8 && roll < 13) {
+		t->setEntity(new Halfling(t));
+	} else if (roll >= 13 && roll < 15) {
+		t->setEntity(new Elf(t));
+	} else if (roll >= 15 && roll < 17) {
+		t->setEntity(new Orc(t));
+	} else {
+		t->setEntity(new Merchant(t));
+	}*/
+}
+
+/* *
+ * spawnPotion
+ *     1/6 for each potion
+ */
+void Tile::spawnPotion() {
+	// TODO: uncomment once .h and .cc for each potion is added
+	/*int roll = rand() % 6 + 1;
+	Tile *t = dynamic_cast<Tile *>(this);
+	switch(roll) {
+		case: 1
+			t->setEntity(new RestoreHealth(t));
+			break;
+		case: 2
+			t->setEntity(new PoisonHealth(t));
+			break;
+		case: 3
+			t->setEntity(new BoostAtk(t));
+			break;
+		case: 4
+			t->setEntity(new BoostDef(t));
+			break;
+		case: 5
+			t->setEntity(new WoundDef(t));
+			break;
+		default:
+			t->setEntity(new WoundAtk(t));
+			break;
+	} */
+}
+
+/* *
+ * spawnTreasure
+ * 	Normal:	5/8
+ * 	Dragon: 1/8
+ *	Small: 	1/4 = 2/8
+ */
+void Tile::spawnTreasure() {
+	// TODO: uncomment when .h and .cc are added
+	int roll = rand() % 8 + 1;
+	if (roll >= 1 && roll < 6) {
+		setEntity(new NormalTreasure(t));
+	} else if (roll == 6) {
+		setEntity(new DragonTreasure(t));
+	} else {
+		setEntity(new SmallTreasure(t));
+	}
+}
+
+/* *
+ * spawnStair
+ * Spawns stair entity in a room without the Player
+ */
+void Tile::spawnStair() {
+	setEntity(Stair::getInstance(t));
+}
+
+/* *
+ * spawnPlayer
+ * Spawn player singleton in any room
+ */
+void Tile::spawnPlayer() {
+	setEntity(Player::getInstance(t));
 }

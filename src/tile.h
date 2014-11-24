@@ -21,6 +21,13 @@ class Tile: public Cell {
 		void clearEntity();
 		void destroyEntity();
 		void setEntity(Entity *entity);	
+
+		void spawnEnemy();
+		void spawnPotion();
+		void spawnTreasure();
+		void spawnStair();
+		void spawnPlayer();
+
 		
 		bool steppedOnBy(Character *other);
 		bool pickedUpBy(Character *other);

@@ -1,5 +1,6 @@
 #include "floor.h"
 #include "chamber.h"
+#include "tile.h"
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
@@ -34,27 +35,27 @@ Floor::~Floor() {
  * Gets all the cells in the chamber by flooding it start from (i, j)
  * Marks off flooded tiles in the rows parameter, and returns a new Chamber
  */
-void Floor::floodChamber(int i, int j, string (*rows)[MAX_ROW], std::vector<Cell *> *cells) {
-	cells->push_back(map[i][j]);
+void Floor::floodChamber(int i, int j, string (*rows)[MAX_ROW], std::vector<Tile *> *tiles) {
+	tiles->push_back(dynamic_cast<Tile *>(map[i][j]));
 	(*rows)[i][j] = '~';
 	if (i > 0) {
 		if ((*rows)[i-1][j] == '.') {
-			floodChamber(i-1, j, rows, cells);
+			floodChamber(i-1, j, rows, tiles);
 		}
 	}
 	if (j > 0) {
 		if ((*rows)[i][j-1] == '.') {
-			floodChamber(i, j-1, rows, cells);
+			floodChamber(i, j-1, rows, tiles);
 		}
 	}
 	if (i < MAX_ROW) {
 		if ((*rows)[i+1][j] == '.') {
-			floodChamber(i+1, j, rows, cells);
+			floodChamber(i+1, j, rows, tiles);
 		}
 	}
 	if (j < MAX_COLUMN) {
 		if ((*rows)[i][j+1] == '.') {
-			floodChamber(i, j+1, rows, cells);
+			floodChamber(i, j+1, rows, tiles);
 		}
 	}
 }
@@ -72,22 +73,16 @@ void Floor::loadFromFile(string fileName) {
 		rows[i] = line;
 		for (int j = 0; j < MAX_COLUMN; j ++) {
 			map[i][j] = Cell::getInstance(i, j, line[j]);
-#ifdef DEBUG
-			cout << line[j];
-#endif
 		}
-#ifdef DEBUG
-		cout << endl;
-#endif
 	}
 	// Going through every floor tile and flooding each chamber
 	int numChambers = 0;
 	for (int i = 0 ; i < MAX_ROW && numChambers < MAX_CHAMBERS; i++) {
 		for (int j = 0 ; j < MAX_COLUMN && numChambers < MAX_CHAMBERS; j++) {
 			if (rows[i][j] == '.') {
-				vector<Cell *> cells;
-				floodChamber(i, j, &rows, &cells);
-				chambers[numChambers] = new Chamber(cells);
+				vector<Tile *> tiles;
+				floodChamber(i, j, &rows, &tiles);
+				chambers[numChambers] = new Chamber(tiles);
 				numChambers++;
 			}
 		}
@@ -125,27 +120,27 @@ void Floor::spawn() {
 
 	// Player
 	int playerChamber = rand() % MAX_CHAMBERS;
-	chambers[playerChamber]->getRandomCell()->spawnPlayer();
+	chambers[playerChamber]->getRandomTile()->spawnPlayer();
 
 	// Stairs
 	int stairsChamber = rand() % MAX_CHAMBERS;
 	while (stairsChamber == playerChamber) {
 		stairsChamber = rand() % MAX_CHAMBERS;
 	}
-	chambers[stairsChamber]->getRandomCell()->spawnStair();
+	chambers[stairsChamber]->getRandomTile()->spawnStair();
 
 	// Potions
 	for (int i = 0 ; i < NUM_POTION ; i++) {
-		chambers[stairsChamber]->getRandomCell()->spawnPotion();
+		chambers[stairsChamber]->getRandomTile()->spawnPotion();
 	}
 
 	// Gold
 	for (int i = 0 ; i < NUM_GOLD ; i++) {
-		chambers[stairsChamber]->getRandomCell()->spawnTreasure();
+		chambers[stairsChamber]->getRandomTile()->spawnTreasure();
 	}
 
 	// Enemies
 	for (int i = 0 ; i < NUM_ENEMY ; i++) {
-		chambers[stairsChamber]->getRandomCell()->spawnEnemy();
+		chambers[stairsChamber]->getRandomTile()->spawnEnemy();
 	}
 }

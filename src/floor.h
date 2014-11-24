@@ -5,6 +5,7 @@
 
 // Forward declaration
 class Cell;
+class Tile;
 class Chamber;
 
 class Floor {
@@ -25,6 +26,6 @@ class Floor {
 	private:
 		Cell *map[MAX_ROW][MAX_COLUMN];
 		Chamber *chambers[MAX_CHAMBERS];
-		void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Cell *> *cells);
+		void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
 };
 #endif
