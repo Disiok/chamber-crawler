@@ -54,7 +54,8 @@ bool Tile::attackedBy(Character *other) {
 }
 
 bool Tile::isSteppable(Player *player) {
-	if (entity) 		return entity->isSteppable(player);
+	if (entity) {
+		return entity->isSteppable(player);
 	} else {
 		return true;
 	}
@@ -89,7 +90,6 @@ char Tile::getSymbol() {
 void Tile::spawnEnemy() {
 	// TODO: uncomment when .h and .cc are added
 	int roll = rand() % 18 + 1;
-	Tile *t = dynamic_cast<Tile *>(this);
 	/*if (true || roll >= 1 && roll < 5) {
 		t->setEntity(new Shade(t));
 	} else if (roll >= 5 && roll < 8) {
@@ -112,7 +112,6 @@ void Tile::spawnEnemy() {
 void Tile::spawnPotion() {
 	// TODO: uncomment once .h and .cc for each potion is added
 	/*int roll = rand() % 6 + 1;
-	Tile *t = dynamic_cast<Tile *>(this);
 	switch(roll) {
 		case: 1
 			t->setEntity(new RestoreHealth(t));
@@ -145,11 +144,11 @@ void Tile::spawnTreasure() {
 	// TODO: uncomment when .h and .cc are added
 	int roll = rand() % 8 + 1;
 	if (roll >= 1 && roll < 6) {
-		setEntity(new NormalTreasure(t));
+		setEntity(new NormalTreasure(this));
 	} else if (roll == 6) {
-		setEntity(new DragonTreasure(t));
+		setEntity(new DragonTreasure(this));
 	} else {
-		setEntity(new SmallTreasure(t));
+		setEntity(new SmallTreasure(this));
 	}
 }
 
@@ -158,7 +157,7 @@ void Tile::spawnTreasure() {
  * Spawns stair entity in a room without the Player
  */
 void Tile::spawnStair() {
-	setEntity(Stair::getInstance(t));
+	setEntity(Stair::getInstance(this));
 }
 
 /* *
@@ -166,5 +165,5 @@ void Tile::spawnStair() {
  * Spawn player singleton in any room
  */
 void Tile::spawnPlayer() {
-	setEntity(Player::getInstance(t));
+	setEntity(Player::getInstance(this));
 }

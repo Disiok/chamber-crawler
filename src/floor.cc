@@ -116,31 +116,39 @@ void Floor::spawn() {
 	cout<<"Floor::spawn"<<endl;
 #endif
 
-	//TODO: Fix random chamber logic, make sure all entities are spawned when collision happens
-
 	// Player
-	int playerChamber = rand() % MAX_CHAMBERS;
-	chambers[playerChamber]->getRandomTile()->spawnPlayer();
+	Chamber *playerChamber = getRandomChamber();
+	playerChamber->getRandomTile()->spawnPlayer();
 
 	// Stairs
-	int stairsChamber = rand() % MAX_CHAMBERS;
+	Chamber *stairsChamber = getRandomChamber();
 	while (stairsChamber == playerChamber) {
-		stairsChamber = rand() % MAX_CHAMBERS;
+		stairsChamber = getRandomChamber();
 	}
-	chambers[stairsChamber]->getRandomTile()->spawnStair();
+	stairsChamber->getRandomTile()->spawnStair();
 
 	// Potions
 	for (int i = 0 ; i < NUM_POTION ; i++) {
-		chambers[stairsChamber]->getRandomTile()->spawnPotion();
+		getRandomTile()->spawnPotion();
 	}
 
 	// Gold
 	for (int i = 0 ; i < NUM_GOLD ; i++) {
-		chambers[stairsChamber]->getRandomTile()->spawnTreasure();
+		getRandomTile()->spawnTreasure();
 	}
 
 	// Enemies
 	for (int i = 0 ; i < NUM_ENEMY ; i++) {
-		chambers[stairsChamber]->getRandomTile()->spawnEnemy();
+		getRandomTile()->spawnEnemy();
 	}
 }
+
+Chamber *Floor::getRandomChamber() {
+	return chambers[rand() % MAX_CHAMBERS];
+}
+
+Tile *Floor::getRandomTile() {
+	return getRandomChamber()->getRandomTile();
+}
+
+

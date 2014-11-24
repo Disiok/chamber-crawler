@@ -26,6 +26,9 @@ class Floor {
 	private:
 		Cell *map[MAX_ROW][MAX_COLUMN];
 		Chamber *chambers[MAX_CHAMBERS];
+
 		void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
+		Chamber *getRandomChamber();
+		Tile *getRandomTile();
 };
 #endif
