@@ -38,6 +38,7 @@ void Game::start() {
 void Game::setupFloor() {
 	floor = new Floor();
 	floor->loadFromFile(DEFAULT_FLOOR);
+	floor->spawn();
 }
 
 void Game::chooseRace() {

@@ -12,6 +12,9 @@ class Floor {
 		static const int MAX_CHAMBERS = 5;
 		static const int MAX_ROW = 25;
 		static const int MAX_COLUMN = 79;
+		static const int NUM_GOLD = 10;
+		static const int NUM_POTION = 10;
+		static const int NUM_ENEMY = 20;
 
 		Floor();
 		~Floor();

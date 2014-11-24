@@ -1,21 +1,36 @@
 #include "player.h"
 #include "tile.h"
-#include "character.h"
 #include "shade.h"
 #include <string>
 #include <iostream>
+#include <cstdlib>
 using namespace std;
+
+Player *Player::curPlayer = NULL;
 
 Player *Player::getInstance(char type) {
 #ifdef DEBUG
-	cout << "Player::getInstance" << endl;
+	cout << "Player::getInstance(char)" << endl;
 #endif
 	switch (type) {
 		case Shade::TYPE_ID:
-			return new Shade();
+            curPlayer = new Shade();
+            atexit(cleanup);
+			return curPlayer;
 		default:
 			return NULL;
 	}
+}
+
+Player *Player::getInstance() {
+#ifdef DEBUG
+    cout << "Player::getInstance()" << endl;
+#endif
+    if (curPlayer) {
+        return curPlayer;
+    } else {
+        return NULL;
+    }
 }
 
 Player::Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName):
@@ -34,4 +49,8 @@ void Player::pickUp(int direction) {
 
 void Player::killedBy(Character *other) {
 
+}
+
+void Player::cleanup() {
+    delete curPlayer;
 }

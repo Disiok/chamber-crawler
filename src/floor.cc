@@ -2,6 +2,7 @@
 #include "chamber.h"
 #include <fstream>
 #include <iostream>
+#include <cstdlib>
 #include "cell.h"
 #include <string>
 using namespace std;
@@ -34,29 +35,28 @@ Floor::~Floor() {
  * Marks off flooded tiles in the rows parameter, and returns a new Chamber
  */
 void Floor::floodChamber(int i, int j, string (*rows)[MAX_ROW], std::vector<Cell *> *cells) {
-
-		cells->push_back(map[i][j]);
-		(*rows)[i][j] = '~';
-		if (i > 0) {
-			if ((*rows)[i-1][j] == '.') {
-				floodChamber(i-1, j, rows, cells);
-			}
+	cells->push_back(map[i][j]);
+	(*rows)[i][j] = '~';
+	if (i > 0) {
+		if ((*rows)[i-1][j] == '.') {
+			floodChamber(i-1, j, rows, cells);
 		}
-		if (j > 0) {
-			if ((*rows)[i][j-1] == '.') {
-				floodChamber(i, j-1, rows, cells);
-			}
+	}
+	if (j > 0) {
+		if ((*rows)[i][j-1] == '.') {
+			floodChamber(i, j-1, rows, cells);
 		}
-		if (i < MAX_ROW) {
-			if ((*rows)[i+1][j] == '.') {
-				floodChamber(i+1, j, rows, cells);
-			}
+	}
+	if (i < MAX_ROW) {
+		if ((*rows)[i+1][j] == '.') {
+			floodChamber(i+1, j, rows, cells);
 		}
-		if (j < MAX_COLUMN) {
-			if ((*rows)[i][j+1] == '.') {
-				floodChamber(i, j+1, rows, cells);
-			}
+	}
+	if (j < MAX_COLUMN) {
+		if ((*rows)[i][j+1] == '.') {
+			floodChamber(i, j+1, rows, cells);
 		}
+	}
 }
 
 void Floor::loadFromFile(string fileName) {
@@ -88,6 +88,7 @@ void Floor::loadFromFile(string fileName) {
 				vector<Cell *> cells;
 				floodChamber(i, j, &rows, &cells);
 				chambers[numChambers] = new Chamber(cells);
+				numChambers++;
 			}
 		}
 	}
@@ -111,6 +112,21 @@ void Floor::displayFloor() {
 
 }
 
+/* *
+ * spawn
+ * Spawns player, stairs and all potions, gold, enemies on floor.
+ */
 void Floor::spawn() {
+	// Player
+	chambers[rand() % 5]->getRandomCell()->spawnPlayer();
 
+	// Stairs
+
+
+	// Potions
+
+	// Gold
+
+	// Enemies
+	target->spawnEnemy();
 }

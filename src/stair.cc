@@ -3,7 +3,15 @@
 #include "entity.h"
 #include "character.h"
 
+Stair *Stair::stairs = NULL;
+
 Stair::Stair(Tile *tile): Entity(tile) {}
+
+Stair *Stair::getInstance() {
+    if (!stairs) {
+        stairs = new Stairs();
+    }
+}
 
 bool Stair::isSteppable(Player *player) {
 	return true;

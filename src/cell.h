@@ -18,11 +18,17 @@ class Cell {
 		// Constructor & Destructor
 		Cell(int i, int j, char symbol);
 		virtual ~Cell() = 0;
-		
+
 		// Methods
+		virtual bool performAction();
 		virtual bool isSteppable(Player *player);
 		virtual bool isSteppable(Enemy *enemy);
 		virtual char getSymbol();
+		void spawnEnemy();
+		void spawnPotion();
+		void spawnTreasure();
+		void spawnStair();
+		void spawnPlayer();
 
 };
 #endif
