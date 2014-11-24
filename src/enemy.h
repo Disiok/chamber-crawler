@@ -13,7 +13,7 @@ class Enemy: public Character {
 	public:
 		void move();
 		void performAction();
-		void die();
-		bool isAttacked(Character *character);
+		void killedBy(Character *other);
+		bool attackedBy(Character *other);
 };
 #endif
