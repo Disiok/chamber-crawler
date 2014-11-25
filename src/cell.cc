@@ -45,3 +45,11 @@ Cell *Cell::getInstance(int i, int j, char id) {
 char Cell::getSymbol() {
 	return symbol;
 }
+
+int Cell::getI() {
+	return i;
+}
+
+int Cell::getJ() {
+	return j;
+}

@@ -23,6 +23,11 @@ class Cell {
 		virtual bool performAction();
 		virtual bool isSteppable(Player *player);
 		virtual bool isSteppable(Enemy *enemy);
+		
+		
 		virtual char getSymbol();
+		int getI();
+		int getJ();
+
 };
 #endif
