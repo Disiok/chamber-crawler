@@ -18,34 +18,35 @@ void Player::setRace(char race) {
 }
 
 /* *
- * getInstance(Tile *)
+ * spawn(Tile *)
  * Sets current player to type based on char and returns the curPlayer
  */
-Player *Player::getInstance(Tile *tile) {
+void *Player::spawn(Tile *tile) {
 #ifdef DEBUG
-	cout << "Player::getInstance(Tile *)" << endl;
+	cout << "Player::spawn(Tile *)" << endl;
 #endif
-	switch (race) {
-		case Shade::TYPE_ID:
-			curPlayer = new Shade(tile);
-			break;
-		case Drow::TYPE_ID:
-			curPlayer = new Drow(tile);
-			break;
-		case Vampire::TYPE_ID:
-			curPlayer = new Vampire(tile);
-			break;
-		case Troll::TYPE_ID:
-			curPlayer =  new Troll(tile);
-			break;
-		case Goblin::TYPE_ID:
-			curPlayer =  new Goblin(tile);
-			break;
-		default:
-			break;
-	}
+	if (!curPlayer) {
+		switch (race) {
+			case Shade::TYPE_ID:
+				curPlayer = new Shade(tile);
+				break;
+			case Drow::TYPE_ID:
+				curPlayer = new Drow(tile);
+				break;
+			case Vampire::TYPE_ID:
+				curPlayer = new Vampire(tile);
+				break;
+			case Troll::TYPE_ID:
+				curPlayer =  new Troll(tile);
+				break;
+			case Goblin::TYPE_ID:
+				curPlayer =  new Goblin(tile);
+				break;
+			default:
+				break;
+		}
 	atexit(cleanup);
-	return curPlayer;
+	}
 }
 
 /* *

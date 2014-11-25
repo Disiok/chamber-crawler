@@ -17,7 +17,8 @@ class Stair: public Entity {
 		Stair(Tile *tile);
 
 	public:
-		static Stair *getInstance(Tile *tile);
+		static void spawn(Tile *tile);
+		static Stair *getInstance();
 		bool steppedOnBy(Character *character);
 		bool isSteppable(Player *player);
 };

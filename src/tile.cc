@@ -1,7 +1,9 @@
 #include "tile.h"
+
 #include "entity.h"
+#include "character.h"
 #include "enemy.h"
-#include "shade.h"
+#include "player.h"
 #include "stair.h"
 
 // Treasures
@@ -17,7 +19,6 @@
 #include "merchant.h"
 #include "halfling.h"
 
-#include "character.h"
 #include <iostream>
 using namespace std;
 
@@ -169,7 +170,7 @@ void Tile::spawnTreasure() {
  * Spawns stair entity in a room without the Player
  */
 void Tile::spawnStair() {
-	setEntity(Stair::getInstance(this));
+	Stair::spawn(this);
 }
 
 /* *
@@ -177,5 +178,5 @@ void Tile::spawnStair() {
  * Spawn player singleton in any room
  */
 void Tile::spawnPlayer() {
-	setEntity(Player::getInstance(this));
+	Player::spawn(this);
 }

@@ -19,7 +19,7 @@ class Player: public Character {
 		static const char SYMBOL_PLAYER = '@';
 		
 		static void setRace(char race); 
-		static Player *getInstance(Tile *tile);
+		static void *spawn(Tile *tile);
         	static Player *getInstance();
 		
 		Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);

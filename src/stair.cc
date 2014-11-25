@@ -9,12 +9,15 @@ Stair *Stair::stair = NULL;
 
 Stair::Stair(Tile *tile): Entity(tile, SYMBOL_STAIR) {}
 
-Stair *Stair::getInstance(Tile *tile) {
+void Stair::spawn(Tile *tile) {
     if (!stair) {
         stair = new Stair(tile);
 	atexit(cleanup);
     }
-    return stair;
+}
+
+Stair *Stair::getInstance() {
+	return stair;
 }
 
 bool Stair::isSteppable(Player *player) {
