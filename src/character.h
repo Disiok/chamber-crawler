@@ -5,6 +5,7 @@
 
 // Forward declaration
 class Tile;
+class Cell;
 
 /** 
  * Character:
@@ -28,7 +29,7 @@ class Character: public Entity {
 		// Methods
 		virtual void attack(Character *other);
 		virtual bool attackedBy(Character *other);
-		virtual void move();
+		virtual void move(Tile *tile);
 		virtual void killedBy(Character *other);
 
 		virtual bool isDead();

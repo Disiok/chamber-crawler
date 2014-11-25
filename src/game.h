@@ -24,6 +24,7 @@ class Game {
 	public:
 		static const std::string DEFAULT_FLOOR;
 		static Game *getInstance();
+		static int parseDirection(std::string direction);
 
 		~Game();
 		

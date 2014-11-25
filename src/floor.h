@@ -22,6 +22,7 @@ class Floor {
 
 		void loadFromFile(std::string fileName);
 		void displayFloor();
+		void performAction();
 		void spawn();
 	private:
 		Cell *map[MAX_ROW][MAX_COLUMN];

@@ -21,7 +21,7 @@ void Player::setRace(char race) {
  * spawn(Tile *)
  * Sets current player to type based on char and returns the curPlayer
  */
-void *Player::spawn(Tile *tile) {
+void Player::spawn(Tile *tile) {
 #ifdef DEBUG
 	cout << "Player::spawn(Tile *)" << endl;
 #endif
@@ -70,6 +70,10 @@ void Player::move(int direction) {
 }
 
 void Player::pickUp(int direction) {
+
+}
+
+void Player::engage(int direction) {
 
 }
 

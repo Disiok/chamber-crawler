@@ -1,4 +1,6 @@
 #include "character.h"
+#include "cell.h"
+#include "tile.h"
 #include "entity.h"
 #include <cmath>
 #include <iostream>
@@ -16,8 +18,10 @@ Character::Character(Tile *tile, char symbol, int hp, int atk, int def, int gold
 
 Character::~Character() {}
 
-void Character::move() {
-	// TODO: Finish move logic
+void Character::move(Tile *tile) {
+	getTile()->clearEntity();
+	setTile(tile);
+	tile->steppedOnBy(this);
 }
 
 void Character::killedBy(Character *other) {

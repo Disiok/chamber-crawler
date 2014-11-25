@@ -47,3 +47,7 @@ Tile *Entity::getTile() {
 char Entity::getSymbol() {
 	return symbol;
 }
+
+void Entity::setTile(Tile *tile) {
+	this->tile = tile;
+}
