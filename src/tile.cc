@@ -3,12 +3,19 @@
 #include "enemy.h"
 #include "shade.h"
 #include "stair.h"
+
 // Treasures
 #include "normalTreasure.h"
 #include "smallTreasure.h"
 #include "dragonTreasure.h"
 
-// Player
+// Enemies
+#include "human.h"
+#include "dwarf.h"
+#include "elf.h"
+#include "orc.h"
+#include "merchant.h"
+#include "halfling.h"
 
 #include "character.h"
 #include <iostream>
@@ -95,21 +102,20 @@ char Tile::getSymbol() {
  * 	  Merchant: 1/9 = 2/18
  */
 void Tile::spawnEnemy() {
-	// TODO: uncomment when .h and .cc are added
 	int roll = rand() % 18 + 1;
-	/*if (true || roll >= 1 && roll < 5) {
-		t->setEntity(new Shade(t));
+	if (roll >= 1 && roll < 5) {
+		setEntity(new Shade(this));
 	} else if (roll >= 5 && roll < 8) {
-		t->setEntity(new Dwarf(t));
+		setEntity(new Dwarf(this));
 	} else if (roll >= 8 && roll < 13) {
-		t->setEntity(new Halfling(t));
+		setEntity(new Halfling(this));
 	} else if (roll >= 13 && roll < 15) {
-		t->setEntity(new Elf(t));
+		setEntity(new Elf(this));
 	} else if (roll >= 15 && roll < 17) {
-		t->setEntity(new Orc(t));
+		setEntity(new Orc(this));
 	} else {
-		t->setEntity(new Merchant(t));
-	}*/
+		setEntity(new Merchant(this));
+	}
 }
 
 /* *
@@ -148,7 +154,6 @@ void Tile::spawnPotion() {
  *	Small: 	1/4 = 2/8
  */
 void Tile::spawnTreasure() {
-	// TODO: uncomment when .h and .cc are added
 	int roll = rand() % 8 + 1;
 	if (roll >= 1 && roll < 6) {
 		setEntity(new NormalTreasure(this));

@@ -20,5 +20,7 @@ void Enemy::killedBy(Character *other) {
 }
 
 bool Enemy::attackedBy(Character *other) {
-
+	Character::attackedBy(other);
+	other->attackedBy(this);
+	return true;
 }

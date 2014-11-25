@@ -1,7 +1,7 @@
-#include "elf.h"
+#include "merchant.h"
 #include <string>
 using namespace std;
 
-const string Elf::TYPE_NAME = "Elf";
+const string Merchant::TYPE_NAME = "Merchant";
 
-Elf::Elf(Tile *tile): Enemy(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {}
+Merchant::Merchant(Tile *tile): Enemy(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {}
