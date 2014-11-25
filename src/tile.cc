@@ -104,7 +104,7 @@ char Tile::getSymbol() {
 void Tile::spawnEnemy() {
 	int roll = rand() % 18 + 1;
 	if (roll >= 1 && roll < 5) {
-		setEntity(new Shade(this));
+		setEntity(new Human(this));
 	} else if (roll >= 5 && roll < 8) {
 		setEntity(new Dwarf(this));
 	} else if (roll >= 8 && roll < 13) {
