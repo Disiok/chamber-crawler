@@ -13,7 +13,7 @@ class Tile: public Cell {
 		static const char SYMBOL_TILE = '.';
 
 		// Constructor
-		Tile(int i, int j);
+		Tile(int i, int j, Floor* floor);
 
 		// Tile methods
 		void spawnEnemy();

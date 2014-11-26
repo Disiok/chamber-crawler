@@ -6,6 +6,7 @@ class Character;
 class Entity;
 class Player;
 class Enemy;
+class Floor;
 
 class Cell {
 	private:
@@ -17,10 +18,11 @@ class Cell {
 		char symbol;
 	protected:
 		Entity *entity;
+		Floor *floor;
 	public:
-		static Cell *getInstance(int i, int j, char id);
+		static Cell *getInstance(int i, int j, char id, Floor *floor);
 		// Constructor & Destructor
-		Cell(int i, int j, char symbol);
+		Cell(int i, int j, char symbol, Floor *floor);
 		virtual ~Cell() = 0;
 
 		// Methods

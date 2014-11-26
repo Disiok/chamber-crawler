@@ -7,7 +7,7 @@ class Door: public Cell {
 		static const char SYMBOL_DOOR = '+';
 
 		// Constructor
-		Door(int i, int j);
+		Door(int i, int j, Floor* floor);
         bool isSteppable(Player *player);
         char getSymbol();
 };

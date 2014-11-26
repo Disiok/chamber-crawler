@@ -8,6 +8,6 @@ class Player;
 class Wall: public Cell {
 	public:
 		// Constructor
-		Wall(int i, int j, char symbol);
+		Wall(int i, int j, char symbol, Floor* floor);
 };
 #endif

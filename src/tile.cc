@@ -23,8 +23,8 @@
 #include <cstdlib>
 using namespace std;
 
-Tile::Tile(int i, int j):
-	Cell(i, j, SYMBOL_TILE) {}
+Tile::Tile(int i, int j, Floor* floor):
+	Cell(i, j, SYMBOL_TILE, floor) {}
 
 bool Tile::isSteppable(Player *player) {
 	if (entity) {

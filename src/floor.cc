@@ -72,7 +72,7 @@ void Floor::loadFromFile(string fileName) {
 		getline(ifs, line);
 		rows[i] = line;
 		for (int j = 0; j < MAX_COLUMN; j ++) {
-			map[i][j] = Cell::getInstance(i, j, line[j]);
+			map[i][j] = Cell::getInstance(i, j, line[j], this);
 		}
 	}
 	// Going through every floor tile and flooding each chamber
