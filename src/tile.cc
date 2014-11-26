@@ -42,15 +42,6 @@ bool Tile::isSteppable(Enemy *enemy) {
 	}
 }
 
-char Tile::getSymbol() {
-	if (entity) {
-		return entity->getSymbol();
-	} else {
-		return Cell::getSymbol();
-	}
-}
-
-
 /* *
  * spawnEnemy
  * 	  Human: 	2/9 = 4/18

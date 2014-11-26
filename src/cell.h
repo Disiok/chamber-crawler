@@ -37,7 +37,7 @@ class Cell {
 		bool pickedUpBy(Character *other);
 		bool attackedBy(Character *other);
 
-		virtual char getSymbol();
+		char getSymbol();
 		int getI();
 		int getJ();
 

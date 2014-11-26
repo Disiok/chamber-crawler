@@ -87,7 +87,11 @@ bool Cell::attackedBy(Character *other) {
 }
 
 char Cell::getSymbol() {
-	return symbol;
+	if (entity) {
+		return entity->getSymbol();
+	} else {
+		return symbol;
+	}
 }
 
 int Cell::getI() {

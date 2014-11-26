@@ -7,5 +7,7 @@ class Passage: public Cell {
 
 		// Constructor
 		Passage(int i, int j);
+        bool isSteppable(Player *player);
+        char getSymbol();
 };
 #endif

@@ -9,6 +9,5 @@ class Wall: public Cell {
 	public:
 		// Constructor
 		Wall(int i, int j, char symbol);
-		bool isSteppable(Player *player);
 };
 #endif

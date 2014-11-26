@@ -25,6 +25,5 @@ class Tile: public Cell {
 		// Override methods
 		bool isSteppable(Player *player);
 		bool isSteppable(Enemy *enemy);
-		char getSymbol();
 };
 #endif
