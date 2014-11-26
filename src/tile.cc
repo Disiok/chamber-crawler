@@ -20,6 +20,7 @@
 #include "halfling.h"
 
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 Tile::Tile(int i, int j):
@@ -128,22 +129,22 @@ void Tile::spawnPotion() {
 	/*int roll = rand() % 6 + 1;
 	switch(roll) {
 		case: 1
-			t->setEntity(new RestoreHealth(t));
+			setEntity(new RestoreHealth(this));
 			break;
 		case: 2
-			t->setEntity(new PoisonHealth(t));
+			setEntity(new PoisonHealth(this));
 			break;
 		case: 3
-			t->setEntity(new BoostAtk(t));
+			setEntity(new BoostAtk(this));
 			break;
 		case: 4
-			t->setEntity(new BoostDef(t));
+			setEntity(new BoostDef(this));
 			break;
 		case: 5
-			t->setEntity(new WoundDef(t));
+			setEntity(new WoundDef(this));
 			break;
 		default:
-			t->setEntity(new WoundAtk(t));
+			setEntity(new WoundAtk(this));
 			break;
 	} */
 }
