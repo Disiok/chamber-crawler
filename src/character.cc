@@ -21,6 +21,7 @@ Character::~Character() {}
 void Character::move(Cell *cell) {
 	getCell()->clearEntity();
 	setCell(cell);
+    cout<<"WE MADE IT"<<endl;
 	cell->steppedOnBy(this);
 }
 

@@ -109,21 +109,21 @@ Cell *Game::parseDirection(string direction) {
 	int i = Player::getInstance()->getCell()->getI();
     int j = Player::getInstance()->getCell()->getJ();
     if (direction == "no") {
-		return floor->getCell(i, j+1);
-	} else if (direction == "so") {
-		return floor->getCell(i, j-1);
-	} else if (direction == "ea") {
-		return floor->getCell(i+1, j);
-	} else if (direction == "we") {
 		return floor->getCell(i-1, j);
+	} else if (direction == "so") {
+		return floor->getCell(i+1, j);
+	} else if (direction == "ea") {
+		return floor->getCell(i, j+1);
+	} else if (direction == "we") {
+		return floor->getCell(i, j-1);
 	} else if (direction == "ne") {
-		return floor->getCell(i+1, j+1);
-	} else if (direction == "nw") {
 		return floor->getCell(i-1, j+1);
-	} else if (direction == "se") {
-		return floor->getCell(i+1, j-1);
-	} else if (direction == "sw") {
+	} else if (direction == "nw") {
 		return floor->getCell(i-1, j-1);
+	} else if (direction == "se") {
+		return floor->getCell(i+1, j+1);
+	} else if (direction == "sw") {
+		return floor->getCell(i+1, j-1);
 	} else {
 		return NULL;
 	}

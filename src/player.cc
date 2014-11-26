@@ -67,6 +67,7 @@ Player::~Player() {}
 
 void Player::move(Cell *cell) {
     if (cell->isSteppable(curPlayer)) {
+        cell->setEntity(curPlayer);
         Character::move(cell);
     }
 }
