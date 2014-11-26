@@ -1,6 +1,7 @@
 #ifndef ___GAME_H___
 #define ___GAME_H___
 #include <string>
+#include "cell.h"
 
 // Forward declaration
 class Floor;
@@ -9,9 +10,9 @@ class Game {
 	private:
 		static Game *game;
 		static void cleanup();
-		
+
 		Floor *floor;
-		
+
 		Game();
 
 		void chooseRace();
@@ -24,10 +25,10 @@ class Game {
 	public:
 		static const std::string DEFAULT_FLOOR;
 		static Game *getInstance();
-		static int parseDirection(std::string direction);
+		Cell *parseDirection(std::string direction);
 
 		~Game();
-		
+
 		void start();
 		void nextFloor();
 };

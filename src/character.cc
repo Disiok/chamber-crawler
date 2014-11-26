@@ -18,10 +18,10 @@ Character::Character(Tile *tile, char symbol, int hp, int atk, int def, int gold
 
 Character::~Character() {}
 
-void Character::move(Tile *tile) {
-	getTile()->clearEntity();
-	setTile(tile);
-	tile->steppedOnBy(this);
+void Character::move(Cell *cell) {
+	getCell()->clearEntity();
+	setCell(cell);
+	cell->steppedOnBy(this);
 }
 
 void Character::killedBy(Character *other) {

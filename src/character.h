@@ -7,7 +7,7 @@
 class Tile;
 class Cell;
 
-/** 
+/**
  * Character:
  * 	movable Entity
  */
@@ -15,7 +15,7 @@ class Character: public Entity {
 	private:
 		const char typeIdentifier;
 		const std::string typeName;
-		
+
 		int hp;
 		int atk;
 		int def;
@@ -29,7 +29,7 @@ class Character: public Entity {
 		// Methods
 		virtual void attack(Character *other);
 		virtual bool attackedBy(Character *other);
-		virtual void move(Tile *tile);
+		virtual void move(Cell *cell);
 		virtual void killedBy(Character *other);
 
 		virtual bool isDead();

@@ -12,22 +12,21 @@ class Player: public Character {
 	private:
 		static Player *curPlayer;
 		static char race;
-		
-		static void cleanup();
 
+		static void cleanup();
 	public:
 		static const char SYMBOL_PLAYER = '@';
-		
-		static void setRace(char race); 
+
+		static void setRace(char race);
 		static void spawn(Tile *tile);
         	static Player *getInstance();
-		
+
 		Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
 		virtual ~Player() = 0;
 
-		virtual void move(int direction);
-		virtual void pickUp(int direction);
-		virtual void engage(int direction);
+		virtual void move(Cell *cell);
+		virtual void pickUp(Cell *cell);
+		virtual void engage(Cell *cell);
 		virtual void killedBy(Character *other);
 };
 #endif

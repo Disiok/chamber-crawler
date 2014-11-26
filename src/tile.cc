@@ -24,50 +24,7 @@
 using namespace std;
 
 Tile::Tile(int i, int j):
-	Cell(i, j, SYMBOL_TILE), entity(NULL) {}
-
-bool Tile::hasEntity() {
-	if (entity) {
-		return true;
-	} else {
-		return false;
-	}
-}
-void Tile::destroyEntity() {
-	delete entity;
-}
-
-void Tile::clearEntity() {
-	entity = NULL;
-}
-
-void Tile::setEntity(Entity *entity) {
-	this->entity = entity;
-}
-
-bool Tile::steppedOnBy(Character *other) {
-	if (entity) {
-		return entity->steppedOnBy(other);
-	} else {
-		return false;
-	}
-}
-
-bool Tile::pickedUpBy(Character *other) {
-	if (entity) {
-		return entity->pickedUpBy(other);
-	} else {
-		return false;
-	}
-}
-
-bool Tile::attackedBy(Character *other) {
-	if (entity) {
-		return entity->attackedBy(other);
-	} else {
-		return false;
-	}
-}
+	Cell(i, j, SYMBOL_TILE) {}
 
 bool Tile::isSteppable(Player *player) {
 	if (entity) {

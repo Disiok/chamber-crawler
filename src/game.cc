@@ -62,6 +62,7 @@ void Game::runGameLoop() {
 	while(true) {
 		runPlayerTurn();
 		runEnemyTurn();
+        floor->displayFloor();
 	}
 }
 
@@ -69,18 +70,18 @@ void Game::runPlayerTurn() {
 	cout << "Enter command: ";
 	string command;
 	cin >> command;
-	int direction = parseDirection(command);
-	if (direction != -1) {
-		Player::getInstance()->move(direction);
+	Cell *cell = parseDirection(command);
+	if (cell != NULL) {
+		Player::getInstance()->move(cell);
 	} else {
 		if (command == "u") {
 			cin >> command;
-			direction = parseDirection(command);
-			Player::getInstance()->pickUp(direction);
+			cell = parseDirection(command);
+			Player::getInstance()->pickUp(cell);
 		} else if (command == "a") {
 			cin >> command;
-			direction = parseDirection(command);
-			Player::getInstance()->engage(direction);
+			cell = parseDirection(command);
+			Player::getInstance()->engage(cell);
 		} else if (command == "r") {
 			// TODO: Restart
 		} else if (command == "q") {
@@ -104,26 +105,26 @@ void Game::cleanup() {
  * 		456
  * 		123
  */
-int Game::parseDirection(string direction) {
-	if (direction == "no") {
-		return 8;
+Cell *Game::parseDirection(string direction) {
+	int i = Player::getInstance()->getCell()->getI();
+    int j = Player::getInstance()->getCell()->getJ();
+    if (direction == "no") {
+		return floor->getCell(i, j+1);
 	} else if (direction == "so") {
-		return 2;
+		return floor->getCell(i, j-1);
 	} else if (direction == "ea") {
-		return 6;
+		return floor->getCell(i+1, j);
 	} else if (direction == "we") {
-		return 4;
+		return floor->getCell(i-1, j);
 	} else if (direction == "ne") {
-		return 9;
+		return floor->getCell(i+1, j+1);
 	} else if (direction == "nw") {
-		return 7;
+		return floor->getCell(i-1, j+1);
 	} else if (direction == "se") {
-		return 3;
+		return floor->getCell(i+1, j-1);
 	} else if (direction == "sw") {
-		return 1;
-	} else if (direction == "st") {
-		return 5;
+		return floor->getCell(i-1, j-1);
 	} else {
-		return -1;
+		return NULL;
 	}
 }

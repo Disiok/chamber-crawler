@@ -6,7 +6,7 @@
 #include <cstdlib>
 using namespace std;
 
-Enemy::Enemy(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const string typeName): 
+Enemy::Enemy(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const string typeName):
 	Character(tile, typeIdentifier, hp, atk, def, 0, typeIdentifier, typeName) {}
 
 Enemy::~Enemy() {}
@@ -34,8 +34,8 @@ bool Enemy::attackedBy(Character *other) {
 }
 
 bool Enemy::isPlayerNearby() {
-	Tile *current = getTile();
-	Tile *other = Player::getInstance()->getTile();
+	Cell *current = getCell();
+	Cell *other = Player::getInstance()->getCell();
 	int i1 = current->getI();
 	int j1 = current->getJ();
 	int i2 = other->getI();

@@ -9,8 +9,6 @@ class Player;
 class Enemy;
 
 class Tile: public Cell {
-	private:
-		Entity *entity;
 	public:
 		static const char SYMBOL_TILE = '.';
 
@@ -18,22 +16,12 @@ class Tile: public Cell {
 		Tile(int i, int j);
 
 		// Tile methods
-		bool hasEntity();
-		void clearEntity();
-		void destroyEntity();
-		void setEntity(Entity *entity);	
-
 		void spawnEnemy();
 		void spawnPotion();
 		void spawnTreasure();
 		void spawnStair();
 		void spawnPlayer();
 
-		
-		bool steppedOnBy(Character *other);
-		bool pickedUpBy(Character *other);
-		bool attackedBy(Character *other);
-		
 		// Override methods
 		bool isSteppable(Player *player);
 		bool isSteppable(Enemy *enemy);

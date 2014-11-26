@@ -5,17 +5,17 @@
 #include <iostream>
 using namespace std;
 
-Entity::Entity(Tile *tile, char symbol): tile(tile), symbol(symbol) {
+Entity::Entity(Tile *tile, char symbol): cell(tile), symbol(symbol) {
 	if (tile) {
-		tile->setEntity(this);	
+		cell->setEntity(this);
 	}
 }
 
 Entity::~Entity() {}
 
 void Entity::destroy() {
-	tile->destroyEntity();
-	tile->clearEntity();
+	cell->destroyEntity();
+	cell->clearEntity();
 }
 
 void Entity::performAction() {}
@@ -40,14 +40,14 @@ bool Entity::isSteppable(Enemy *enemy) {
 	return false;
 }
 
-Tile *Entity::getTile() {
-	return tile;
+Cell *Entity::getCell() {
+	return cell;
 }
 
 char Entity::getSymbol() {
 	return symbol;
 }
 
-void Entity::setTile(Tile *tile) {
-	this->tile = tile;
+void Entity::setCell(Cell *cell) {
+	this->cell = cell;
 }

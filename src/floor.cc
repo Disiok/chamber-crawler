@@ -151,6 +151,10 @@ Tile *Floor::getRandomTile() {
 	return getRandomChamber()->getRandomTile();
 }
 
+Cell *Floor::getCell(int i, int j) {
+    return map[i][j];
+}
+
 void Floor::performAction() {
 	for (int i = 0; i < MAX_ROW; i++) {
 		for (int j = 0; j < MAX_COLUMN; j++) {

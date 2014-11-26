@@ -2,6 +2,7 @@
 #define ___ENTITY_H___
 
 // Forward declarations
+class Cell;
 class Tile;
 class Character;
 class Player;
@@ -13,7 +14,7 @@ class Enemy;
  */
 class Entity {
 	private:
-		Tile *tile;
+		Cell *cell;
 		char symbol;
 	public:
 		Entity(Tile *tile, char symbol);
@@ -27,11 +28,11 @@ class Entity {
 		virtual bool isSteppable(Player *player);
 		virtual bool isSteppable(Enemy *enemy);
 
-		Tile *getTile();
+		Cell *getCell();
 		char getSymbol();
-		
-		void setTile(Tile *tile);
-		
+
+		void setCell(Cell *cell);
+
 
 
 };

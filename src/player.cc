@@ -65,15 +65,17 @@ Player::Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, 
 
 Player::~Player() {}
 
-void Player::move(int direction) {
+void Player::move(Cell *cell) {
+    if (cell->isSteppable(curPlayer)) {
+        Character::move(cell);
+    }
+}
+
+void Player::pickUp(Cell *cell) {
 
 }
 
-void Player::pickUp(int direction) {
-
-}
-
-void Player::engage(int direction) {
+void Player::engage(Cell *cell) {
 
 }
 
