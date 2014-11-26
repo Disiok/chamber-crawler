@@ -42,3 +42,7 @@ bool Enemy::isPlayerNearby() {
 	int j2 = other->getJ();
 	return abs(i1 - i2) <= 1 && abs(j1 - j2) <= 1;
 }
+
+bool Enemy::isSteppable(Player *player) {
+    return false;
+}

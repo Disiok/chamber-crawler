@@ -101,9 +101,6 @@ void Game::cleanup() {
 /**
  * parseDirection:
  * 	Helper function to convert from command to numpad representation of direction:
- * 		789
- * 		456
- * 		123
  */
 Cell *Game::parseDirection(string direction) {
 	int i = Player::getInstance()->getCell()->getI();

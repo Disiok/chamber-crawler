@@ -14,13 +14,16 @@ class Enemy: public Character {
 	private:
 		bool isPlayerNearby();
 		void move();
-	
+
 	public:
 		Enemy(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
 		virtual ~Enemy() = 0;
-		
+
 		virtual void performAction();
 		virtual void killedBy(Character *other);
 		virtual bool attackedBy(Character *other);
+
+		// Overrides
+		bool isSteppable(Player *player);
 };
 #endif
