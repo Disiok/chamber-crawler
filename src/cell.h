@@ -16,9 +16,10 @@ class Cell {
 
 		// Representation
 		char symbol;
+
+		Floor *floor;
 	protected:
 		Entity *entity;
-		Floor *floor;
 	public:
 		static Cell *getInstance(int i, int j, char id, Floor *floor);
 		// Constructor & Destructor
@@ -40,6 +41,7 @@ class Cell {
 		bool attackedBy(Character *other);
 
 		char getSymbol();
+		Floor *getFloor();
 		int getI();
 		int getJ();
 

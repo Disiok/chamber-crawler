@@ -19,6 +19,10 @@ Cell::Cell(int i, int j, char symbol, Floor *floor):
 Cell::~Cell() {}
 
 bool Cell::performAction() {
+	if (entity) {
+		entity->performAction();
+		return true;
+	}
 	return false;
 }
 
@@ -27,7 +31,7 @@ bool Cell::isSteppable(Player *player) {
 }
 
 bool Cell::isSteppable(Enemy *enemy) {
-	return true;
+	return false;
 }
 
 Cell *Cell::getInstance(int i, int j, char id, Floor* floor) {
@@ -93,6 +97,10 @@ char Cell::getSymbol() {
 	} else {
 		return symbol;
 	}
+}
+
+Floor *Cell::getFloor() {
+	return floor;
 }
 
 int Cell::getI() {
