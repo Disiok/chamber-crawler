@@ -10,6 +10,7 @@ using namespace std;
 const string Game::DEFAULT_FLOOR = "default.floor";
 Game *Game::game = NULL;
 
+// Static instance accessor
 Game *Game::getInstance() {
 	if (!game) {
 		game = new Game();
@@ -62,7 +63,7 @@ void Game::runGameLoop() {
 	while(true) {
 		runPlayerTurn();
 		runEnemyTurn();
-        floor->displayFloor();
+		floor->displayFloor();
 	}
 }
 
