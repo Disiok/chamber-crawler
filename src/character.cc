@@ -22,6 +22,7 @@ void Character::move(Cell *cell) {
 	getCell()->clearEntity();
 	setCell(cell);
 	cell->steppedOnBy(this);
+	cell->setEntity(this);
 }
 
 void Character::killedBy(Character *other) {
@@ -61,6 +62,13 @@ int Character::getGold() {
 	return gold;
 }
 
+char Character::getTypeId() {
+	return typeIdentifier;
+}
+
+string Character::getTypeName() {
+	return typeName;
+}
 void Character::setHP(int hp) {
 	this->hp = hp;
 }

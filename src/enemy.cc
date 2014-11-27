@@ -37,7 +37,6 @@ void Enemy::move() {
         // Moving enemy
         int roll = rand() % steppableCells.size();
         Cell *cell = steppableCells.at(roll);
-        cell->setEntity(this);
         Character::move(cell);
     }
 }

@@ -22,6 +22,10 @@ class Game {
 		void runEnemyTurn();
 
 		void setupFloor();
+
+		void display();
+		void displayInfo();
+		void displayAction();
 	public:
 		static const std::string DEFAULT_FLOOR;
 		static Game *getInstance();

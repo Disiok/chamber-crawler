@@ -19,7 +19,7 @@ void Player::setRace(char race) {
 
 /* *
  * spawn(Tile *)
- * Sets current player to type based on char and returns the curPlayer
+ * 	Sets current player to type based on char and returns the curPlayer
  */
 void Player::spawn(Tile *tile) {
 #ifdef DEBUG
@@ -51,12 +51,9 @@ void Player::spawn(Tile *tile) {
 
 /* *
  * getInstance()
- * Returns the curPlayer
+ * 	Returns the curPlayer
  */
 Player *Player::getInstance() {
-#ifdef DEBUG
-    cout << "Player::getInstance()" << endl;
-#endif
     return curPlayer;
 }
 
@@ -66,18 +63,17 @@ Player::Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, 
 Player::~Player() {}
 
 void Player::move(Cell *cell) {
-    if (cell->isSteppable(curPlayer)) {
-        cell->setEntity(curPlayer);
-        Character::move(cell);
-    }
+	if (cell->isSteppable(curPlayer)) {
+		Character::move(cell);
+	}
 }
 
 void Player::pickUp(Cell *cell) {
-
+	cell->pickedUpBy(this);
 }
 
 void Player::engage(Cell *cell) {
-
+	cell->attackedBy(this);
 }
 
 void Player::killedBy(Character *other) {

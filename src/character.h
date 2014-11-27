@@ -40,6 +40,9 @@ class Character: public Entity {
 		virtual int getDef();
 		virtual int getGold();
 
+		char getTypeId();
+		std::string getTypeName();
+
 		// Mutators
 		virtual void setHP(int hp);
 		virtual void setAtk(int atk);

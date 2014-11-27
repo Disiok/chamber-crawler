@@ -48,7 +48,7 @@ void Game::setupFloor() {
 	floor = new Floor();
 	floor->loadFromFile(DEFAULT_FLOOR);
 	floor->spawn();
-	floor->displayFloor();
+	display();
 }
 
 void Game::chooseRace() {
@@ -63,7 +63,7 @@ void Game::runGameLoop() {
 	while(true) {
 		runPlayerTurn();
 		runEnemyTurn();
-		floor->displayFloor();
+		display();
 	}
 }
 
@@ -125,4 +125,23 @@ Cell *Game::parseDirection(string direction) {
 	} else {
 		return NULL;
 	}
+}
+
+void Game::display() {
+	floor->displayFloor();
+	displayInfo();
+	displayAction();
+}
+
+void Game::displayInfo() {
+	// TODO: print floor number
+	cout << "Race: " << Player::getInstance()->getTypeName() << " Gold: " << Player::getInstance()->getGold() << endl;
+	cout << "HP: " << Player::getInstance()->getHP() << endl;
+	cout << "Atk: " << Player::getInstance()->getAtk() << endl;
+	cout << "Def: " << Player::getInstance()->getDef() << endl;	
+}
+
+void Game::displayAction() {
+	// TODO: print previous action
+	cout << "Action: " << endl;
 }
