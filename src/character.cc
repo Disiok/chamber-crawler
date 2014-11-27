@@ -3,7 +3,10 @@
 #include "tile.h"
 #include "entity.h"
 #include <cmath>
+#include "game.h"
+#include <sstream>
 #include <iostream>
+#include "game.h"
 #include <string>
 using namespace std;
 
@@ -33,8 +36,14 @@ void Character::attack(Character *other) {
 #ifdef DEBUG
 	cout << "Character::attack" << endl;
 #endif
-	int damage = ceil(100/ (float)(100 + other->getDef()) * getAtk());
+	int damage = calculateDamage(other);
+	addAttackAction(other, damage);
 	other->setHP(other->getHP() - damage);
+}
+
+int Character::calculateDamage(Character *other) {
+	return ceil(100/ (float)(100 + other->getDef()) * getAtk());
+
 }
 
 bool Character::attackedBy(Character *other) {
@@ -87,4 +96,10 @@ void Character::setGold(int gold) {
 
 bool Character::isDead() {
 	return hp <= 0;
+}
+
+void Character::addMissAction(Character *other) {
+	ostringstream oss;
+	oss << other->getTypeId() << " missed. ";
+	Game::getInstance()->addAction(oss.str());
 }

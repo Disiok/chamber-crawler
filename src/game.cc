@@ -20,7 +20,7 @@ Game *Game::getInstance() {
 }
 
 // Constructor
-Game::Game(): floor(0) {};
+Game::Game(): floor(NULL), level(1), action("") {};
 
 // Destructor
 Game::~Game() {
@@ -42,6 +42,7 @@ void Game::nextFloor() {
 	cout << "Game::nextFloor" << endl;
 #endif
 	//TODO: Implement next floor logic
+	level ++;
 }
 
 void Game::setupFloor() {
@@ -61,6 +62,7 @@ void Game::chooseRace() {
 void Game::runGameLoop() {
 	// TODO: Add breaking logic
 	while(true) {
+		clearAction();
 		runPlayerTurn();
 		runEnemyTurn();
 		display();
@@ -105,8 +107,8 @@ void Game::cleanup() {
  */
 Cell *Game::parseDirection(string direction) {
 	int i = Player::getInstance()->getCell()->getI();
-    int j = Player::getInstance()->getCell()->getJ();
-    if (direction == "no") {
+	int j = Player::getInstance()->getCell()->getJ();
+	if (direction == "no") {
 		return floor->getCell(i-1, j);
 	} else if (direction == "so") {
 		return floor->getCell(i+1, j);
@@ -134,8 +136,10 @@ void Game::display() {
 }
 
 void Game::displayInfo() {
-	// TODO: print floor number
-	cout << "Race: " << Player::getInstance()->getTypeName() << " Gold: " << Player::getInstance()->getGold() << endl;
+	cout << "Race: " << Player::getInstance()->getTypeName();
+	cout << " Gold: " << Player::getInstance()->getGold();
+	cout << "\t\t\t\t\t\t\tFloor " << level << endl;
+	
 	cout << "HP: " << Player::getInstance()->getHP() << endl;
 	cout << "Atk: " << Player::getInstance()->getAtk() << endl;
 	cout << "Def: " << Player::getInstance()->getDef() << endl;	
@@ -143,5 +147,13 @@ void Game::displayInfo() {
 
 void Game::displayAction() {
 	// TODO: print previous action
-	cout << "Action: " << endl;
+	cout << "Action: " << action << endl;
+}
+
+void Game::addAction(string action) {
+	this->action += action;
+}
+
+void Game::clearAction() {
+	action = "";
 }

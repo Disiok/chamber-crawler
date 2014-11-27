@@ -12,6 +12,8 @@ class Game {
 		static void cleanup();
 
 		Floor *floor;
+		int level;
+		std::string action;
 
 		Game();
 
@@ -26,6 +28,7 @@ class Game {
 		void display();
 		void displayInfo();
 		void displayAction();
+		void clearAction();
 	public:
 		static const std::string DEFAULT_FLOOR;
 		static Game *getInstance();
@@ -35,5 +38,6 @@ class Game {
 
 		void start();
 		void nextFloor();
+		void addAction(std::string action);
 };
 #endif

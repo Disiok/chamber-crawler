@@ -29,6 +29,9 @@ class Character: public Entity {
 		// Methods
 		virtual void attack(Character *other);
 		virtual bool attackedBy(Character *other);
+		virtual int calculateDamage(Character *other);
+		virtual void addAttackAction(Character *other, int damage) = 0;
+		void addMissAction(Character *other);
 		virtual void move(Cell *cell);
 		virtual void killedBy(Character *other);
 

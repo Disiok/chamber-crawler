@@ -21,7 +21,7 @@ class Enemy: public Character {
 
 		virtual void performAction();
 		virtual void killedBy(Character *other);
-		virtual bool attackedBy(Character *other);
+		void addAttackAction(Character *other, int damage);
 
 		// Overrides
 		bool isSteppable(Player *player);

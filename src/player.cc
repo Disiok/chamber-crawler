@@ -5,8 +5,11 @@
 #include "vampire.h"
 #include "troll.h"
 #include "goblin.h"
+#include "game.h"
+#include "game.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <cstdlib>
 using namespace std;
 
@@ -45,7 +48,8 @@ void Player::spawn(Tile *tile) {
 			default:
 				break;
 		}
-	atexit(cleanup);
+		atexit(cleanup);
+		Game::getInstance()->addAction("Player character has spawned.");
 	}
 }
 
@@ -82,4 +86,19 @@ void Player::killedBy(Character *other) {
 
 void Player::cleanup() {
     delete curPlayer;
+}
+
+void Player::addAttackAction(Character *other, int damage) {
+	std::ostringstream oss;
+	oss << "PC deals " << damage <<  " damage to " << other->getTypeId() << " (" << other->getHP() << " HP). ";
+	Game::getInstance()->addAction(oss.str());
+}
+
+bool Player::attackedBy(Character *other) {
+	if (rand() % 2) {
+		Character::attackedBy(other);
+	} else {
+		addMissAction(other);
+	}
+	return true;
 }

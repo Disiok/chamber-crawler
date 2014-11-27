@@ -28,5 +28,8 @@ class Player: public Character {
 		virtual void pickUp(Cell *cell);
 		virtual void engage(Cell *cell);
 		virtual void killedBy(Character *other);
+
+		virtual bool attackedBy(Character *other);
+		void addAttackAction(Character *other, int damage);
 };
 #endif

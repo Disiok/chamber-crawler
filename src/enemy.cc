@@ -1,11 +1,14 @@
 #include "enemy.h"
 #include "tile.h"
 #include <string>
+#include "game.h"
 #include "player.h"
 #include "entity.h"
 #include "floor.h"
 #include <cstdlib>
+#include "game.h"
 #include <vector>
+#include <sstream>
 #include <iostream>
 using namespace std;
 
@@ -52,13 +55,6 @@ void Enemy::performAction() {
 void Enemy::killedBy(Character *other) {
 
 }
-
-bool Enemy::attackedBy(Character *other) {
-	Character::attackedBy(other);
-	other->attackedBy(this);
-	return true;
-}
-
 bool Enemy::isPlayerNearby() {
 	Cell *current = getCell();
 	Cell *other = Player::getInstance()->getCell();
@@ -71,4 +67,10 @@ bool Enemy::isPlayerNearby() {
 
 bool Enemy::isSteppable(Player *player) {
     return false;
+}
+
+void Enemy::addAttackAction(Character *other, int damage) {
+	std::ostringstream oss;
+	oss << getTypeId() << " deals " << damage <<  " damage to PC. ";
+	Game::getInstance()->addAction(oss.str());
 }
