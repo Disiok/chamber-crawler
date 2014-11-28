@@ -33,7 +33,7 @@ class Character: public Entity {
 		virtual void addAttackAction(Character *other, int damage) = 0;
 		void addMissAction(Character *other);
 		virtual void move(Cell *cell);
-		virtual void killedBy(Character *other);
+		virtual void killedBy(Character *other) = 0;
 
 		virtual bool isDead();
 

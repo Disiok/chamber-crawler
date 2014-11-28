@@ -32,6 +32,10 @@ void Game::start() {
 #ifdef DEBUG
 	cout << "Game::start" << endl;
 #endif
+
+#ifdef SEED
+	srand(SEED);
+#endif
 	chooseRace();
 	setupFloor();
 	runGameLoop();

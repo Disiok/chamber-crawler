@@ -28,10 +28,6 @@ void Character::move(Cell *cell) {
 	cell->setEntity(this);
 }
 
-void Character::killedBy(Character *other) {
-	// TODO: Finish dying logic
-}
-
 void Character::attack(Character *other) {
 #ifdef DEBUG
 	cout << "Character::attack" << endl;

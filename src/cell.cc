@@ -57,6 +57,7 @@ bool Cell::hasEntity() {
 }
 void Cell::destroyEntity() {
 	delete entity;
+	clearEntity();
 }
 
 void Cell::clearEntity() {

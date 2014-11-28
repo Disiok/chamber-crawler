@@ -53,7 +53,13 @@ void Enemy::performAction() {
 }
 
 void Enemy::killedBy(Character *other) {
+	int gold = (rand() % 2) ? 1 : 2;
+	other->setGold(other->getGold() + gold);
+	getCell()->destroyEntity();
 
+	ostringstream oss;
+	oss << "PC killed " << getTypeId() << " for " << gold << " gold. ";
+	Game::getInstance()->addAction(oss.str());
 }
 bool Enemy::isPlayerNearby() {
 	Cell *current = getCell();
@@ -70,7 +76,7 @@ bool Enemy::isSteppable(Player *player) {
 }
 
 void Enemy::addAttackAction(Character *other, int damage) {
-	std::ostringstream oss;
+	ostringstream oss;
 	oss << getTypeId() << " deals " << damage <<  " damage to PC. ";
 	Game::getInstance()->addAction(oss.str());
 }
