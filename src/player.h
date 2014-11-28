@@ -31,5 +31,6 @@ class Player: public Character {
 
 		virtual bool attackedBy(Character *other);
 		void addAttackAction(Character *other, int damage);
+		void addMissAction(Character *other);
 };
 #endif

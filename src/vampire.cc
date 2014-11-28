@@ -1,4 +1,5 @@
 #include "vampire.h"
+#include "dwarf.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -16,4 +17,16 @@ void Vampire::attack(Character *other) {
 	
 	// Life steal
 	setHP(getHP() + 5);
+}
+
+void Vampire::attack(Dwarf *dwarf) {
+	Character::attack(dwarf);
+
+	// Reverse life steal
+	setHP(getHP() - 5);
+
+}
+
+void Vampire::setHP(int hp) {
+	this->hp = max(0, hp);
 }

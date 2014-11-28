@@ -13,6 +13,5 @@ Troll::Troll(Tile *tile): Player(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
 };
 
 void Troll::invokeAbility() {
-	// TODO: Implement max health
 	setHP(getHP() + 5);
 }

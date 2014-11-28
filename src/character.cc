@@ -2,11 +2,14 @@
 #include "cell.h"
 #include "tile.h"
 #include "entity.h"
+#include "drow.h"
+#include "dwarf.h"
+#include "human.h"
 #include <cmath>
 #include "game.h"
+#include "goblin.h"
 #include <sstream>
 #include <iostream>
-#include "game.h"
 #include <string>
 using namespace std;
 
@@ -14,6 +17,7 @@ Character::Character(Tile *tile, char symbol, int hp, int atk, int def, int gold
 	Entity(tile, symbol),
 	typeIdentifier(typeIdentifier),
 	typeName(typeName),
+	maxHP(hp),
 	hp(hp),
 	atk(atk),
 	def(def),
@@ -32,14 +36,25 @@ void Character::attack(Character *other) {
 #ifdef DEBUG
 	cout << "Character::attack" << endl;
 #endif
-	int damage = calculateDamage(other);
-	addAttackAction(other, damage);
+	int damage = calculateDamageOn(other);
 	other->setHP(other->getHP() - damage);
+	addAttackAction(other, damage);
 }
 
-int Character::calculateDamage(Character *other) {
-	return ceil(100/ (float)(100 + other->getDef()) * getAtk());
+void Character::attack(Dwarf *dwarf) {
+	attack((Character *) dwarf);
+}
 
+void Character::attack(Drow *drow) {
+	attack((Character *) drow);
+}
+
+int Character::calculateDamageOn(Character *other) {
+	return ceil(100/ (float)(100 + other->getDef()) * getAtk());
+}
+
+int Character::calculateDamageOn(Goblin *goblin) {
+	return calculateDamageOn((Character *) goblin);
 }
 
 bool Character::attackedBy(Character *other) {
@@ -74,8 +89,9 @@ char Character::getTypeId() {
 string Character::getTypeName() {
 	return typeName;
 }
+
 void Character::setHP(int hp) {
-	this->hp = hp;
+	this->hp = min(maxHP, max(0, hp));
 }
 
 void Character::setAtk(int atk) {
@@ -91,11 +107,15 @@ void Character::setGold(int gold) {
 }
 
 bool Character::isDead() {
-	return hp <= 0;
+	return hp == 0;
 }
 
-void Character::addMissAction(Character *other) {
-	ostringstream oss;
-	oss << other->getTypeId() << " missed. ";
-	Game::getInstance()->addAction(oss.str());
+void Character::invokeAbility() {}
+
+int Character::calculateGoldFrom(Character *other) {
+	return (rand() % 2) ? 1 : 2;
+}
+
+int Character::calculateGoldFrom(Human *human) {
+	return 4;
 }

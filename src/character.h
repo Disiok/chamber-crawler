@@ -6,6 +6,10 @@
 // Forward declaration
 class Tile;
 class Cell;
+class Drow;
+class Dwarf;
+class Goblin;
+class Human;
 
 /**
  * Character:
@@ -15,7 +19,9 @@ class Character: public Entity {
 	private:
 		const char typeIdentifier;
 		const std::string typeName;
+		const int maxHP;
 
+	protected:
 		int hp;
 		int atk;
 		int def;
@@ -28,14 +34,22 @@ class Character: public Entity {
 
 		// Methods
 		virtual void attack(Character *other);
+		virtual void attack(Dwarf *dwarf);
+		virtual void attack(Drow *drow);
 		virtual bool attackedBy(Character *other);
-		virtual int calculateDamage(Character *other);
+		virtual int calculateDamageOn(Character *other);
+		virtual int calculateDamageOn(Goblin *goblin);
 		virtual void addAttackAction(Character *other, int damage) = 0;
-		void addMissAction(Character *other);
+
+		virtual void addMissAction(Character *other) = 0;
+
+		virtual int calculateGoldFrom(Character *other);
+		virtual int calculateGoldFrom(Human *human);
 		virtual void move(Cell *cell);
 		virtual void killedBy(Character *other) = 0;
 
 		virtual bool isDead();
+		virtual void invokeAbility();
 
 		// Accessors
 		virtual int getHP();

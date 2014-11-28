@@ -9,5 +9,8 @@ class Elf: public Enemy {
 		static const int ATK = 30;
 		static const int DEF = 10;
 		Elf(Tile *tile);
+
+		void attack(Character *other);
+		void attack(Drow *drow);
 };
 #endif

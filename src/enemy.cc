@@ -45,6 +45,8 @@ void Enemy::move() {
 }
 
 void Enemy::performAction() {
+	invokeAbility();
+	
 	if (isPlayerNearby()) {
 		Player::getInstance()->attackedBy(this);
 	} else {
@@ -53,13 +55,11 @@ void Enemy::performAction() {
 }
 
 void Enemy::killedBy(Character *other) {
-	int gold = (rand() % 2) ? 1 : 2;
+	int gold = other->calculateGoldFrom(this);
 	other->setGold(other->getGold() + gold);
 	getCell()->destroyEntity();
-
-	ostringstream oss;
-	oss << "PC killed " << getTypeId() << " for " << gold << " gold. ";
-	Game::getInstance()->addAction(oss.str());
+	
+	addKilledAction(gold);
 }
 bool Enemy::isPlayerNearby() {
 	Cell *current = getCell();
@@ -80,3 +80,16 @@ void Enemy::addAttackAction(Character *other, int damage) {
 	oss << getTypeId() << " deals " << damage <<  " damage to PC. ";
 	Game::getInstance()->addAction(oss.str());
 }
+
+void Enemy::addKilledAction(int gold) {
+	ostringstream oss;
+	oss << "PC killed " << getTypeId() << " for " << gold << " gold. ";
+	Game::getInstance()->addAction(oss.str());
+}
+
+void Enemy::addMissAction(Character *other) {
+	ostringstream oss;
+	oss << getTypeId() << " missed on PC. ";
+	Game::getInstance()->addAction(oss.str());
+}
+

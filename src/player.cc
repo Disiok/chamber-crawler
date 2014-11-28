@@ -98,7 +98,13 @@ bool Player::attackedBy(Character *other) {
 	if (rand() % 2) {
 		Character::attackedBy(other);
 	} else {
-		addMissAction(other);
+		other->addMissAction(this);
 	}
 	return true;
+}
+
+void Player::addMissAction(Character *other) {
+	ostringstream oss;
+	oss << "PC missed on " << other->getTypeId() << ". ";
+	Game::getInstance()->addAction(oss.str());
 }

@@ -74,6 +74,8 @@ void Game::runGameLoop() {
 }
 
 void Game::runPlayerTurn() {
+	Player::getInstance()->invokeAbility();
+	
 	cout << "Enter command: ";
 	string command;
 	cin >> command;

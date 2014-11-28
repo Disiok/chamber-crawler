@@ -14,5 +14,7 @@ class Vampire: public Player {
 
 		Vampire(Tile *tile);
 		void attack(Character *other);
+		void attack(Dwarf *dwarf);
+		void setHP(int hp);
 };
 #endif

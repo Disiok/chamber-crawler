@@ -15,5 +15,6 @@ class Goblin: public Player {
 		static const int DEF = 20;
 
 		Goblin(Tile *tile);
+		int calculateGoldFrom(Character *other);
 };
 #endif

@@ -9,5 +9,7 @@ class Halfling: public Enemy {
 		static const int ATK = 15;
 		static const int DEF = 20;
 		Halfling(Tile *tile);
+
+		bool attackedBy(Character *other);
 };
 #endif

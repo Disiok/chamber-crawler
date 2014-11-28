@@ -2,6 +2,9 @@
 #define ___MERCHANT_H___
 #include "enemy.h"
 class Merchant: public Enemy {
+	private:
+		static bool isHostile;
+		void addKilledAction();
 	public:
 		static const std::string TYPE_NAME;
 		static const char TYPE_ID = 'M';
@@ -9,5 +12,10 @@ class Merchant: public Enemy {
 		static const int ATK = 70;
 		static const int DEF = 5;
 		Merchant(Tile *tile);
+
+		bool attackedBy(Character *other);
+		bool isPlayerNearby();
+
+		void killedBy(Character *other);
 };
 #endif
