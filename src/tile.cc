@@ -19,6 +19,14 @@
 #include "merchant.h"
 #include "halfling.h"
 
+// Potions
+#include "restoreHealth.h"
+#include "poisonHealth.h"
+#include "boostAtk.h"
+#include "woundAtk.h"
+#include "boostDef.h"
+#include "woundDef.h"
+
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -74,27 +82,27 @@ void Tile::spawnEnemy() {
  */
 void Tile::spawnPotion() {
 	// TODO: uncomment once .h and .cc for each potion is added
-	/*int roll = rand() % 6 + 1;
+	int roll = rand() % 6 + 1;
 	switch(roll) {
-		case: 1
+		case 1:
 			setEntity(new RestoreHealth(this));
 			break;
-		case: 2
+		case 2:
 			setEntity(new PoisonHealth(this));
 			break;
-		case: 3
+		case 3:
 			setEntity(new BoostAtk(this));
 			break;
-		case: 4
+		case 4:
 			setEntity(new BoostDef(this));
 			break;
-		case: 5
+		case 5:
 			setEntity(new WoundDef(this));
 			break;
 		default:
 			setEntity(new WoundAtk(this));
 			break;
-	} */
+	}
 }
 
 /* *

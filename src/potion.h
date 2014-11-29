@@ -1,22 +1,25 @@
 #ifndef ___POTION_H___
 #define ___POTION_H___
+#include <string>
 #include "player.h"
+
+class Cell;
+
 class Potion: public Player {
-	private:
+	protected:
 		Player *player;
 	public:
-		Potion(Tile *tile);
+		static const char SYMBOL_POTION = 'P';
+		Potion(Tile *tile, std::string typeIdentifier);
 
 		// Delegating Player methods
-		void move(int direction);
-		void pickUp(int direction);
+		void move(Cell *cell);
+		virtual void pickUp(Cell *cell);
 		void killedBy(Character *other);
 
 		// Delegating Character methods
 		void attack(Character *other);
 		bool attackedBy(Character *other);
-		void move();
-		void killedBy(Character *other);
 
 		bool isDead();
 
@@ -24,14 +27,16 @@ class Potion: public Player {
 		int getAtk();
 		int getDef();
 		int getGold();
-		
+
 		void setHP(int hp);
 		void setAtk(int atk);
 		void setDef(int def);
 		void setGold(int gold);
 
 		// Delegating Entity methods
-		Tile *getTile();
+		Cell *getCell();
 
+		// Other
+		virtual Player *getBarePlayer();
 };
 #endif

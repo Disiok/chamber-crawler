@@ -13,7 +13,7 @@ class Enemy;
  * 	Spawnable on Tiles
  */
 class Entity {
-	private:
+	protected:
 		Cell *cell;
 		char symbol;
 	public:

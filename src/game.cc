@@ -147,8 +147,7 @@ void Game::runPlayerTurn() {
 	cin >> command;
 	Cell *cell = parseDirection(command);
 	if (cell != NULL) {
-		signalNextFloor();
-		//Player::getInstance()->move(cell);
+		Player::getInstance()->move(cell);
 	} else {
 		if (command == "u") {
 			cin >> command;

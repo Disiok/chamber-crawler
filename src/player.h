@@ -19,7 +19,8 @@ class Player: public Character {
 
 		static void setRace(char race);
 		static void spawn(Tile *tile);
-        	static Player *getInstance();
+        static Player *getInstance();
+        static void setInstance(Player *p);
 
 		Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
 		virtual ~Player() = 0;
