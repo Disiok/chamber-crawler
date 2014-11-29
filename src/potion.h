@@ -8,9 +8,10 @@ class Cell;
 class Potion: public Player {
 	protected:
 		Player *player;
+		bool choosePickUp(bool revealed);
 	public:
 		static const char SYMBOL_POTION = 'P';
-		Potion(Tile *tile, std::string typeIdentifier);
+		Potion(Tile *tile, std::string typeName);
 
 		bool pickedUpBy(Character *character);
 

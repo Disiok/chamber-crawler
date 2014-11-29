@@ -1,13 +1,17 @@
 #include "woundAtk.h"
 using namespace std;
 
-const string WoundAtk::typeIdentifier = "Wound Atk";
+const string WoundAtk::typeName = "Wound Atk";
+bool WoundAtk::revealed = false;
 
-WoundAtk::WoundAtk(Tile *tile): Potion(tile, typeIdentifier) {}
+WoundAtk::WoundAtk(Tile *tile): Potion(tile, typeName) {}
 
 bool WoundAtk::pickedUpBy(Character *character) {
-    character->setAtk(character->getAtk() - 5);
-    Potion::pickedUpBy(character);
+    if (choosePickUp(revealed)) {
+        revealed = true;
+        character->setAtk(character->getAtk() - 5);
+        Potion::pickedUpBy(character);
+    }
 }
 
 Player *WoundAtk::getBarePlayer() {

@@ -1,13 +1,17 @@
 #include "boostDef.h"
 using namespace std;
 
-const string BoostDef::typeIdentifier = "Boost Def";
+const string BoostDef::typeName = "Boost Def";
+bool BoostDef::revealed = false;
 
-BoostDef::BoostDef(Tile *tile): Potion(tile, typeIdentifier) {}
+BoostDef::BoostDef(Tile *tile): Potion(tile, typeName) {}
 
 bool BoostDef::pickedUpBy(Character *character) {
-    character->setDef(character->getDef() + 5);
-    Potion::pickedUpBy(character);
+    if (choosePickUp(revealed)) {
+        revealed = true;
+        character->setDef(character->getDef() + 5);
+        Potion::pickedUpBy(character);
+    }
 }
 
 Player *BoostDef::getBarePlayer() {

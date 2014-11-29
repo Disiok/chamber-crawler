@@ -5,8 +5,10 @@
 class Cell;
 
 class BoostAtk: public Potion {
+    private:
+        static bool revealed;
     public:
-        static const std::string typeIdentifier;
+        static const std::string typeName;
         BoostAtk(Tile *tile);
         bool pickedUpBy(Character *character);
         Player *getBarePlayer();

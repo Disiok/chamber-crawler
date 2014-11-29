@@ -1,13 +1,17 @@
 #include "boostAtk.h"
 using namespace std;
 
-const string BoostAtk::typeIdentifier = "Boost Atk";
+const string BoostAtk::typeName = "Boost Atk";
+bool BoostAtk::revealed = false;
 
-BoostAtk::BoostAtk(Tile *tile): Potion(tile, typeIdentifier) {}
+BoostAtk::BoostAtk(Tile *tile): Potion(tile, typeName) {}
 
 bool BoostAtk::pickedUpBy(Character *character) {
-    character->setAtk(character->getAtk() + 5);
-    Potion::pickedUpBy(character);
+    if (choosePickUp(revealed)) {
+        revealed = true;
+        character->setAtk(character->getAtk() + 5);
+        Potion::pickedUpBy(character);
+    }
 }
 
 Player *BoostAtk::getBarePlayer() {

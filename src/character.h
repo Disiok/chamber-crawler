@@ -18,10 +18,10 @@ class Human;
 class Character: public Entity {
 	private:
 		const char typeIdentifier;
-		const std::string typeName;
 		const int maxHP;
 
 	protected:
+		const std::string typeName;
 		int hp;
 		int atk;
 		int def;

@@ -5,8 +5,10 @@
 class Cell;
 
 class WoundAtk: public Potion {
+    private:
+        static bool revealed;
     public:
-        static const std::string typeIdentifier;
+        static const std::string typeName;
         WoundAtk(Tile *tile);
         bool pickedUpBy(Character *character);
         Player *getBarePlayer();

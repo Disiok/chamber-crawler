@@ -1,12 +1,30 @@
 #include "potion.h"
-
-// tempo
 #include <iostream>
 using namespace std;
 
-Potion::Potion(Tile *tile, const string typeIdentifier): Player(tile, 0, 0, 0, SYMBOL_POTION, typeIdentifier) {
+Potion::Potion(Tile *tile, const string typeName): Player(tile, 0, 0, 0, SYMBOL_POTION, typeName) {
     tile->setEntity(this);
     symbol = SYMBOL_POTION;
+}
+
+bool Potion::choosePickUp(bool revealed) {
+    while (true) {
+        cout << "Pick up ";
+        if (revealed) {
+            cout << typeName;
+        } else {
+            cout << "Unknown Potion";
+        }
+        cout << "? (y/n)" << endl;
+
+        string choice;
+        cin >> choice;
+        if (choice == "y") {
+            return true;
+        } else if (choice == "n") {
+            return false;
+        }
+    }
 }
 
 bool Potion::pickedUpBy(Character *character) {
