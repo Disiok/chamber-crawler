@@ -12,7 +12,7 @@ using namespace std;
 
 DragonTreasure::DragonTreasure(Tile *tile): Treasure(tile, GOLD_DRAGON), isGuarded(true) {
     // Spawning a Dragon adjacent to DragonTreasure
-    Dragon *d = new Dragon(tile);
+    Dragon *d = new Dragon(tile, NULL);
     vector<Cell *> spawnableCells;
     int i = getCell()->getI();
     int j = getCell()->getJ();
@@ -28,13 +28,19 @@ DragonTreasure::DragonTreasure(Tile *tile): Treasure(tile, GOLD_DRAGON), isGuard
     if (spawnableCells.size() == 0) {
         return;
     } else {
-        tile->setEntity(d);
         int roll = rand() % spawnableCells.size();
         Cell *cell = spawnableCells.at(roll);
+        // change Tile dragon was inialized with to correct one.
+        delete d;
+        d = new Dragon(dynamic_cast<Tile *>(cell), this);
         cell->setEntity(d);
     }
 }
 
 bool DragonTreasure::isSteppable(Player *player) {
 	return !isGuarded;
+}
+
+void DragonTreasure::unlock() {
+    isGuarded = false;
 }

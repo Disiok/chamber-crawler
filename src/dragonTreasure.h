@@ -5,11 +5,11 @@
 class DragonTreasure: public Treasure {
 	private:
 		bool isGuarded;
-	public:	
+	public:
 		static const int GOLD_DRAGON = 6;
 		DragonTreasure(Tile *tile);
 
 		bool isSteppable(Player *player);
-			
+		void unlock();
 };
 #endif
