@@ -28,7 +28,7 @@ class Entity {
 		virtual bool isSteppable(Player *player);
 		virtual bool isSteppable(Enemy *enemy);
 
-		Cell *getCell();
+		virtual Cell *getCell();
 		char getSymbol();
 
 		void setCell(Cell *cell);

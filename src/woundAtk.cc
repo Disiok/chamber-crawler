@@ -5,9 +5,9 @@ const string WoundAtk::typeIdentifier = "Wound Atk";
 
 WoundAtk::WoundAtk(Tile *tile): Potion(tile, typeIdentifier) {}
 
-void WoundAtk::pickUp(Cell *cell) {
-    player->setAtk(player->getAtk() - 5);
-    Potion::pickUp(cell);
+bool WoundAtk::pickedUpBy(Character *character) {
+    character->setAtk(character->getAtk() - 5);
+    Potion::pickedUpBy(character);
 }
 
 Player *WoundAtk::getBarePlayer() {

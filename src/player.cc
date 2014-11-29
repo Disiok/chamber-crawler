@@ -88,8 +88,16 @@ void Player::killedBy(Character *other) {
 	Game::getInstance()->restartOrQuit();
 }
 
+bool Player::isSteppable(Player *player) {
+	return false;
+}
+
 void Player::cleanup() {
     delete curPlayer;
+}
+
+Player *Player::getBarePlayer() {
+	return curPlayer;
 }
 
 void Player::addAttackAction(Character *other, int damage) {

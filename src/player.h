@@ -29,6 +29,8 @@ class Player: public Character {
 		virtual void pickUp(Cell *cell);
 		virtual void engage(Cell *cell);
 		virtual void killedBy(Character *other);
+		bool isSteppable(Player *player);
+		virtual Player *getBarePlayer();
 
 		virtual bool attackedBy(Character *other);
 		void addAttackAction(Character *other, int damage);

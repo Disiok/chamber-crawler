@@ -8,5 +8,6 @@ class RestoreHealth: public Potion {
     public:
         static const std::string typeIdentifier;
         RestoreHealth(Tile *tile);
+        bool pickedUpBy(Character *character);
 };
 #endif

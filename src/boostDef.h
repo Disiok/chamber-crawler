@@ -8,7 +8,7 @@ class BoostDef: public Potion {
     public:
         static const std::string typeIdentifier;
         BoostDef(Tile *tile);
-        void pickUp(Cell *cell);
+        bool pickedUpBy(Character *character);
         Player *getBarePlayer();
 };
 #endif

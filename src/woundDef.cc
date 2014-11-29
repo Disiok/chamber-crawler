@@ -1,13 +1,16 @@
 #include "woundDef.h"
+
+// temp
+#include <iostream>
 using namespace std;
 
 const string WoundDef::typeIdentifier = "Wound Def";
 
 WoundDef::WoundDef(Tile *tile): Potion(tile, typeIdentifier) {}
 
-void WoundDef::pickUp(Cell *cell) {
-    player->setDef(player->getDef() - 5);
-    Potion::pickUp(cell);
+bool WoundDef::pickedUpBy(Character *character) {
+    character->setDef(character->getDef() - 5);
+    Potion::pickedUpBy(character);
 }
 
 Player *WoundDef::getBarePlayer() {

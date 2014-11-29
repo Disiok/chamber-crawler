@@ -1,4 +1,7 @@
 #include "potion.h"
+
+// tempo
+#include <iostream>
 using namespace std;
 
 Potion::Potion(Tile *tile, const string typeIdentifier): Player(tile, 0, 0, 0, SYMBOL_POTION, typeIdentifier) {
@@ -6,15 +9,18 @@ Potion::Potion(Tile *tile, const string typeIdentifier): Player(tile, 0, 0, 0, S
     symbol = SYMBOL_POTION;
 }
 
+bool Potion::pickedUpBy(Character *character) {
+    // Clearing tile
+    cell->clearEntity();
+    // Wrapping player with this potion
+    player = dynamic_cast<Player *>(character);
+    Player::setInstance(this);
+    return true;
+}
+
 // Player methods
 void Potion::move(Cell *cell) {
     player->move(cell);
-}
-
-void Potion::pickUp(Cell *cell) {
-    player = Player::getInstance();
-    Player::setInstance(this);
-    player->pickUp(cell);
 }
 
 void Potion::killedBy(Character *other) {
@@ -70,6 +76,13 @@ Cell *Potion::getCell() {
     return player->getCell();
 }
 
-Player *Potion::getBarePlayer() {
+char Potion::getSymbol() {
+    if (player) {
+        return player->getSymbol();
+    }
+    return symbol;
+}
 
+Player *Potion::getBarePlayer() {
+    return player->getBarePlayer();
 }

@@ -8,7 +8,7 @@ class WoundAtk: public Potion {
     public:
         static const std::string typeIdentifier;
         WoundAtk(Tile *tile);
-        void pickUp(Cell *cell);
+        bool pickedUpBy(Character *character);
         Player *getBarePlayer();
 };
 #endif

@@ -5,9 +5,9 @@ const string BoostDef::typeIdentifier = "Boost Def";
 
 BoostDef::BoostDef(Tile *tile): Potion(tile, typeIdentifier) {}
 
-void BoostDef::pickUp(Cell *cell) {
-    player->setDef(player->getDef() + 5);
-    Potion::pickUp(cell);
+bool BoostDef::pickedUpBy(Character *character) {
+    character->setDef(character->getDef() + 5);
+    Potion::pickedUpBy(character);
 }
 
 Player *BoostDef::getBarePlayer() {

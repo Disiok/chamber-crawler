@@ -84,6 +84,12 @@ void Game::nextFloor() {
 		cout << "You are victorious! Congratulations, brave venturer." << endl;
 		restartOrQuit();
 	} else {
+		Player *player = Player::getInstance()->getBarePlayer();
+		int atk = player->getAtk();
+		int def = player->getDef();
+		int hp = player->getHP();
+		int gold = player->getGold();
+
 		delete floor;
 		srand(rand()%300);
 
@@ -91,6 +97,11 @@ void Game::nextFloor() {
 		floor = new Floor();
 		floor->loadFromFile(DEFAULT_FLOOR);
 		floor->spawn();
+
+		player->setAtk(atk);
+		player->setDef(def);
+		player->setHP(hp);
+		player->setGold(gold);
 		display();
 	}
 }
