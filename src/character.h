@@ -36,6 +36,7 @@ class Character: public Entity {
 		virtual void attack(Character *other);
 		virtual void attack(Dwarf *dwarf);
 		virtual void attack(Drow *drow);
+		virtual void attack(Goblin *goblin);
 		virtual bool attackedBy(Character *other);
 		virtual int calculateDamageOn(Character *other);
 		virtual int calculateDamageOn(Goblin *goblin);

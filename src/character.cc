@@ -43,11 +43,17 @@ void Character::attack(Character *other) {
 }
 
 void Character::attack(Dwarf *dwarf) {
-	attack(dynamic_cast<Character *>(dwarf));
+	Character::attack(dynamic_cast<Character *>(dwarf));
 }
 
 void Character::attack(Drow *drow) {
-	attack(dynamic_cast<Character *>(drow));
+	Character::attack(dynamic_cast<Character *>(drow));
+}
+
+void Character::attack(Goblin *goblin) {
+	int damage = calculateDamageOn(goblin);
+	goblin->setHP(goblin->getHP() - damage);
+	addAttackAction(goblin, damage);
 }
 
 int Character::calculateDamageOn(Character *other) {
@@ -55,7 +61,7 @@ int Character::calculateDamageOn(Character *other) {
 }
 
 int Character::calculateDamageOn(Goblin *goblin) {
-	return calculateDamageOn((Character *) goblin);
+	return calculateDamageOn(dynamic_cast<Character *>(goblin));
 }
 
 bool Character::attackedBy(Character *other) {

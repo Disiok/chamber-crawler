@@ -15,5 +15,6 @@ class Orc: public Enemy {
 		Orc(Tile *tile);
 
 		int calculateDamageOn(Goblin *goblin);
+        void attack(Goblin *goblin);
 };
 #endif

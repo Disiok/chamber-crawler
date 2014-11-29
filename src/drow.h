@@ -15,5 +15,6 @@ class Drow: public Player {
 		static const int DEF = 15;
 
 		Drow(Tile *tile);
+        bool attackedBy(Character *other);
 };
 #endif
