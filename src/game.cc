@@ -9,6 +9,7 @@ using namespace std;
 // Initializing static fields
 const string Game::DEFAULT_FLOOR = "default.floor";
 Game *Game::game = NULL;
+bool Game::nextFloorFlag = false;
 
 // Static instance accessor
 Game *Game::getInstance() {
@@ -41,12 +42,24 @@ void Game::start() {
 	runGameLoop();
 }
 
+void Game::signalNextFloor() {
+	nextFloorFlag = true;
+}
+
 void Game::nextFloor() {
 #ifdef DEBUG
 	cout << "Game::nextFloor" << endl;
 #endif
-	//TODO: Implement next floor logic
+	// TODO: unwind potions
 	level ++;
+	delete floor;
+	srand(rand()%300);
+
+	// setup floor w/o display
+	floor = new Floor();
+	floor->loadFromFile(DEFAULT_FLOOR);
+	floor->spawn();
+	display();
 }
 
 void Game::setupFloor() {
@@ -66,16 +79,22 @@ void Game::chooseRace() {
 void Game::runGameLoop() {
 	// TODO: Add breaking logic
 	while(true) {
+		if (nextFloorFlag) {
+			nextFloorFlag = false;
+			nextFloor();
+		}
 		clearAction();
 		runPlayerTurn();
 		runEnemyTurn();
-		display();
+		if (!nextFloorFlag) {
+			display();
+		}
 	}
 }
 
 void Game::runPlayerTurn() {
 	Player::getInstance()->invokeAbility();
-	
+
 	cout << "Enter command: ";
 	string command;
 	cin >> command;
@@ -145,10 +164,10 @@ void Game::displayInfo() {
 	cout << "Race: " << Player::getInstance()->getTypeName();
 	cout << " Gold: " << Player::getInstance()->getGold();
 	cout << "\t\t\t\t\t\t\tFloor " << level << endl;
-	
+
 	cout << "HP: " << Player::getInstance()->getHP() << endl;
 	cout << "Atk: " << Player::getInstance()->getAtk() << endl;
-	cout << "Def: " << Player::getInstance()->getDef() << endl;	
+	cout << "Def: " << Player::getInstance()->getDef() << endl;
 }
 
 void Game::displayAction() {

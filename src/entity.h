@@ -32,8 +32,5 @@ class Entity {
 		char getSymbol();
 
 		void setCell(Cell *cell);
-
-
-
 };
 #endif

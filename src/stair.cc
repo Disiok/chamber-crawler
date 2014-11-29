@@ -12,7 +12,9 @@ Stair::Stair(Tile *tile): Entity(tile, SYMBOL_STAIR) {}
 void Stair::spawn(Tile *tile) {
     if (!stair) {
         stair = new Stair(tile);
-	atexit(cleanup);
+	    atexit(cleanup);
+    } else {
+        stair->setCell(tile);
     }
 }
 
@@ -25,7 +27,7 @@ bool Stair::isSteppable(Player *player) {
 }
 
 bool Stair::steppedOnBy(Character *character) {
-	Game::getInstance()->nextFloor();
+	Game::getInstance()->signalNextFloor();
 	return true;
 }
 

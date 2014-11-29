@@ -10,6 +10,7 @@ class Game {
 	private:
 		static Game *game;
 		static void cleanup();
+		static bool nextFloorFlag;
 
 		Floor *floor;
 		int level;
@@ -24,6 +25,7 @@ class Game {
 		void runEnemyTurn();
 
 		void setupFloor();
+		void nextFloor();
 
 		void display();
 		void displayInfo();
@@ -37,7 +39,7 @@ class Game {
 		~Game();
 
 		void start();
-		void nextFloor();
+		void signalNextFloor();
 		void addAction(std::string action);
 };
 #endif

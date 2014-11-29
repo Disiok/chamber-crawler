@@ -22,7 +22,7 @@ void Player::setRace(char race) {
 
 /* *
  * spawn(Tile *)
- * 	Sets current player to type based on char and returns the curPlayer
+ * 	Sets current player to type based on char
  */
 void Player::spawn(Tile *tile) {
 #ifdef DEBUG
@@ -50,7 +50,9 @@ void Player::spawn(Tile *tile) {
 		}
 		atexit(cleanup);
 		Game::getInstance()->addAction("Player character has spawned.");
-	}
+	} else {
+        curPlayer->setCell(tile);
+    }
 }
 
 /* *

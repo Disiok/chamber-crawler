@@ -9,14 +9,14 @@ class Tile;
 
 class Stair: public Entity {
 	private:
-		static const char SYMBOL_STAIR = '\\';
-		
 		static Stair *stair;
 		static void cleanup();
 
 		Stair(Tile *tile);
 
 	public:
+		static const char SYMBOL_STAIR = '\\';
+
 		static void spawn(Tile *tile);
 		static Stair *getInstance();
 		bool steppedOnBy(Character *character);

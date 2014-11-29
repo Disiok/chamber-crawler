@@ -6,6 +6,10 @@
 #include <cstdlib>
 #include "cell.h"
 #include <string>
+
+// temp
+#include "stair.h"
+#include "player.h"
 using namespace std;
 
 Floor::Floor() {
@@ -22,6 +26,9 @@ Floor::Floor() {
 Floor::~Floor() {
 	for (int i = 0; i < MAX_ROW; i ++) {
 		for (int j = 0; j < MAX_COLUMN; j ++) {
+			if (map[i][j] != NULL && map[i][j]->getSymbol() != Stair::SYMBOL_STAIR && map[i][j]->getSymbol() != Player::SYMBOL_PLAYER) {
+				map[i][j]->destroyEntity();
+			}
 			delete map[i][j];
 		}
 	}
@@ -131,12 +138,10 @@ void Floor::spawn() {
 	for (int i = 0 ; i < NUM_POTION ; i++) {
 		getRandomTile()->spawnPotion();
 	}
-
 	// Gold
 	for (int i = 0 ; i < NUM_GOLD ; i++) {
 		getRandomTile()->spawnTreasure();
 	}
-
 	// Enemies
 	for (int i = 0 ; i < NUM_ENEMY ; i++) {
 		getRandomTile()->spawnEnemy();
@@ -158,7 +163,7 @@ Cell *Floor::getCell(int i, int j) {
 void Floor::performAction() {
 	for (int i = 0; i < MAX_ROW; i++) {
 		for (int j = 0; j < MAX_COLUMN; j++) {
-			if (map[i][j]) {
+			if (map[i][j] != NULL) {
 				map[i][j]->performAction();
 			}
 		}

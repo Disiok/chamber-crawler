@@ -120,6 +120,7 @@ void Tile::spawnTreasure() {
  */
 void Tile::spawnStair() {
 	Stair::spawn(this);
+	setEntity(Stair::getInstance());
 }
 
 /* *
@@ -128,4 +129,5 @@ void Tile::spawnStair() {
  */
 void Tile::spawnPlayer() {
 	Player::spawn(this);
+	setEntity(Player::getInstance());
 }
