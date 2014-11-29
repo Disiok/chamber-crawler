@@ -85,6 +85,8 @@ void Player::engage(Cell *cell) {
 void Player::killedBy(Character *other) {
 	cout << endl;
 	cout << "You have been slain!" << endl;
+	cout << "Your score is: " << getScore() << endl;
+	cout << endl;
 	Game::getInstance()->restartOrQuit();
 }
 
@@ -98,6 +100,10 @@ void Player::cleanup() {
 
 Player *Player::getBarePlayer() {
 	return curPlayer;
+}
+
+int Player::getScore() {
+	return getGold();
 }
 
 void Player::addAttackAction(Character *other, int damage) {

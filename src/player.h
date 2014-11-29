@@ -32,6 +32,7 @@ class Player: public Character {
 		bool isSteppable(Player *player);
 		virtual Player *getBarePlayer();
 
+		virtual int getScore();
 		virtual bool attackedBy(Character *other);
 		void addAttackAction(Character *other, int damage);
 		void addMissAction(Character *other);

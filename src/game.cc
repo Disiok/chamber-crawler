@@ -96,8 +96,11 @@ void Game::nextFloor() {
 	if (level > MAX_LEVEL) {
 		cout << endl;
 		cout << "You are victorious! Congratulations, brave venturer." << endl;
+		cout << "Your score is: " << Player::getInstance()->getScore() << endl;
+		cout << endl;
 		restartOrQuit();
 	} else {
+		// Carry over stats for next floor.
 		Player *player = Player::getInstance()->getBarePlayer();
 		int atk = player->getAtk();
 		int def = player->getDef();
@@ -112,10 +115,10 @@ void Game::nextFloor() {
 		floor->loadFromFile(DEFAULT_FLOOR);
 		floor->spawn();
 
-		player->setAtk(atk);
-		player->setDef(def);
-		player->setHP(hp);
-		player->setGold(gold);
+		Player::getInstance()->setAtk(atk);
+		Player::getInstance()->setDef(def);
+		Player::getInstance()->setHP(hp);
+		Player::getInstance()->setGold(gold);
 		display();
 	}
 }

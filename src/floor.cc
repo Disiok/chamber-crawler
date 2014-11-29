@@ -167,5 +167,3 @@ void Floor::performAction() {
 		}
 	}
 }
-
-

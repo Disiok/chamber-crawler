@@ -15,5 +15,6 @@ class Shade: public Player {
 		static const int DEF = 25;
 
 		Shade(Tile *tile);
+        int getScore();
 };
 #endif

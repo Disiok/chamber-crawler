@@ -8,4 +8,5 @@ int main() {
 #endif
 	Game *game = Game::getInstance();
 	game->start();
+    delete game;
 }
