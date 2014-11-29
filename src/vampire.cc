@@ -9,12 +9,12 @@ const string Vampire::TYPE_NAME = "Vampire";
 Vampire::Vampire(Tile *tile): Player(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
 #ifdef DEBUG
 	cout << "Vampire::Vampire" << endl;
-#endif 
+#endif
 }
 
 void Vampire::attack(Character *other) {
 	Character::attack(other);
-	
+
 	// Life steal
 	setHP(getHP() + 5);
 }

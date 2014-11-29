@@ -43,11 +43,11 @@ void Character::attack(Character *other) {
 }
 
 void Character::attack(Dwarf *dwarf) {
-	attack((Character *) dwarf);
+	attack(dynamic_cast<Character *>(dwarf));
 }
 
 void Character::attack(Drow *drow) {
-	attack((Character *) drow);
+	attack(dynamic_cast<Character *>(drow));
 }
 
 int Character::calculateDamageOn(Character *other) {
@@ -114,7 +114,6 @@ bool Character::isDead() {
 void Character::invokeAbility() {}
 
 int Character::calculateGoldFrom(Character *other) {
-	cout<<"calculating from generic character"<<endl;
 	return (rand() % 2) ? 1 : 2;
 }
 
