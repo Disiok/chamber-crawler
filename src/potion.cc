@@ -7,6 +7,7 @@ using namespace std;
 Potion::Potion(Tile *tile, const string typeName): Player(tile, 0, 0, 0, SYMBOL_POTION, typeName) {
     tile->setEntity(this);
     symbol = SYMBOL_POTION;
+    player = NULL;
 }
 
 bool Potion::choosePickUp(bool revealed) {
@@ -35,6 +36,7 @@ void Potion::addPickupAction() {
     Game::getInstance()->addAction(oss.str());
 }
 
+// Entity methods
 bool Potion::pickedUpBy(Character *character) {
     // Clearing tile
     cell->clearEntity();
@@ -63,7 +65,10 @@ void Potion::attack(Character *other) {
 }
 
 bool Potion::attackedBy(Character *other) {
-    return player->attackedBy(other);
+    if (player) {
+        return player->attackedBy(other);
+    }
+    return false;
 }
 
 bool Potion::isDead() {

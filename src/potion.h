@@ -14,7 +14,7 @@ class Potion: public Player {
 		static const char SYMBOL_POTION = 'P';
 		Potion(Tile *tile, std::string typeName);
 
-		// Delegating Entity method
+		// Delegating Entity methods
 		bool pickedUpBy(Character *character);
 
 		// Delegating Player methods
