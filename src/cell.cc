@@ -7,10 +7,6 @@
 #include "floor.h"
 #include <iostream>
 #include <cstdlib>
-
-// temp
-#include "player.h"
-#include "stair.h"
 using namespace std;
 
 // Forward Declaration

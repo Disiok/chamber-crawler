@@ -11,6 +11,10 @@ const string Merchant::TYPE_NAME = "Merchant";
 
 Merchant::Merchant(Tile *tile): Enemy(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {}
 
+void Merchant::resetHostile() {
+	isHostile = false;
+}
+
 bool Merchant::attackedBy(Character *other) {
 	isHostile = true;
 	return Character::attackedBy(other);
@@ -27,7 +31,7 @@ bool Merchant::isPlayerNearby() {
 
 void Merchant::killedBy(Character *other) {
 	addKilledAction();
-	
+
 	Cell *cell = getCell();
 	cell->destroyEntity();
 	cell->setEntity(new MerchantTreasure((Tile *)cell));

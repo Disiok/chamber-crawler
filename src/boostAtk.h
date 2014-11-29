@@ -9,6 +9,7 @@ class BoostAtk: public Potion {
         static bool revealed;
     public:
         static const std::string typeName;
+        static void resetRevealed();
         BoostAtk(Tile *tile);
         bool pickedUpBy(Character *character);
         Player *getBarePlayer();

@@ -9,6 +9,7 @@ class PoisonHealth: public Potion {
         static bool revealed;
     public:
         static const std::string typeName;
+        static void resetRevealed();
         PoisonHealth(Tile *tile);
         bool pickedUpBy(Character *character);
 };

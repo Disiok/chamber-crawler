@@ -9,6 +9,7 @@ class RestoreHealth: public Potion {
         static bool revealed;
     public:
         static const std::string typeName;
+        static void resetRevealed();
         RestoreHealth(Tile *tile);
         bool pickedUpBy(Character *character);
 };

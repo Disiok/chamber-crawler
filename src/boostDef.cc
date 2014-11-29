@@ -4,6 +4,10 @@ using namespace std;
 const string BoostDef::typeName = "Boost Def";
 bool BoostDef::revealed = false;
 
+void BoostDef::resetRevealed() {
+    revealed = false;
+}
+
 BoostDef::BoostDef(Tile *tile): Potion(tile, typeName) {}
 
 bool BoostDef::pickedUpBy(Character *character) {

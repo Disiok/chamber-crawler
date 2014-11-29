@@ -5,9 +5,6 @@
 #include "tile.h"
 #include <vector>
 #include <cstdlib>
-
-// temp
-#include <iostream>
 using namespace std;
 
 DragonTreasure::DragonTreasure(Tile *tile): Treasure(tile, GOLD_DRAGON), isGuarded(true) {

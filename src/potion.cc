@@ -32,7 +32,7 @@ bool Potion::choosePickUp(bool revealed) {
 
 void Potion::addPickupAction() {
     ostringstream oss;
-    oss << "Drank a " << typeName << " potion.";
+    oss << "Drank a " << typeName << " potion. ";
     Game::getInstance()->addAction(oss.str());
 }
 

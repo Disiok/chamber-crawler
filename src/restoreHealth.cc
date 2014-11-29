@@ -4,6 +4,10 @@ using namespace std;
 const string RestoreHealth::typeName = "Restore Health";
 bool RestoreHealth::revealed = false;
 
+void RestoreHealth::resetRevealed() {
+    revealed = false;
+}
+
 RestoreHealth::RestoreHealth(Tile *tile): Potion(tile, typeName) {}
 
 bool RestoreHealth::pickedUpBy(Character *character) {

@@ -4,6 +4,10 @@ using namespace std;
 const string BoostAtk::typeName = "Boost Atk";
 bool BoostAtk::revealed = false;
 
+void BoostAtk::resetRevealed() {
+    revealed = false;
+}
+
 BoostAtk::BoostAtk(Tile *tile): Potion(tile, typeName) {}
 
 bool BoostAtk::pickedUpBy(Character *character) {

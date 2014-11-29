@@ -4,6 +4,10 @@ using namespace std;
 const string PoisonHealth::typeName = "Poison Health";
 bool PoisonHealth::revealed = false;
 
+void PoisonHealth::resetRevealed() {
+    revealed = false;
+}
+
 PoisonHealth::PoisonHealth(Tile *tile): Potion(tile, typeName) {}
 
 bool PoisonHealth::pickedUpBy(Character *character) {

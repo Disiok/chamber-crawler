@@ -4,6 +4,10 @@ using namespace std;
 const string WoundDef::typeName = "Wound Def";
 bool WoundDef::revealed = false;
 
+void WoundDef::resetRevealed() {
+    revealed = false;
+}
+
 WoundDef::WoundDef(Tile *tile): Potion(tile, typeName) {}
 
 bool WoundDef::pickedUpBy(Character *character) {

@@ -4,6 +4,10 @@ using namespace std;
 const string WoundAtk::typeName = "Wound Atk";
 bool WoundAtk::revealed = false;
 
+void WoundAtk::resetRevealed() {
+    revealed = false;
+}
+
 WoundAtk::WoundAtk(Tile *tile): Potion(tile, typeName) {}
 
 bool WoundAtk::pickedUpBy(Character *character) {

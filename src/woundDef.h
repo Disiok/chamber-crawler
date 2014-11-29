@@ -9,6 +9,7 @@ class WoundDef: public Potion {
         static bool revealed;
     public:
         static const std::string typeName;
+        static void resetRevealed();
         WoundDef(Tile *tile);
         bool pickedUpBy(Character *character);
         Player *getBarePlayer();

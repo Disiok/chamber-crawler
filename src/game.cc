@@ -1,5 +1,12 @@
 #include "game.h"
 #include "floor.h"
+#include "boostAtk.h"
+#include "boostDef.h"
+#include "woundAtk.h"
+#include "woundDef.h"
+#include "poisonHealth.h"
+#include "restoreHealth.h"
+#include "merchant.h"
 #include <string>
 #include <cstdlib>
 #include "player.h"
@@ -47,6 +54,13 @@ void Game::start() {
 void Game::restart() {
 	delete floor;
 	level = 1;
+	BoostAtk::resetRevealed();
+    BoostDef::resetRevealed();
+    WoundAtk::resetRevealed();
+    WoundDef::resetRevealed();
+    PoisonHealth::resetRevealed();
+    RestoreHealth::resetRevealed();
+	Merchant::resetHostile();
 	start();
 }
 

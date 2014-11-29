@@ -9,6 +9,7 @@ class BoostDef: public Potion {
         static bool revealed;
     public:
         static const std::string typeName;
+        static void resetRevealed();
         BoostDef(Tile *tile);
         bool pickedUpBy(Character *character);
         Player *getBarePlayer();

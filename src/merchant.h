@@ -12,6 +12,7 @@ class Merchant: public Enemy {
 		static const int ATK = 70;
 		static const int DEF = 5;
 		Merchant(Tile *tile);
+		static void resetHostile();
 
 		bool attackedBy(Character *other);
 		bool isPlayerNearby();

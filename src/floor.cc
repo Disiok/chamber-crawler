@@ -6,8 +6,6 @@
 #include <cstdlib>
 #include "cell.h"
 #include <string>
-
-// temp
 #include "stair.h"
 #include "player.h"
 using namespace std;
