@@ -14,6 +14,7 @@ class Enemy: public Character {
 	private:
 		void move();
 		void addAttackAction(Character *other, int damage);
+	protected:
 		void addKilledAction(int gold);
 	public:
 		Enemy(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);

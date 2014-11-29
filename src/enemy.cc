@@ -46,7 +46,7 @@ void Enemy::move() {
 
 void Enemy::performAction() {
 	invokeAbility();
-	
+
 	if (isPlayerNearby()) {
 		Player::getInstance()->attackedBy(this);
 	} else {
@@ -58,9 +58,10 @@ void Enemy::killedBy(Character *other) {
 	int gold = other->calculateGoldFrom(this);
 	other->setGold(other->getGold() + gold);
 	getCell()->destroyEntity();
-	
+
 	addKilledAction(gold);
 }
+
 bool Enemy::isPlayerNearby() {
 	Cell *current = getCell();
 	Cell *other = Player::getInstance()->getCell();

@@ -9,5 +9,7 @@ class Human: public Enemy {
 		static const int ATK = 20;
 		static const int DEF = 20;
 		Human(Tile *tile);
+
+        void killedBy(Character *other);
 };
 #endif

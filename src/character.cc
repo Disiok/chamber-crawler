@@ -10,6 +10,7 @@
 #include "goblin.h"
 #include <sstream>
 #include <iostream>
+#include <cstdlib>
 #include <string>
 using namespace std;
 
@@ -113,6 +114,7 @@ bool Character::isDead() {
 void Character::invokeAbility() {}
 
 int Character::calculateGoldFrom(Character *other) {
+	cout<<"calculating from generic character"<<endl;
 	return (rand() % 2) ? 1 : 2;
 }
 
