@@ -5,7 +5,7 @@
 class Cell;
 
 class PoisonHealth: public Potion {
-    private:
+    protected:
         static bool revealed;
     public:
         static const std::string typeName;

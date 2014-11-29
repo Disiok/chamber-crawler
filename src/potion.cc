@@ -1,5 +1,7 @@
 #include "potion.h"
+#include "game.h"
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 Potion::Potion(Tile *tile, const string typeName): Player(tile, 0, 0, 0, SYMBOL_POTION, typeName) {
@@ -11,9 +13,9 @@ bool Potion::choosePickUp(bool revealed) {
     while (true) {
         cout << "Pick up ";
         if (revealed) {
-            cout << typeName;
+            cout << typeName << " potion";
         } else {
-            cout << "Unknown Potion";
+            cout << "Unknown potion";
         }
         cout << "? (y/n)" << endl;
 
@@ -27,12 +29,22 @@ bool Potion::choosePickUp(bool revealed) {
     }
 }
 
+void Potion::addPickupAction() {
+    ostringstream oss;
+    oss << "Drank a " << typeName << " potion.";
+    Game::getInstance()->addAction(oss.str());
+}
+
 bool Potion::pickedUpBy(Character *character) {
     // Clearing tile
     cell->clearEntity();
+
     // Wrapping player with this potion
     player = dynamic_cast<Player *>(character);
     Player::setInstance(this);
+
+    // Show pickup message
+    addPickupAction();
     return true;
 }
 
@@ -103,4 +115,8 @@ char Potion::getSymbol() {
 
 Player *Potion::getBarePlayer() {
     return player->getBarePlayer();
+}
+
+string Potion::getTypeName() {
+    return player->getTypeName();
 }

@@ -59,7 +59,7 @@ class Character: public Entity {
 		virtual int getGold();
 
 		char getTypeId();
-		std::string getTypeName();
+		virtual std::string getTypeName();
 
 		// Mutators
 		virtual void setHP(int hp);

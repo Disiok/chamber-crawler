@@ -9,10 +9,12 @@ class Potion: public Player {
 	protected:
 		Player *player;
 		bool choosePickUp(bool revealed);
+		void addPickupAction();
 	public:
 		static const char SYMBOL_POTION = 'P';
 		Potion(Tile *tile, std::string typeName);
 
+		// Delegating Entity method
 		bool pickedUpBy(Character *character);
 
 		// Delegating Player methods
@@ -38,6 +40,7 @@ class Potion: public Player {
 		// Delegating Entity methods
 		Cell *getCell();
 		char getSymbol();
+		std::string getTypeName();
 
 		// Other
 		virtual Player *getBarePlayer();
