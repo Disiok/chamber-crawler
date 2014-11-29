@@ -7,6 +7,7 @@
 using namespace std;
 
 // Initializing static fields
+const int Game::MAX_LEVEL = 5;
 const string Game::DEFAULT_FLOOR = "default.floor";
 Game *Game::game = NULL;
 bool Game::nextFloorFlag = false;
@@ -50,19 +51,26 @@ void Game::restart() {
 }
 
 void Game::quit() {
-
+	// TODO: run w. valgrind
 }
 
 void Game::signalNextFloor() {
 	nextFloorFlag = true;
 }
 
-void Game::signalRestart() {
-	restartFlag = true;
-}
-
-void Game::signalQuit() {
-	quitFlag = true;
+void Game::restartOrQuit() {
+	while (true) {
+		cout << "Restart (r) or Quit (q)?" << endl;
+		string choice;
+		cin >> choice;
+		if (choice == "r") {
+			restartFlag = true;
+			break;
+		} else if (choice == "q") {
+			quitFlag = true;
+			break;
+		}
+	}
 }
 
 void Game::nextFloor() {
@@ -71,14 +79,20 @@ void Game::nextFloor() {
 #endif
 	// TODO: unwind potions
 	level ++;
-	delete floor;
-	srand(rand()%300);
+	if (level > MAX_LEVEL) {
+		cout << endl;
+		cout << "You are victorious! Congratulations, brave venturer." << endl;
+		restartOrQuit();
+	} else {
+		delete floor;
+		srand(rand()%300);
 
-	// setup floor w/o display
-	floor = new Floor();
-	floor->loadFromFile(DEFAULT_FLOOR);
-	floor->spawn();
-	display();
+		// setup floor w/o display
+		floor = new Floor();
+		floor->loadFromFile(DEFAULT_FLOOR);
+		floor->spawn();
+		display();
+	}
 }
 
 void Game::setupFloor() {
@@ -97,14 +111,17 @@ void Game::chooseRace() {
 
 void Game::runGameLoop() {
 	while(true) {
+		// These clauses are seperated as after calling nextFloor it is possible to trigger the other flags
 		if (nextFloorFlag) {
 			nextFloorFlag = false;
 			nextFloor();
-		} else if (restartFlag) {
+		}
+		if (restartFlag) {
 			restartFlag = false;
 			restart();
 			break;
-		} else if (quitFlag) {
+		}
+		if (quitFlag) {
 			cout << endl;
 			cout << "Farewell, adventurer."<<endl;
 			quit();
@@ -113,8 +130,11 @@ void Game::runGameLoop() {
 		clearAction();
 		runPlayerTurn();
 		runEnemyTurn();
+		// Show board if game continues as normal, else clear action text for new floor
 		if (!nextFloorFlag && !restartFlag && !quitFlag) {
 			display();
+		} else {
+			clearAction();
 		}
 	}
 }
@@ -127,7 +147,8 @@ void Game::runPlayerTurn() {
 	cin >> command;
 	Cell *cell = parseDirection(command);
 	if (cell != NULL) {
-		Player::getInstance()->move(cell);
+		signalNextFloor();
+		//Player::getInstance()->move(cell);
 	} else {
 		if (command == "u") {
 			cin >> command;
@@ -138,9 +159,9 @@ void Game::runPlayerTurn() {
 			cell = parseDirection(command);
 			Player::getInstance()->engage(cell);
 		} else if (command == "r") {
-			// TODO: Restart
+			restartFlag = true;
 		} else if (command == "q") {
-			// TODO: Quit
+			quitFlag = true;
 		}
 	}
 }

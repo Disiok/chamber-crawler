@@ -8,6 +8,7 @@ class Floor;
 
 class Game {
 	private:
+		static const int MAX_LEVEL;
 		static Game *game;
 		static void cleanup();
 		static bool nextFloorFlag;
@@ -44,8 +45,7 @@ class Game {
 
 		void start();
 		void signalNextFloor();
-		void signalRestart();
-		void signalQuit();
+		void restartOrQuit();
 		void addAction(std::string action);
 };
 #endif

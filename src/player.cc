@@ -81,18 +81,7 @@ void Player::engage(Cell *cell) {
 void Player::killedBy(Character *other) {
 	cout << endl;
 	cout << "You have been slain!" << endl;
-	while (true) {
-		cout << "Restart (r) or Quit (q)?" << endl;
-		string choice;
-		cin >> choice;
-		if (choice == "r") {
-			Game::getInstance()->signalRestart();
-			break;
-		} else if (choice == "q") {
-			Game::getInstance()->signalQuit();
-			break;
-		}
-	}
+	Game::getInstance()->restartOrQuit();
 }
 
 void Player::cleanup() {
