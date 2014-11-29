@@ -12,10 +12,10 @@ class Tile;
  */
 class Enemy: public Character {
 	private:
-		void move();
 		void addAttackAction(Character *other, int damage);
 	protected:
 		void addKilledAction(int gold);
+		virtual void move();
 	public:
 		Enemy(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
 		virtual ~Enemy() = 0;

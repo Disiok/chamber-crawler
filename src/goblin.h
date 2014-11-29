@@ -16,5 +16,6 @@ class Goblin: public Player {
 
 		Goblin(Tile *tile);
 		int calculateGoldFrom(Character *other);
+        bool attackedBy(Character *other);
 };
 #endif

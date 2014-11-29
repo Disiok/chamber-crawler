@@ -16,3 +16,11 @@ Goblin::Goblin(Tile *tile): Player(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
 int Goblin::calculateGoldFrom(Character *other) {
 	return Character::calculateGoldFrom(other) + 5;
 }
+
+bool Goblin::attackedBy(Character *other) {
+    other->attack(this);
+    if (isDead()) {
+        killedBy(other);
+    }
+    return true;
+}
