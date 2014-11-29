@@ -10,7 +10,7 @@ class Drow: public Player {
 	public:
 		static const std::string TYPE_NAME;
 		static const char TYPE_ID = 'D';
-		static const int HP = 150;
+		static const int HP = 1;
 		static const int ATK = 25;
 		static const int DEF = 15;
 

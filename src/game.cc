@@ -10,6 +10,8 @@ using namespace std;
 const string Game::DEFAULT_FLOOR = "default.floor";
 Game *Game::game = NULL;
 bool Game::nextFloorFlag = false;
+bool Game::restartFlag = false;
+bool Game::quitFlag = false;
 
 // Static instance accessor
 Game *Game::getInstance() {
@@ -28,7 +30,6 @@ Game::~Game() {
 	delete floor;
 }
 
-
 void Game::start() {
 #ifdef DEBUG
 	cout << "Game::start" << endl;
@@ -42,8 +43,26 @@ void Game::start() {
 	runGameLoop();
 }
 
+void Game::restart() {
+	delete floor;
+	level = 1;
+	start();
+}
+
+void Game::quit() {
+
+}
+
 void Game::signalNextFloor() {
 	nextFloorFlag = true;
+}
+
+void Game::signalRestart() {
+	restartFlag = true;
+}
+
+void Game::signalQuit() {
+	quitFlag = true;
 }
 
 void Game::nextFloor() {
@@ -77,16 +96,24 @@ void Game::chooseRace() {
 }
 
 void Game::runGameLoop() {
-	// TODO: Add breaking logic
 	while(true) {
 		if (nextFloorFlag) {
 			nextFloorFlag = false;
 			nextFloor();
+		} else if (restartFlag) {
+			restartFlag = false;
+			restart();
+			break;
+		} else if (quitFlag) {
+			cout << endl;
+			cout << "Farewell, adventurer."<<endl;
+			quit();
+			break;
 		}
 		clearAction();
 		runPlayerTurn();
 		runEnemyTurn();
-		if (!nextFloorFlag) {
+		if (!nextFloorFlag && !restartFlag && !quitFlag) {
 			display();
 		}
 	}

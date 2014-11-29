@@ -11,6 +11,8 @@ class Game {
 		static Game *game;
 		static void cleanup();
 		static bool nextFloorFlag;
+		static bool restartFlag;
+		static bool quitFlag;
 
 		Floor *floor;
 		int level;
@@ -26,6 +28,8 @@ class Game {
 
 		void setupFloor();
 		void nextFloor();
+		void restart();
+		void quit();
 
 		void display();
 		void displayInfo();
@@ -40,6 +44,8 @@ class Game {
 
 		void start();
 		void signalNextFloor();
+		void signalRestart();
+		void signalQuit();
 		void addAction(std::string action);
 };
 #endif

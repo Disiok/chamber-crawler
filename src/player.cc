@@ -6,7 +6,6 @@
 #include "troll.h"
 #include "goblin.h"
 #include "game.h"
-#include "game.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -28,31 +27,28 @@ void Player::spawn(Tile *tile) {
 #ifdef DEBUG
 	cout << "Player::spawn(Tile *)" << endl;
 #endif
-	if (!curPlayer) {
-		switch (race) {
-			case Shade::TYPE_ID:
-				curPlayer = new Shade(tile);
-				break;
-			case Drow::TYPE_ID:
-				curPlayer = new Drow(tile);
-				break;
-			case Vampire::TYPE_ID:
-				curPlayer = new Vampire(tile);
-				break;
-			case Troll::TYPE_ID:
-				curPlayer =  new Troll(tile);
-				break;
-			case Goblin::TYPE_ID:
-				curPlayer =  new Goblin(tile);
-				break;
-			default:
-				break;
-		}
-		atexit(cleanup);
-		Game::getInstance()->addAction("Player character has spawned.");
-	} else {
-        curPlayer->setCell(tile);
-    }
+	delete curPlayer;
+	switch (race) {
+		case Shade::TYPE_ID:
+			curPlayer = new Shade(tile);
+			break;
+		case Drow::TYPE_ID:
+			curPlayer = new Drow(tile);
+			break;
+		case Vampire::TYPE_ID:
+			curPlayer = new Vampire(tile);
+			break;
+		case Troll::TYPE_ID:
+			curPlayer =  new Troll(tile);
+			break;
+		case Goblin::TYPE_ID:
+			curPlayer =  new Goblin(tile);
+			break;
+		default:
+			break;
+	}
+	atexit(cleanup);
+	Game::getInstance()->addAction("Player character has spawned.");
 }
 
 /* *
@@ -83,7 +79,20 @@ void Player::engage(Cell *cell) {
 }
 
 void Player::killedBy(Character *other) {
-
+	cout << endl;
+	cout << "You have been slain!" << endl;
+	while (true) {
+		cout << "Restart (r) or Quit (q)?" << endl;
+		string choice;
+		cin >> choice;
+		if (choice == "r") {
+			Game::getInstance()->signalRestart();
+			break;
+		} else if (choice == "q") {
+			Game::getInstance()->signalQuit();
+			break;
+		}
+	}
 }
 
 void Player::cleanup() {
