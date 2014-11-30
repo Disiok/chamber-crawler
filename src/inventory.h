@@ -11,7 +11,7 @@ class Inventory: public Entity {
 		Inventory(Tile *tile, char symbol);
 		virtual ~Inventory() = 0;
 		
-		std::string getName();
+		virtual std::string getName() = 0;
 		virtual void usedBy(Player *player) = 0;
 		virtual bool pickedUpBy(Character *character);
 		virtual bool pickedUpBy(Drow *drow);

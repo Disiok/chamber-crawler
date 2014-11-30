@@ -1,7 +1,10 @@
 #include "sword.h"
 #include "player.h"
 #include <cstdlib>
+#include <string>
+using namespace std;
 
+const string Sword::NAME_SWORD = "Sword";
 Sword::Sword(Tile *tile): Equipment(tile, SYMBOL_SWORD) {
 	int rating = rand() % 100;
 	if (rating == 100) {
@@ -19,4 +22,8 @@ int Sword::getAtk() {
 
 void Sword::usedBy(Player *player) {
 	player->equip(this);
+}
+
+string Sword::getName() {
+	return NAME_SWORD;
 }

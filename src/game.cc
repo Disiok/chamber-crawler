@@ -237,7 +237,6 @@ void Game::runEnemyTurn() {
 
 void Game::cleanup() {
 	delete game;
-	delete floorStream;
 }
 
 /**

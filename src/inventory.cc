@@ -11,10 +11,6 @@ Inventory::Inventory(Tile *tile, char symbol): Entity(tile, symbol) {}
 
 Inventory::~Inventory() {};
 
-string Inventory::getName() {
-	return "Inventory Stub";
-}
-
 bool Inventory::pickedUpBy(Character *character) {
 	cell->clearEntity();
 	
