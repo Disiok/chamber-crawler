@@ -10,6 +10,8 @@
 #include <string>
 #include <cstdlib>
 #include "inventory.h"
+#include "sword.h"
+#include "armor.h"
 #include "player.h"
 #include <iostream>
 using namespace std;
@@ -260,8 +262,18 @@ void Game::displayInfo() {
 	cout << "\t\t\t\t\t\t\tFloor " << level << endl;
 
 	cout << "HP: " << Player::getInstance()->getHP() << endl;
-	cout << "Atk: " << Player::getInstance()->getAtk() << endl;
-	cout << "Def: " << Player::getInstance()->getDef() << endl;
+	cout << "Atk: " << Player::getInstance()->getAtk();
+	Sword *sword = Player::getInstance()->getSword();
+	if (sword) {
+		cout << "(" << sword->getAtk() << " from "  << sword->getName();
+	} 
+	cout << endl;
+	cout << "Def: " << Player::getInstance()->getDef();
+	Armor *armor = Player::getInstance()->getArmor();
+ 	if (armor) {
+		cout << "(" << armor->getDef() << " from " << armor->getName();
+	}	
+	cout << endl;
 	cout << "Inventory: ";
 	for (int i = 0; i < Player::MAX_INVENTORY; i ++) {
 		Inventory *inventory = Player::getInstance()->getInventoryAt(i);

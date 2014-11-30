@@ -71,6 +71,23 @@ void Potion::pickUp(Cell *cell) {
     player->pickUp(cell);
 }
 
+Inventory *Potion::getInventoryAt(int index) {
+	return player->getInventoryAt(index);
+}
+Sword *Potion::getSword() {
+	return player->getSword();
+}
+Armor *Potion::getArmor() {
+	return player->getArmor();
+}
+
+void Potion::equip(Sword *sword) {
+	player->equip(sword);
+}
+void Potion::equip(Armor *armor) {
+	player->equip(armor);
+}
+
 // Character methods
 void Potion::attack(Character *other) {
     player->attack(other);
@@ -141,3 +158,5 @@ Player *Potion::getBarePlayer() {
 string Potion::getTypeName() {
     return player->getTypeName();
 }
+
+

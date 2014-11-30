@@ -39,7 +39,13 @@ class Player: public Character {
 
 		int getAtk();
 		int getDef();
+
 		Inventory *getInventoryAt(int index);
+		Sword *getSword();
+		Armor *getArmor();
+
+		virtual void equip(Sword *sword);
+		virtual void equip(Armor *armor);
 
 	private:
 		static Player *curPlayer;

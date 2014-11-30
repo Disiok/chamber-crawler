@@ -156,3 +156,19 @@ Inventory *Player::getInventoryAt(int index) {
 		return NULL;
 	}
 }
+
+Sword *Player::getSword() {
+	return sword;
+}
+
+Armor *Player::getArmor() {
+	return armor;
+}
+
+void Player::equip(Sword *sword) {
+	this->sword = sword;
+}
+
+void Player::equip(Armor *armor) {
+	this->armor = armor;
+}

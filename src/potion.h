@@ -25,6 +25,14 @@ class Potion: public Player {
 		void killedBy(Character *other);
 		void pickUp(Cell *cell);
 
+		Inventory *getInventoryAt(int index);
+		Sword *getSword();
+		Armor *getArmor();
+
+		void equip(Sword *sword);
+		void equip(Armor *armor);
+
+
 		// Delegating Character methods
 		void attack(Character *other);
 		bool attackedBy(Character *other);
