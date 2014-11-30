@@ -21,7 +21,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include <time.h>
+#include <ctime>
 using namespace std;
 
 // Initializing static fields
