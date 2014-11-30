@@ -21,6 +21,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <cctype>
 #include <ctime>
 using namespace std;
 
@@ -153,9 +154,9 @@ void Game::setupFloor() {
 
 void Game::chooseRace() {
 	cout << "Choose race: ";
-	char race;
-	cin >> race;
-	while (!Player::setRace(race)) {
+	string race;
+	getline(cin, race);
+	while (!Player::setRace(toupper(race[0]))) {
 		cout << "Invalid input, please try again: ";
 		cin >> race;
 	}
