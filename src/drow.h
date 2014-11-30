@@ -16,5 +16,6 @@ class Drow: public Player {
 
 		Drow(Tile *tile);
         bool attackedBy(Character *other);
+        void pickUp(Cell *cell);
 };
 #endif

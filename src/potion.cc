@@ -1,5 +1,6 @@
 #include "potion.h"
 #include "game.h"
+#include "drow.h"
 #include <iostream>
 #include <sstream>
 using namespace std;
@@ -8,6 +9,7 @@ Potion::Potion(Tile *tile, const string typeName): Player(tile, 0, 0, 0, SYMBOL_
     tile->setEntity(this);
     symbol = SYMBOL_POTION;
     player = NULL;
+    multiplier = 1;
 }
 
 bool Potion::choosePickUp(bool revealed) {
@@ -49,6 +51,8 @@ bool Potion::pickedUpBy(Character *character) {
     addPickupAction();
     return true;
 }
+
+bool Potion::pickedUpBy(Drow *drow) {}
 
 // Player methods
 void Potion::move(Cell *cell) {

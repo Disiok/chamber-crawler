@@ -4,18 +4,21 @@
 #include "player.h"
 
 class Cell;
+class Drow;
 
 class Potion: public Player {
 	protected:
 		Player *player;
 		bool choosePickUp(bool revealed);
 		void addPickupAction();
+		int multiplier;
 	public:
 		static const char SYMBOL_POTION = 'P';
 		Potion(Tile *tile, std::string typeName);
 
 		// Delegating Entity methods
 		bool pickedUpBy(Character *character);
+		bool pickedUpBy(Drow *drow);
 
 		// Delegating Player methods
 		void move(Cell *cell);

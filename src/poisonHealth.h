@@ -7,10 +7,13 @@ class Cell;
 class PoisonHealth: public Potion {
     protected:
         static bool revealed;
+        static const int EFFECT;
+        double multiplier;
     public:
         static const std::string typeName;
         static void resetRevealed();
         PoisonHealth(Tile *tile);
         bool pickedUpBy(Character *character);
+        bool pickedUpBy(Drow *drow);
 };
 #endif

@@ -18,3 +18,7 @@ bool Drow::attackedBy(Character *other) {
     }
     return true;
 }
+
+void Drow::pickUp(Cell *cell) {
+    cell->pickedUpBy(this);
+}

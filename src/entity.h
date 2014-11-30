@@ -7,6 +7,7 @@ class Tile;
 class Character;
 class Player;
 class Enemy;
+class Drow;
 
 /**
  * Entity:
@@ -24,6 +25,7 @@ class Entity {
 		virtual void performAction();
 		virtual bool attackedBy(Character *character);
 		virtual bool pickedUpBy(Character *character);
+		virtual bool pickedUpBy(Drow *drow);
 		virtual bool steppedOnBy(Character *character);
 		virtual bool isSteppable(Player *player);
 		virtual bool isSteppable(Enemy *enemy);

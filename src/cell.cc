@@ -84,6 +84,14 @@ bool Cell::pickedUpBy(Character *other) {
 	}
 }
 
+bool Cell::pickedUpBy(Drow *drow) {
+	if (entity) {
+		return entity->pickedUpBy(drow);
+	} else {
+		return false;
+	}
+}
+
 bool Cell::attackedBy(Character *other) {
 	if (entity) {
 		return entity->attackedBy(other);

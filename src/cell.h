@@ -7,6 +7,7 @@ class Entity;
 class Player;
 class Enemy;
 class Floor;
+class Drow;
 
 class Cell {
 	private:
@@ -38,6 +39,7 @@ class Cell {
 
 		bool steppedOnBy(Character *other);
 		bool pickedUpBy(Character *other);
+		bool pickedUpBy(Drow *drow);
 		bool attackedBy(Character *other);
 
 		char getSymbol();
