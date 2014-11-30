@@ -9,6 +9,7 @@
 #include "merchant.h"
 #include <string>
 #include <cstdlib>
+#include "inventory.h"
 #include "player.h"
 #include <iostream>
 using namespace std;
@@ -261,6 +262,19 @@ void Game::displayInfo() {
 	cout << "HP: " << Player::getInstance()->getHP() << endl;
 	cout << "Atk: " << Player::getInstance()->getAtk() << endl;
 	cout << "Def: " << Player::getInstance()->getDef() << endl;
+	cout << "Inventory: ";
+	for (int i = 0; i < Player::MAX_INVENTORY; i ++) {
+		Inventory *inventory = Player::getInstance()->getInventoryAt(i);
+		cout <<"[" << i+1 << ". ";
+		if (inventory) {
+			cout << inventory->getName();
+		} else {
+			cout << "\t";
+		}
+		cout << "]";
+	}
+	cout << endl;
+	
 }
 
 void Game::displayAction() {

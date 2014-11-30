@@ -7,27 +7,20 @@
 // Forward declarations
 class Sword;
 class Armor;
-
+class Inventory;
 /**
  * Player:
  * 	controllable Character
  */
 class Player: public Character {
-	private:
-		static Player *curPlayer;
-		static char race;
-
-		static void cleanup();
-
-		Sword *sword;
-		Armor *armor;
 	public:
+		static const int MAX_INVENTORY = 5;
 		static const char SYMBOL_PLAYER = '@';
 
 		static void setRace(char race);
 		static void spawn(Tile *tile);
-        static Player *getInstance();
-        static void setInstance(Player *p);
+       		static Player *getInstance();
+        	static void setInstance(Player *p);
 
 		Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
 		virtual ~Player() = 0;
@@ -46,5 +39,16 @@ class Player: public Character {
 
 		int getAtk();
 		int getDef();
+		Inventory *getInventoryAt(int index);
+
+	private:
+		static Player *curPlayer;
+		static char race;
+
+		static void cleanup();
+
+		Sword *sword;
+		Armor *armor;
+		Inventory *inventory[MAX_INVENTORY];
 };
 #endif

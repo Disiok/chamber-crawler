@@ -66,7 +66,11 @@ void Player::setInstance(Player *p) {
 }
 
 Player::Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName):
-	Character(tile, SYMBOL_PLAYER, hp, atk, def, 0, typeIdentifier, typeName) {}
+	Character(tile, SYMBOL_PLAYER, hp, atk, def, 0, typeIdentifier, typeName), sword(NULL), armor(NULL) {
+	for (int i = 0; i < MAX_INVENTORY; i ++) {
+		inventory[i] = NULL;
+	}	
+}
 
 Player::~Player() {}
 
@@ -142,5 +146,13 @@ int Player::getDef() {
 		return Character::getDef() + armor->getDef();
 	} else {
 		return Character::getDef();
+	}
+}
+
+Inventory *Player::getInventoryAt(int index) {
+	if (index >= 0 && index < MAX_INVENTORY) {
+		return inventory[index];
+	} else {
+		return NULL;
 	}
 }

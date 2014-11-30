@@ -5,11 +5,7 @@
 #include <iostream>
 using namespace std;
 
-Entity::Entity(Tile *tile, char symbol): cell(tile), symbol(symbol) {
-	if (tile) {
-		cell->setEntity(this);
-	}
-}
+Entity::Entity(Tile *tile, char symbol): cell(tile), symbol(symbol) {}
 
 Entity::~Entity() {}
 

@@ -116,13 +116,14 @@ bool Tile::spawnTreasure() {
 	int roll = rand() % 8 + 1;
 	if (roll >= 1 && roll < 6) {
 		setEntity(new NormalTreasure(this));
-		return true;
+		return false;
 	} else if (roll == 6) {
 		setEntity(new DragonTreasure(this));
+		return true;
 	} else {
 		setEntity(new SmallTreasure(this));
+		return false;
 	}
-	return false;
 }
 
 /* *
