@@ -39,7 +39,7 @@ class Entity {
 		
 		// Accessors
 		virtual Cell *getCell();
-		char getSymbol();
+		virtual char getSymbol();
 
 		// Mutator
 		void setCell(Cell *);

@@ -1,5 +1,6 @@
 #include "player.h"
 #include "goblin.h"
+#include "cell.h"
 #include "character.h"
 #include "merchant.h"
 #include <string>

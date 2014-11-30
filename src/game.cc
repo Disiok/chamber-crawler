@@ -1,20 +1,26 @@
 #include "game.h"
 #include "floor.h"
+#include "cell.h"
+#include "player.h"
+
+// Potions
 #include "boostAtk.h"
 #include "boostDef.h"
 #include "woundAtk.h"
 #include "woundDef.h"
 #include "poisonHealth.h"
 #include "restoreHealth.h"
+
+// Specific
 #include "merchant.h"
-#include <string>
-#include <cstdlib>
 #include "inventory.h"
 #include "sword.h"
 #include "armor.h"
-#include "player.h"
+
 #include <sstream>
 #include <iostream>
+#include <string>
+#include <cstdlib>
 using namespace std;
 
 // Initializing static fields

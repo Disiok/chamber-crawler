@@ -9,53 +9,60 @@ class Drow;
 class Potion: public Player {
 	protected:
 		Player *player;
+		int multiplier;
+
 		bool choosePickUp(bool revealed);
 		void addPickupAction();
-		int multiplier;
 	public:
 		static const char SYMBOL_POTION = 'P';
+		
+		// Constructor & destructor
 		Potion(Tile *tile, std::string typeName);
+		virtual ~Potion() = 0;
 
-		// Delegating Entity methods
+		// Potion methods
 		bool pickedUpBy(Character *character);
 		bool pickedUpBy(Drow *drow);
 
-		// Delegating Player methods
-		void move(Cell *cell);
-		void killedBy(Character *other);
-		void pickUp(Cell *cell);
-
-		Inventory *getInventoryAt(int index);
-		Sword *getSword();
-		Armor *getArmor();
-
-		void equip(Sword *sword);
-		void equip(Armor *armor);
-		void useInventory(int index);
+		// Delegating Entity methods
+		Cell *getCell();
+		char getSymbol();
 
 		// Delegating Character methods
 		void attack(Character *other);
 		bool attackedBy(Character *other);
-		void invokeAbility();
-
 		bool isDead();
+
+		void move(Cell *cell);
+		void invokeAbility();
 
 		int getHP();
 		int getAtk();
 		int getDef();
 		int getGold();
+		std::string getTypeName();
 
 		void setHP(int hp);
 		void setAtk(int atk);
 		void setDef(int def);
 		void setGold(int gold);
+		
 
-		// Delegating Entity methods
-		Cell *getCell();
-		char getSymbol();
-		std::string getTypeName();
+		// Delegating Player methods
+		void killedBy(Character *other);
 
-		// Other
-		virtual Player *getBarePlayer();
+		void pickUp(Cell *);
+		void engage(Cell *);
+
+		void equip(Sword *);
+		void equip(Armor *);
+		void useInventory(int index);
+		void addInventory(Inventory *);
+
+		Player *getBarePlayer();
+		int getScore();
+		Inventory *getInventoryAt(int index);
+		Sword *getSword();
+		Armor *getArmor();
 };
 #endif

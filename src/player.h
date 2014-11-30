@@ -37,9 +37,9 @@ class Player: public Character {
 		
 		virtual Player *getBarePlayer();
 		virtual int getScore();
-		Inventory *getInventoryAt(int index);
-		Sword *getSword();
-		Armor *getArmor();
+		virtual Inventory *getInventoryAt(int index);
+		virtual Sword *getSword();
+		virtual Armor *getArmor();
 
 		// Character methods
 		void move(Cell *);

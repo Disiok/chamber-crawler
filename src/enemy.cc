@@ -1,22 +1,79 @@
 #include "enemy.h"
-#include "tile.h"
-#include <string>
 #include "game.h"
-#include "player.h"
-#include "entity.h"
 #include "floor.h"
-#include <cstdlib>
-#include "game.h"
+#include "tile.h"
+#include "entity.h"
+#include "player.h"
 #include "goblin.h"
+
+#include <string>
+#include <cstdlib>
 #include <vector>
 #include <sstream>
 #include <iostream>
 using namespace std;
 
+// Constructor & destructor
 Enemy::Enemy(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const string typeName):
 	Character(tile, typeIdentifier, hp, atk, def, 0, typeIdentifier, typeName) {}
 
 Enemy::~Enemy() {}
+
+// Entity method
+void Enemy::performAction() {
+	invokeAbility();
+
+    // Only attack if player is till alive, preventing 'double deaths'
+	if (isPlayerNearby() && !Player::getInstance()->isDead()) {
+		Player::getInstance()->attackedBy(this);
+	} else {
+		move();
+	}
+}
+
+// Character method
+void Enemy::addMissAction(Character *) {
+	ostringstream oss;
+	oss << getTypeId() << " missed on PC. ";
+	Game::getInstance()->addAction(oss.str());
+}
+
+void Enemy::addAttackAction(Character *, int damage) {
+	ostringstream oss;
+	oss << getTypeId() << " deals " << damage <<  " damage to PC. ";
+	Game::getInstance()->addAction(oss.str());
+}
+
+bool Enemy::attackedBy(Goblin *goblin) {
+    goblin->attack(this);
+    if (isDead()) {
+        killedBy(goblin);
+    }
+    return true;
+}
+
+void Enemy::killedBy(Character *other) {
+	int gold = other->calculateGoldFrom(this);
+	other->setGold(other->getGold() + gold);
+	getCell()->destroyEntity();
+
+	addKilledAction(gold);
+}
+
+// Enemy methods
+void Enemy::killedBy(Goblin *goblin) {
+    int gold = goblin->calculateGoldFrom(this);
+    goblin->setGold(goblin->getGold() + gold);
+    getCell()->destroyEntity();
+
+    addKilledAction(gold);
+}
+
+void Enemy::addKilledAction(int gold) {
+	ostringstream oss;
+	oss << "PC killed " << getTypeId() << " for " << gold << " gold. ";
+	Game::getInstance()->addAction(oss.str());
+}
 
 /* *
  * move
@@ -45,41 +102,6 @@ void Enemy::move() {
     }
 }
 
-void Enemy::performAction() {
-	invokeAbility();
-
-    // Only attack if player is till alive, preventing 'double deaths'
-	if (isPlayerNearby() && Player::getInstance()->getHP() > 0) {
-		Player::getInstance()->attackedBy(this);
-	} else {
-		move();
-	}
-}
-
-void Enemy::killedBy(Character *other) {
-	int gold = other->calculateGoldFrom(this);
-	other->setGold(other->getGold() + gold);
-	getCell()->destroyEntity();
-
-	addKilledAction(gold);
-}
-
-void Enemy::killedBy(Goblin *goblin) {
-    int gold = goblin->calculateGoldFrom(this);
-    goblin->setGold(goblin->getGold() + gold);
-    getCell()->destroyEntity();
-
-    addKilledAction(gold);
-}
-
-bool Enemy::attackedBy(Goblin *goblin) {
-    goblin->attack(this);
-    if (isDead()) {
-        killedBy(goblin);
-    }
-    return true;
-}
-
 bool Enemy::isPlayerNearby() {
 	Cell *current = getCell();
 	Cell *other = Player::getInstance()->getCell();
@@ -90,24 +112,3 @@ bool Enemy::isPlayerNearby() {
 	return abs(i1 - i2) <= 1 && abs(j1 - j2) <= 1;
 }
 
-bool Enemy::isSteppable(Player *player) {
-    return false;
-}
-
-void Enemy::addAttackAction(Character *other, int damage) {
-	ostringstream oss;
-	oss << getTypeId() << " deals " << damage <<  " damage to PC. ";
-	Game::getInstance()->addAction(oss.str());
-}
-
-void Enemy::addKilledAction(int gold) {
-	ostringstream oss;
-	oss << "PC killed " << getTypeId() << " for " << gold << " gold. ";
-	Game::getInstance()->addAction(oss.str());
-}
-
-void Enemy::addMissAction(Character *other) {
-	ostringstream oss;
-	oss << getTypeId() << " missed on PC. ";
-	Game::getInstance()->addAction(oss.str());
-}

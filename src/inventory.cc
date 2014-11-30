@@ -1,9 +1,10 @@
 #include "inventory.h"
-#include <string>
-#include <sstream>
 #include "game.h"
 #include "character.h"
+#include "cell.h"
 #include "drow.h"
+#include <string>
+#include <sstream>
 using namespace std;
 
 Inventory::Inventory(Tile *tile, char symbol): Entity(tile, symbol) {}

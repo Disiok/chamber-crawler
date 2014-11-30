@@ -1,10 +1,14 @@
 #include "potion.h"
 #include "game.h"
 #include "drow.h"
+#include "cell.h"
+#include "tile.h"
 #include <iostream>
 #include <sstream>
 using namespace std;
 
+
+// Constructor & destructor
 Potion::Potion(Tile *tile, const string typeName): Player(tile, 0, 0, 0, SYMBOL_POTION, typeName) {
     tile->setEntity(this);
     symbol = SYMBOL_POTION;
@@ -12,6 +16,9 @@ Potion::Potion(Tile *tile, const string typeName): Player(tile, 0, 0, 0, SYMBOL_
     multiplier = 1;
 }
 
+Potion::~Potion() {}
+
+// Protected potion methods
 bool Potion::choosePickUp(bool revealed) {
     while (true) {
         cout << "Pick up ";
@@ -38,8 +45,8 @@ void Potion::addPickupAction() {
     Game::getInstance()->addAction(oss.str());
 }
 
-// Entity methods
-bool Potion::pickedUpBy(Character *character) {
+// Public potion methods
+bool Potion::pickedUpBy(Character *) {
     // Clearing tile
     cell->clearEntity();
 
@@ -56,21 +63,45 @@ bool Potion::pickedUpBy(Character *character) {
     return true;
 }
 
-bool Potion::pickedUpBy(Drow *drow) {
+bool Potion::pickedUpBy(Drow *) {
 	return true;
 }
 
 // Player methods
-void Potion::move(Cell *cell) {
-    player->move(cell);
-}
-
 void Potion::killedBy(Character *other) {
     player->killedBy(other);
 }
 
 void Potion::pickUp(Cell *cell) {
     player->pickUp(cell);
+}
+
+void Potion::engage(Cell *cell) {
+	player->engage(cell);
+}
+
+void Potion::equip(Sword *sword) {
+	player->equip(sword);
+}
+void Potion::equip(Armor *armor) {
+	player->equip(armor);
+}
+
+void Potion::useInventory(int index) {
+	player->useInventory(index);
+}
+
+void Potion::addInventory(Inventory *item) {
+	player->addInventory(item);
+}
+
+
+Player *Potion::getBarePlayer() {
+	return player->getBarePlayer();
+}
+
+int Potion::getScore() {
+	return player->getScore();
 }
 
 Inventory *Potion::getInventoryAt(int index) {
@@ -85,16 +116,6 @@ Armor *Potion::getArmor() {
 	return player->getArmor();
 }
 
-void Potion::equip(Sword *sword) {
-	player->equip(sword);
-}
-void Potion::equip(Armor *armor) {
-	player->equip(armor);
-}
-
-void Potion::useInventory(int index) {
-	player->useInventory(index);
-}
 // Character methods
 void Potion::attack(Character *other) {
     player->attack(other);
@@ -107,12 +128,17 @@ bool Potion::attackedBy(Character *other) {
     return false;
 }
 
-void Potion::invokeAbility() {
-    player->invokeAbility();
-}
-
 bool Potion::isDead() {
     return player->isDead();
+}
+
+
+void Potion::move(Cell *cell) {
+    player->move(cell);
+}
+
+void Potion::invokeAbility() {
+    player->invokeAbility();
 }
 
 int Potion::getHP() {
@@ -131,6 +157,11 @@ int Potion::getGold() {
     return player->getGold();
 }
 
+string Potion::getTypeName() {
+    return player->getTypeName();
+}
+
+
 void Potion::setHP(int hp) {
     player->setHP(hp);
 }
@@ -147,6 +178,7 @@ void Potion::setGold(int gold) {
     player->setGold(gold);
 }
 
+// Entity methods
 Cell *Potion::getCell() {
     return player->getCell();
 }
@@ -157,13 +189,4 @@ char Potion::getSymbol() {
     }
     return symbol;
 }
-
-Player *Potion::getBarePlayer() {
-    return player->getBarePlayer();
-}
-
-string Potion::getTypeName() {
-    return player->getTypeName();
-}
-
 

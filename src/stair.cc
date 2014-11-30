@@ -1,5 +1,6 @@
 #include "stair.h"
 #include "player.h"
+#include "tile.h"
 #include "entity.h"
 #include "game.h"
 #include "character.h"

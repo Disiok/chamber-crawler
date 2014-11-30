@@ -11,25 +11,27 @@ class Tile;
  * 	uncontrollable Character
  */
 class Enemy: public Character {
-	private:
-		void addAttackAction(Character *other, int damage);
-	protected:
-		void addKilledAction(int gold);
-		virtual void move();
 	public:
+		// Constructor & destructor
 		Enemy(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
 		virtual ~Enemy() = 0;
 
-		virtual void performAction();
-		virtual void killedBy(Character *other);
-		virtual void killedBy(Goblin *goblin);
-		virtual bool attackedBy(Goblin *goblin);
+		// Entity method
+		void performAction();
+
+		// Character method
+		void addAttackAction(Character *other, int damage);
+		void addMissAction(Character *);
+		bool attackedBy(Goblin *);
+		void killedBy(Character *);
+
+		// Enemy method
+		virtual void killedBy(Goblin *);
+	protected:
+		// Enemy method
+		virtual void addKilledAction(int gold);
+		virtual void move();
 		virtual bool isPlayerNearby();
 
-
-		// Overrides
-		bool isSteppable(Player *player);
-
-		void addMissAction(Character *other);
 };
 #endif
