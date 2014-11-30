@@ -29,30 +29,35 @@ class Character: public Entity {
 		int gold;
 
 	public:
-		// Constructor & Destructor
+		// Constructor & destructor
 		Character(Tile *tile, char symbol, int hp, int atk, int def, int gold, const char typeIdentifier, const std::string typeName);
 		virtual ~Character() = 0;
 
-		// Methods
-		virtual void attack(Character *other);
-		virtual void attack(Dwarf *dwarf);
-		virtual void attack(Drow *drow);
-		virtual void attack(Goblin *goblin);
-		virtual bool attackedBy(Character *other);
-		virtual bool attackedBy(Goblin *goblin);
-		virtual int calculateDamageOn(Character *other);
-		virtual int calculateDamageOn(Goblin *goblin);
-		virtual void addAttackAction(Character *other, int damage) = 0;
+		// Combat methods
+		virtual void attack(Character *);
+		virtual void attack(Dwarf *);
+		virtual void attack(Drow *);
+		virtual void attack(Goblin *);
 
-		virtual void addMissAction(Character *other) = 0;
+		virtual bool attackedBy(Character *);
+		virtual bool attackedBy(Goblin *);
 
-		virtual int calculateGoldFrom(Character *other);
-		virtual int calculateGoldFrom(Human *human);
-		virtual int calculateGoldFrom(Merchant *merchant);
-		virtual void move(Cell *cell);
-		virtual void killedBy(Character *other) = 0;
-
+		virtual void killedBy(Character *) = 0;
 		virtual bool isDead();
+
+
+		virtual void addAttackAction(Character *other, int damage) = 0;
+		virtual void addMissAction(Character *) = 0;
+
+		virtual int calculateDamageOn(Character *);
+		virtual int calculateDamageOn(Goblin *);
+		
+		virtual int calculateGoldFrom(Character *);
+		virtual int calculateGoldFrom(Human *);
+		virtual int calculateGoldFrom(Merchant *);
+		
+		// Other methods
+		virtual void move(Cell *);
 		virtual void invokeAbility();
 
 		// Accessors
@@ -65,9 +70,9 @@ class Character: public Entity {
 		virtual std::string getTypeName();
 
 		// Mutators
-		virtual void setHP(int hp);
-		virtual void setAtk(int atk);
-		virtual void setDef(int def);
-		virtual void setGold(int gold);
+		virtual void setHP(int);
+		virtual void setAtk(int);
+		virtual void setDef(int);
+		virtual void setGold(int);
 };
 #endif

@@ -19,22 +19,29 @@ class Entity {
 		Cell *cell;
 		char symbol;
 	public:
+		// Constructor & destructor
 		Entity(Tile *tile, char symbol);
 		virtual ~Entity() = 0;
-
-		void destroy();
+		
+		// Methods
 		virtual void performAction();
-		virtual bool attackedBy(Character *character);
-		virtual bool attackedBy(Goblin *goblin);
-		virtual bool pickedUpBy(Character *character);
-		virtual bool pickedUpBy(Drow *drow);
-		virtual bool steppedOnBy(Character *character);
-		virtual bool isSteppable(Player *player);
-		virtual bool isSteppable(Enemy *enemy);
+		
+		virtual bool attackedBy(Character *);
+		virtual bool attackedBy(Goblin *);
 
+		virtual bool pickedUpBy(Character *);
+		virtual bool pickedUpBy(Drow *);
+
+		virtual bool steppedOnBy(Character *);
+
+		virtual bool isSteppable(Player *);
+		virtual bool isSteppable(Enemy *);
+		
+		// Accessors
 		virtual Cell *getCell();
 		char getSymbol();
 
-		void setCell(Cell *cell);
+		// Mutator
+		void setCell(Cell *);
 };
 #endif

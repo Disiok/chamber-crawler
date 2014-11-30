@@ -5,15 +5,12 @@
 #include <iostream>
 using namespace std;
 
+// Constructor & destructor
 Entity::Entity(Tile *tile, char symbol): cell(tile), symbol(symbol) {}
 
 Entity::~Entity() {}
 
-void Entity::destroy() {
-	cell->destroyEntity();
-	cell->clearEntity();
-}
-
+// Methods
 void Entity::performAction() {}
 
 bool Entity::steppedOnBy(Character *character) {
@@ -44,6 +41,7 @@ bool Entity::isSteppable(Enemy *enemy) {
 	return false;
 }
 
+// Accessors
 Cell *Entity::getCell() {
 	return cell;
 }
@@ -52,6 +50,7 @@ char Entity::getSymbol() {
 	return symbol;
 }
 
+// Mutator
 void Entity::setCell(Cell *cell) {
 	this->cell = cell;
 }

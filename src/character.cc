@@ -15,6 +15,7 @@
 #include <string>
 using namespace std;
 
+// Constructor & destructor
 Character::Character(Tile *tile, char symbol, int hp, int atk, int def, int gold, const char typeIdentifier, const string typeName):
 	Entity(tile, symbol),
 	typeIdentifier(typeIdentifier),
@@ -27,13 +28,7 @@ Character::Character(Tile *tile, char symbol, int hp, int atk, int def, int gold
 
 Character::~Character() {}
 
-void Character::move(Cell *cell) {
-	getCell()->clearEntity();
-	setCell(cell);
-	cell->steppedOnBy(this);
-	cell->setEntity(this);
-}
-
+// Combat methods
 void Character::attack(Character *other) {
 #ifdef DEBUG
 	cout << "Character::attack" << endl;
@@ -57,14 +52,6 @@ void Character::attack(Goblin *goblin) {
 	addAttackAction(goblin, damage);
 }
 
-int Character::calculateDamageOn(Character *other) {
-	return ceil(100/ (float)(100 + other->getDef()) * getAtk());
-}
-
-int Character::calculateDamageOn(Goblin *goblin) {
-	return calculateDamageOn(dynamic_cast<Character *>(goblin));
-}
-
 bool Character::attackedBy(Character *other) {
 	other->attack(this);
 	if (isDead()) {
@@ -77,6 +64,44 @@ bool Character::attackedBy(Goblin *goblin) {
 	return false;
 }
 
+bool Character::isDead() {
+	return hp == 0;
+}
+
+// Damage calculation
+int Character::calculateDamageOn(Character *other) {
+	return ceil(100/ (float)(100 + other->getDef()) * getAtk());
+}
+
+int Character::calculateDamageOn(Goblin *goblin) {
+	return calculateDamageOn(dynamic_cast<Character *>(goblin));
+}
+
+
+// Gold calculation
+int Character::calculateGoldFrom(Character *) {
+	return (rand() % 2) ? 1 : 2;
+}
+
+int Character::calculateGoldFrom(Human *) {
+	return 4;
+}
+
+int Character::calculateGoldFrom(Merchant *) {
+	return 0;
+}
+
+// Other methods
+void Character::move(Cell *cell) {
+	getCell()->clearEntity();
+	setCell(cell);
+	cell->steppedOnBy(this);
+	cell->setEntity(this);
+}
+
+void Character::invokeAbility() {}
+
+// Accessors
 int Character::getHP() {
 	return hp;
 }
@@ -101,6 +126,7 @@ string Character::getTypeName() {
 	return typeName;
 }
 
+// Mutators
 void Character::setHP(int hp) {
 	this->hp = min(maxHP, max(0, hp));
 }
@@ -115,22 +141,4 @@ void Character::setDef(int def) {
 
 void Character::setGold(int gold) {
 	this->gold = gold;
-}
-
-bool Character::isDead() {
-	return hp == 0;
-}
-
-void Character::invokeAbility() {}
-
-int Character::calculateGoldFrom(Character *other) {
-	return (rand() % 2) ? 1 : 2;
-}
-
-int Character::calculateGoldFrom(Human *human) {
-	return 4;
-}
-
-int Character::calculateGoldFrom(Merchant *merchant) {
-	return 0;
 }
