@@ -10,6 +10,7 @@ class Drow;
 class Dwarf;
 class Goblin;
 class Human;
+class Merchant;
 
 /**
  * Character:
@@ -47,6 +48,7 @@ class Character: public Entity {
 
 		virtual int calculateGoldFrom(Character *other);
 		virtual int calculateGoldFrom(Human *human);
+		virtual int calculateGoldFrom(Merchant *merchant);
 		virtual void move(Cell *cell);
 		virtual void killedBy(Character *other) = 0;
 

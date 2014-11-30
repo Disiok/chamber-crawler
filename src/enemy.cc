@@ -72,6 +72,14 @@ void Enemy::killedBy(Goblin *goblin) {
     addKilledAction(gold);
 }
 
+bool Enemy::attackedBy(Goblin *goblin) {
+    goblin->attack(this);
+    if (isDead()) {
+        killedBy(goblin);
+    }
+    return true;
+}
+
 bool Enemy::isPlayerNearby() {
 	Cell *current = getCell();
 	Cell *other = Player::getInstance()->getCell();

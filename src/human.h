@@ -1,6 +1,9 @@
 #ifndef ___HUMAN_H___
 #define ___HUMAN_H___
 #include "enemy.h"
+
+class Goblin;
+
 class Human: public Enemy {
 	public:
 		static const std::string TYPE_NAME;
@@ -11,5 +14,6 @@ class Human: public Enemy {
 		Human(Tile *tile);
 
         void killedBy(Character *other);
+        void killedBy(Goblin *goblin);
 };
 #endif

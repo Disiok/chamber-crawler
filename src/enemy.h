@@ -23,6 +23,7 @@ class Enemy: public Character {
 		virtual void performAction();
 		virtual void killedBy(Character *other);
 		virtual void killedBy(Goblin *goblin);
+		virtual bool attackedBy(Goblin *goblin);
 		virtual bool isPlayerNearby();
 
 
