@@ -21,6 +21,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <time.h>
 using namespace std;
 
 // Initializing static fields
@@ -60,6 +61,8 @@ void Game::start(string floorFile) {
 
 #ifdef SEED
 	srand(SEED);
+#else
+	srand(time(NULL));
 #endif
 	this->floorFile = floorFile;
 	if (floorFile == "") {
@@ -205,10 +208,12 @@ void Game::runPlayerTurn() {
 			if (cell) {
 				Player::getInstance()->pickUp(cell);
 			} else {
+#ifdef DLC
 				int inventoryIndex = parseInventoryIndex(command);
 				if (inventoryIndex != -1) {
 					Player::getInstance()->useInventory(inventoryIndex);
 				}
+#endif
 			}
 		} else if (command == "a") {
 			cin >> command;
@@ -296,6 +301,7 @@ void Game::displayInfo() {
 		cout << "(" << armor->getDef() << " from " << armor->getName() << ")";
 	}	
 	cout << endl;
+#ifdef DLC
 	cout << "Inventory: ";
 	for (int i = 0; i < Player::MAX_INVENTORY; i ++) {
 		Inventory *inventory = Player::getInstance()->getInventoryAt(i);
@@ -308,6 +314,7 @@ void Game::displayInfo() {
 		cout << "]";
 	}
 	cout << endl;
+#endif
 	
 }
 

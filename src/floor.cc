@@ -174,11 +174,12 @@ void Floor::spawn() {
 	for (int i = 0 ; i < NUM_ENEMY - numDragons ; i++) {
 		getRandomTile()->spawnEnemy();
 	}
-
+#ifdef DLC
 	// Equipments
 	for (int i = 0; i < NUM_EQUIP; i ++) {
 		getRandomTile()->spawnEquipment();
 	}
+#endif
 }
 
 Chamber *Floor::getRandomChamber() {
