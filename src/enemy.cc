@@ -47,7 +47,8 @@ void Enemy::move() {
 void Enemy::performAction() {
 	invokeAbility();
 
-	if (isPlayerNearby()) {
+    // Only attack if player is till alive, preventing 'double deaths'
+	if (isPlayerNearby() && Player::getInstance()->getHP() > 0) {
 		Player::getInstance()->attackedBy(this);
 	} else {
 		move();
