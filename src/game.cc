@@ -155,7 +155,10 @@ void Game::chooseRace() {
 	cout << "Choose race: ";
 	char race;
 	cin >> race;
-	Player::setRace(race);
+	while (!Player::setRace(race)) {
+		cout << "Invalid input, please try again: ";
+		cin >> race;
+	}
 }
 
 void Game::runGameLoop() {
@@ -218,7 +221,9 @@ void Game::runPlayerTurn() {
 		} else if (command == "a") {
 			cin >> command;
 			cell = parseDirection(command);
-			Player::getInstance()->engage(cell);
+			if (cell) {
+				Player::getInstance()->engage(cell);
+			}
 		} else if (command == "r") {
 			restartFlag = true;
 		} else if (command == "q") {

@@ -23,8 +23,18 @@ Player *Player::curPlayer = NULL;
 char Player::race = '\0';
 
 // Static functions
-void Player::setRace(char race) {
-	Player::race = race;
+bool Player::setRace(char race) {
+	switch (race) {
+		case Shade::SYMBOL_SHADE:
+		case Drow::SYMBOL_DROW:
+		case Vampire::SYMBOL_VAMPIRE:
+		case Troll::SYMBOL_TROLL:
+		case Goblin::SYMBOL_GOBLIN:
+			Player::race = race;
+			return true;
+		default:
+			return false;
+	}
 }
 
 /* *
@@ -36,7 +46,7 @@ void Player::spawn(Tile *tile) {
 	cout << "Player::spawn(Tile *)" << endl;
 #endif
 	if (curPlayer) {
-	
+		curPlayer->setCell(tile);
 	} else {
 		switch (race) {
 			case Shade::SYMBOL_SHADE:

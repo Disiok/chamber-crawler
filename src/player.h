@@ -17,7 +17,7 @@ class Player: public Character {
 		static const int MAX_INVENTORY = 5;
 		static const char SYMBOL_PLAYER = '@';
 
-		static void setRace(char);
+		static bool setRace(char);
 		static void spawn(Tile *);
        		static Player *getInstance();
         	static void setInstance(Player *);
