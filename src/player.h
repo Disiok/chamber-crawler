@@ -4,6 +4,10 @@
 #include "tile.h"
 #include <string>
 
+// Forward declarations
+class Sword;
+class Armor;
+
 /**
  * Player:
  * 	controllable Character
@@ -14,6 +18,9 @@ class Player: public Character {
 		static char race;
 
 		static void cleanup();
+
+		Sword *sword;
+		Armor *armor;
 	public:
 		static const char SYMBOL_PLAYER = '@';
 
@@ -36,5 +43,8 @@ class Player: public Character {
 		virtual bool attackedBy(Character *other);
 		void addAttackAction(Character *other, int damage);
 		void addMissAction(Character *other);
+
+		int getAtk();
+		int getDef();
 };
 #endif

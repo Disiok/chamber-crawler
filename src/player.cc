@@ -6,6 +6,8 @@
 #include "troll.h"
 #include "goblin.h"
 #include "game.h"
+#include "sword.h"
+#include "armor.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -125,4 +127,20 @@ void Player::addMissAction(Character *other) {
 	ostringstream oss;
 	oss << "PC missed on " << other->getTypeId() << ". ";
 	Game::getInstance()->addAction(oss.str());
+}
+
+int Player::getAtk() {
+	if (sword) {
+		return Character::getAtk() + sword->getAtk();
+	} else  {
+		return Character::getAtk();
+	}
+}
+
+int Player::getDef() {
+	if (armor) {
+		return Character::getDef() + armor->getDef();
+	} else {
+		return Character::getDef();
+	}
 }
