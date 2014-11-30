@@ -72,8 +72,12 @@ void Player::setInstance(Player *p) {
 }
 
 void Player::cleanup() {
-    delete curPlayer;
-    curPlayer = NULL;
+	Cell *cell = curPlayer->getCell();
+	if (cell) {
+		cell->clearEntity();
+	}
+	delete curPlayer;
+	curPlayer = NULL;
 }
 
 // Constructor & destructor
