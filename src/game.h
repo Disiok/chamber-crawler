@@ -14,6 +14,7 @@ class Game {
 		static bool nextFloorFlag;
 		static bool restartFlag;
 		static bool quitFlag;
+		static std::string floorFile;
 
 		Floor *floor;
 		int level;
@@ -27,7 +28,7 @@ class Game {
 		void runPlayerTurn();
 		void runEnemyTurn();
 
-		void setupFloor(std::string floorFile = "");
+		void setupFloor();
 		void nextFloor();
 		void restart();
 		void quit();
@@ -43,7 +44,7 @@ class Game {
 
 		~Game();
 
-		void start(std::string floorFile = "");
+		void start(std::string floorFile="");
 		void signalNextFloor();
 		void restartOrQuit();
 		void addAction(std::string action);

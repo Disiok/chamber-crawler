@@ -114,7 +114,7 @@ void Floor::displayFloor() {
 
 /* *
  * spawn
- * Spawns player, stairs and all potions, gold, enemies on floor.
+ *  Spawns player, stairs and all potions, gold, enemies on floor.
  */
 void Floor::spawn() {
 #ifdef DEBUG

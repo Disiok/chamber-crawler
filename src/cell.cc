@@ -1,10 +1,39 @@
+// Cell
 #include "wall.h"
 #include "door.h"
 #include "passage.h"
-#include "entity.h"
 #include "tile.h"
-#include "enemy.h"
 #include "floor.h"
+
+// Potion
+#include "boostAtk.h"
+#include "boostDef.h"
+#include "woundAtk.h"
+#include "woundDef.h"
+#include "poisonHealth.h"
+#include "restoreHealth.h"
+
+// Treasure
+#include "smallTreasure.h"
+#include "normalTreasure.h"
+#include "merchantTreasure.h"
+#include "dragonTreasure.h"
+
+// Enemies
+#include "entity.h"
+#include "enemy.h"
+#include "orc.h"
+#include "human.h"
+#include "dwarf.h"
+#include "elf.h"
+#include "merchant.h"
+#include "dragon.h"
+#include "halfling.h"
+
+// Singletons
+#include "player.h"
+#include "stair.h"
+
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -35,6 +64,7 @@ bool Cell::isSteppable(Enemy *enemy) {
 }
 
 Cell *Cell::getInstance(int i, int j, char id, Floor* floor) {
+	// Returning Cells
 	if (id == '|' || id == '-') {
 		return new Wall(i, j, id, floor);
 	} else if (id == '.') {
@@ -43,9 +73,90 @@ Cell *Cell::getInstance(int i, int j, char id, Floor* floor) {
 		return new Passage(i, j, floor);
 	} else if (id == '+') {
 		return new Door(i, j, floor);
-	} else {
-		return NULL;
 	}
+
+	// Returning items
+	if (id == '0') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new RestoreHealth(tile));
+		return tile;
+	} else if (id == '1') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new BoostAtk(tile));
+		return tile;
+	} else if (id == '2') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new BoostDef(tile));
+		return tile;
+	} else if (id == '3') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new PoisonHealth(tile));
+		return tile;
+	} else if (id == '4') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new WoundAtk(tile));
+		return tile;
+	} else if (id == '5') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new WoundDef(tile));
+		return tile;
+	} else if (id == '6') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new NormalTreasure(tile));
+		return tile;
+	} else if (id == '7') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new SmallTreasure(tile));
+		return tile;
+	} else if (id == '8') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new MerchantTreasure(tile));
+		return tile;
+	} else if (id == '9') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new DragonTreasure(tile));
+		return tile;
+	}
+
+	// Returning enemies
+	if (id == 'H') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new Human(tile));
+		return tile;
+	} else if (id == 'W') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new Dwarf(tile));
+		return tile;
+	} else if (id == 'E') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new Elf(tile));
+		return tile;
+	} else if (id == 'O') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new Orc(tile));
+		return tile;
+	} else if (id == 'M') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new Merchant(tile));
+		return tile;
+	} else if (id == 'D') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new Dragon(tile, NULL));
+		return tile;
+	}
+
+	// Returning singletons
+	if (id == '@') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->spawnPlayer();
+		return tile;
+	} else if (id == '\\') {
+		Tile *tile = new Tile(i, j, floor);
+		tile->spawnStair();
+		return tile;
+	}
+
+	return NULL;
 }
 
 bool Cell::hasEntity() {

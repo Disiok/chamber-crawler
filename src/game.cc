@@ -20,6 +20,7 @@ Game *Game::game = NULL;
 bool Game::nextFloorFlag = false;
 bool Game::restartFlag = false;
 bool Game::quitFlag = false;
+string Game::floorFile = "";
 
 // Static instance accessor
 Game *Game::getInstance() {
@@ -46,12 +47,9 @@ void Game::start(string floorFile) {
 #ifdef SEED
 	srand(SEED);
 #endif
+	this->floorFile = floorFile;
 	chooseRace();
-	if (floorFile != "") {
-		setupFloor(floorFile);
-	} else {
-		setupFloor();
-	}
+	setupFloor();
 	runGameLoop();
 }
 
@@ -116,8 +114,12 @@ void Game::nextFloor() {
 
 		// setup floor w/o display
 		floor = new Floor();
-		floor->loadFromFile(DEFAULT_FLOOR);
-		floor->spawn();
+		if (floorFile != "") {
+			floor->loadFromFile(floorFile);
+		} else {
+			floor->loadFromFile(DEFAULT_FLOOR);
+			floor->spawn();
+		}
 
 		Player::getInstance()->setAtk(atk);
 		Player::getInstance()->setDef(def);
@@ -127,12 +129,14 @@ void Game::nextFloor() {
 	}
 }
 
-void Game::setupFloor(string floorFile) {
-	string file = floorFile != "" ? floorFile : DEFAULT_FLOOR;
-
+void Game::setupFloor() {
 	floor = new Floor();
-	floor->loadFromFile(file);
-	floor->spawn();
+	if (floorFile != "") {
+		floor->loadFromFile(floorFile);
+	} else {
+		floor->loadFromFile(DEFAULT_FLOOR);
+		floor->spawn();
+	}
 	display();
 }
 
