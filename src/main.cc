@@ -11,7 +11,6 @@ int main(int argc, char* argv[]) {
     if (argc > 1) {
         game->start(argv[1]);
     } else {
-	   game->start();
+	    game->start("");
     }
-    delete game;
 }

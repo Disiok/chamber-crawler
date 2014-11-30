@@ -20,7 +20,8 @@ Game *Game::game = NULL;
 bool Game::nextFloorFlag = false;
 bool Game::restartFlag = false;
 bool Game::quitFlag = false;
-string Game::floorFile = "";
+ifstream *Game::floorStream = NULL;
+bool Game::defaultFloor = true;
 
 // Static instance accessor
 Game *Game::getInstance() {
@@ -37,6 +38,7 @@ Game::Game(): floor(NULL), level(1), action("") {};
 // Destructor
 Game::~Game() {
 	delete floor;
+	delete floorStream;
 }
 
 void Game::start(string floorFile) {
@@ -47,7 +49,12 @@ void Game::start(string floorFile) {
 #ifdef SEED
 	srand(SEED);
 #endif
-	this->floorFile = floorFile;
+	if (floorFile == "") {
+		floorStream = new ifstream(DEFAULT_FLOOR.c_str());
+	} else {
+		defaultFloor = false;
+		floorStream = new ifstream(floorFile.c_str());
+	}
 	chooseRace();
 	setupFloor();
 	runGameLoop();
@@ -112,12 +119,10 @@ void Game::nextFloor() {
 		delete floor;
 		srand(rand()%300);
 
-		// setup floor w/o display
+		// setup floor
 		floor = new Floor();
-		if (floorFile != "") {
-			floor->loadFromFile(floorFile);
-		} else {
-			floor->loadFromFile(DEFAULT_FLOOR);
+		floor->loadFromFile(floorStream);
+		if (defaultFloor) {
 			floor->spawn();
 		}
 
@@ -131,10 +136,8 @@ void Game::nextFloor() {
 
 void Game::setupFloor() {
 	floor = new Floor();
-	if (floorFile != "") {
-		floor->loadFromFile(floorFile);
-	} else {
-		floor->loadFromFile(DEFAULT_FLOOR);
+	floor->loadFromFile(floorStream);
+	if (defaultFloor) {
 		floor->spawn();
 	}
 	display();
@@ -185,7 +188,8 @@ void Game::runPlayerTurn() {
 	cin >> command;
 	Cell *cell = parseDirection(command);
 	if (cell != NULL) {
-		Player::getInstance()->move(cell);
+		nextFloorFlag = true;
+		//Player::getInstance()->move(cell);
 	} else {
 		if (command == "u") {
 			cin >> command;
@@ -209,6 +213,7 @@ void Game::runEnemyTurn() {
 
 void Game::cleanup() {
 	delete game;
+	delete floorStream;
 }
 
 /**

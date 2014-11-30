@@ -65,16 +65,15 @@ void Floor::floodChamber(int i, int j, string (*rows)[MAX_ROW], std::vector<Tile
 	}
 }
 
-void Floor::loadFromFile(string fileName) {
+void Floor::loadFromFile(std::ifstream *floorStream) {
 #ifdef DEBUG
-	cout << "Floor::loadFromFile(\"" << fileName << "\")" << endl;
+	cout << "Floor::loadFromFile()" << endl;
 #endif
 	// 'rows' stores the floor to be later flooded to create chambers
 	string rows[MAX_ROW];
 	string line;
-	ifstream ifs(fileName.c_str());
 	for (int i = 0; i < MAX_ROW; i ++) {
-		getline(ifs, line);
+		getline(*floorStream, line);
 		rows[i] = line;
 		for (int j = 0; j < MAX_COLUMN; j ++) {
 			map[i][j] = Cell::getInstance(i, j, line[j], this);
