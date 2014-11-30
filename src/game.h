@@ -27,7 +27,7 @@ class Game {
 		void runPlayerTurn();
 		void runEnemyTurn();
 
-		void setupFloor();
+		void setupFloor(std::string floorFile = "");
 		void nextFloor();
 		void restart();
 		void quit();
@@ -43,7 +43,7 @@ class Game {
 
 		~Game();
 
-		void start();
+		void start(std::string floorFile = "");
 		void signalNextFloor();
 		void restartOrQuit();
 		void addAction(std::string action);

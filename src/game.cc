@@ -38,7 +38,7 @@ Game::~Game() {
 	delete floor;
 }
 
-void Game::start() {
+void Game::start(string floorFile) {
 #ifdef DEBUG
 	cout << "Game::start" << endl;
 #endif
@@ -47,7 +47,11 @@ void Game::start() {
 	srand(SEED);
 #endif
 	chooseRace();
-	setupFloor();
+	if (floorFile != "") {
+		setupFloor(floorFile);
+	} else {
+		setupFloor();
+	}
 	runGameLoop();
 }
 
@@ -123,9 +127,11 @@ void Game::nextFloor() {
 	}
 }
 
-void Game::setupFloor() {
+void Game::setupFloor(string floorFile) {
+	string file = floorFile != "" ? floorFile : DEFAULT_FLOOR;
+
 	floor = new Floor();
-	floor->loadFromFile(DEFAULT_FLOOR);
+	floor->loadFromFile(file);
 	floor->spawn();
 	display();
 }
