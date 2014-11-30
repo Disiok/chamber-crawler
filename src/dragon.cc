@@ -34,3 +34,7 @@ void Dragon::killedBy(Character *other) {
     treasure->unlock();
     Enemy::killedBy(other);
 }
+
+void Dragon::setTreasure(DragonTreasure *treasure) {
+    this->treasure = treasure;
+}

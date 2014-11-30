@@ -2,8 +2,10 @@
 #include "merchantTreasure.h"
 #include "cell.h"
 #include "game.h"
+#include "goblin.h"
 #include <sstream>
 #include <string>
+#include <iostream>
 using namespace std;
 
 bool Merchant::isHostile = false;
@@ -16,6 +18,7 @@ void Merchant::resetHostile() {
 }
 
 bool Merchant::attackedBy(Character *other) {
+	cout<<"it's going here"<<endl;
 	isHostile = true;
 	return Character::attackedBy(other);
 }
@@ -35,6 +38,12 @@ void Merchant::killedBy(Character *other) {
 	Cell *cell = getCell();
 	cell->destroyEntity();
 	cell->setEntity(new MerchantTreasure((Tile *)cell));
+}
+
+void Merchant::killedBy(Goblin *goblin) {
+	int gold = goblin->calculateGoldFrom(this);
+    goblin->setGold(goblin->getGold() + gold);
+	Merchant::killedBy(dynamic_cast<Character *>(goblin));
 }
 
 void Merchant::addKilledAction() {

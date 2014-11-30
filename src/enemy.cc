@@ -7,6 +7,7 @@
 #include "floor.h"
 #include <cstdlib>
 #include "game.h"
+#include "goblin.h"
 #include <vector>
 #include <sstream>
 #include <iostream>
@@ -47,7 +48,8 @@ void Enemy::move() {
 void Enemy::performAction() {
 	invokeAbility();
 
-	if (isPlayerNearby()) {
+    // Only attack if player is till alive, preventing 'double deaths'
+	if (isPlayerNearby() && Player::getInstance()->getHP() > 0) {
 		Player::getInstance()->attackedBy(this);
 	} else {
 		move();
@@ -60,6 +62,22 @@ void Enemy::killedBy(Character *other) {
 	getCell()->destroyEntity();
 
 	addKilledAction(gold);
+}
+
+void Enemy::killedBy(Goblin *goblin) {
+    int gold = goblin->calculateGoldFrom(this);
+    goblin->setGold(goblin->getGold() + gold);
+    getCell()->destroyEntity();
+
+    addKilledAction(gold);
+}
+
+bool Enemy::attackedBy(Goblin *goblin) {
+    goblin->attack(this);
+    if (isDead()) {
+        killedBy(goblin);
+    }
+    return true;
 }
 
 bool Enemy::isPlayerNearby() {
@@ -93,4 +111,3 @@ void Enemy::addMissAction(Character *other) {
 	oss << getTypeId() << " missed on PC. ";
 	Game::getInstance()->addAction(oss.str());
 }
-

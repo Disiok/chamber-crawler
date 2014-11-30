@@ -5,6 +5,8 @@
 
 // Forward declaration
 class Tile;
+class Human;
+class Merchant;
 
 class Goblin: public Player {
 	public:
@@ -16,6 +18,9 @@ class Goblin: public Player {
 
 		Goblin(Tile *tile);
 		int calculateGoldFrom(Character *other);
+        int calculateGoldFrom(Merchant *merchant);
+        int calculateGoldFrom(Human *human);
         bool attackedBy(Character *other);
+        void engage(Cell *cell);
 };
 #endif

@@ -1,6 +1,9 @@
 #ifndef ___MERCHANT_H___
 #define ___MERCHANT_H___
 #include "enemy.h"
+
+class Goblin;
+
 class Merchant: public Enemy {
 	private:
 		static bool isHostile;
@@ -18,5 +21,6 @@ class Merchant: public Enemy {
 		bool isPlayerNearby();
 
 		void killedBy(Character *other);
+		void killedBy(Goblin *goblin);
 };
 #endif

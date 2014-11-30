@@ -8,8 +8,10 @@ class DragonTreasure: public Treasure {
 	public:
 		static const int GOLD_DRAGON = 6;
 		DragonTreasure(Tile *tile);
+        DragonTreasure(Tile *tile, bool noDragon);
 
 		bool isSteppable(Player *player);
 		void unlock();
+        void lock();
 };
 #endif

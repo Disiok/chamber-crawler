@@ -28,6 +28,10 @@ bool Entity::attackedBy(Character *character) {
 	return false;
 }
 
+bool Entity::attackedBy(Goblin *goblin) {
+	return false;
+}
+
 bool Entity::pickedUpBy(Character *character) {
 	return false;
 }

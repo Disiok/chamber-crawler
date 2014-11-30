@@ -20,6 +20,9 @@ Game *Game::game = NULL;
 bool Game::nextFloorFlag = false;
 bool Game::restartFlag = false;
 bool Game::quitFlag = false;
+ifstream *Game::floorStream = NULL;
+string Game::floorFile = "";
+bool Game::defaultFloor = true;
 
 // Static instance accessor
 Game *Game::getInstance() {
@@ -36,9 +39,10 @@ Game::Game(): floor(NULL), level(1), action("") {};
 // Destructor
 Game::~Game() {
 	delete floor;
+	delete floorStream;
 }
 
-void Game::start() {
+void Game::start(string floorFile) {
 #ifdef DEBUG
 	cout << "Game::start" << endl;
 #endif
@@ -46,6 +50,13 @@ void Game::start() {
 #ifdef SEED
 	srand(SEED);
 #endif
+	this->floorFile = floorFile;
+	if (floorFile == "") {
+		floorStream = new ifstream(DEFAULT_FLOOR.c_str());
+	} else {
+		defaultFloor = false;
+		floorStream = new ifstream(floorFile.c_str());
+	}
 	chooseRace();
 	setupFloor();
 	runGameLoop();
@@ -53,6 +64,7 @@ void Game::start() {
 
 void Game::restart() {
 	delete floor;
+	delete floorStream;
 	level = 1;
 	BoostAtk::resetRevealed();
     BoostDef::resetRevealed();
@@ -61,7 +73,7 @@ void Game::restart() {
     PoisonHealth::resetRevealed();
     RestoreHealth::resetRevealed();
 	Merchant::resetHostile();
-	start();
+	start(floorFile);
 }
 
 void Game::quit() {
@@ -110,10 +122,12 @@ void Game::nextFloor() {
 		delete floor;
 		srand(rand()%300);
 
-		// setup floor w/o display
+		// setup floor
 		floor = new Floor();
-		floor->loadFromFile(DEFAULT_FLOOR);
-		floor->spawn();
+		floor->loadFromFile(floorStream);
+		if (defaultFloor) {
+			floor->spawn();
+		}
 
 		Player::getInstance()->setAtk(atk);
 		Player::getInstance()->setDef(def);
@@ -125,8 +139,10 @@ void Game::nextFloor() {
 
 void Game::setupFloor() {
 	floor = new Floor();
-	floor->loadFromFile(DEFAULT_FLOOR);
-	floor->spawn();
+	floor->loadFromFile(floorStream);
+	if (defaultFloor) {
+		floor->spawn();
+	}
 	display();
 }
 
@@ -175,6 +191,7 @@ void Game::runPlayerTurn() {
 	cin >> command;
 	Cell *cell = parseDirection(command);
 	if (cell != NULL) {
+		//nextFloorFlag = true;
 		Player::getInstance()->move(cell);
 	} else {
 		if (command == "u") {
@@ -199,6 +216,7 @@ void Game::runEnemyTurn() {
 
 void Game::cleanup() {
 	delete game;
+	delete floorStream;
 }
 
 /**

@@ -1,6 +1,7 @@
 #ifndef ___GAME_H___
 #define ___GAME_H___
 #include <string>
+#include <fstream>
 #include "cell.h"
 
 // Forward declaration
@@ -14,6 +15,9 @@ class Game {
 		static bool nextFloorFlag;
 		static bool restartFlag;
 		static bool quitFlag;
+		static std::ifstream *floorStream;
+		static std::string floorFile;
+		static bool defaultFloor;
 
 		Floor *floor;
 		int level;
@@ -43,7 +47,7 @@ class Game {
 
 		~Game();
 
-		void start();
+		void start(std::string floorFile="");
 		void signalNextFloor();
 		void restartOrQuit();
 		void addAction(std::string action);

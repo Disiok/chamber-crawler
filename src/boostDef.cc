@@ -1,6 +1,7 @@
 #include "boostDef.h"
 #include "drow.h"
 #include <cmath>
+#include <iostream>
 using namespace std;
 
 const string BoostDef::typeName = "Boost Def";
@@ -11,7 +12,7 @@ void BoostDef::resetRevealed() {
     revealed = false;
 }
 
-BoostDef::BoostDef(Tile *tile): Potion(tile, typeName) {}
+BoostDef::BoostDef(Tile *tile): Potion(tile, typeName), multiplier(1) {}
 
 bool BoostDef::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {

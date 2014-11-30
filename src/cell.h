@@ -8,6 +8,7 @@ class Player;
 class Enemy;
 class Floor;
 class Drow;
+class Goblin;
 
 class Cell {
 	private:
@@ -35,12 +36,14 @@ class Cell {
 		bool hasEntity();
 		void clearEntity();
 		void destroyEntity();
+		Entity *getEntity();
 		void setEntity(Entity *entity);
 
 		bool steppedOnBy(Character *other);
 		bool pickedUpBy(Character *other);
 		bool pickedUpBy(Drow *drow);
 		bool attackedBy(Character *other);
+		bool attackedBy(Goblin *goblin);
 
 		char getSymbol();
 		Floor *getFloor();

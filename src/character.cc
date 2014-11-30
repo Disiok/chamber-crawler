@@ -3,6 +3,7 @@
 #include "tile.h"
 #include "entity.h"
 #include "drow.h"
+#include "merchant.h"
 #include "dwarf.h"
 #include "human.h"
 #include <cmath>
@@ -72,6 +73,9 @@ bool Character::attackedBy(Character *other) {
 	return true;
 }
 
+bool Character::attackedBy(Goblin *goblin) {
+	return false;
+}
 
 int Character::getHP() {
 	return hp;
@@ -125,4 +129,8 @@ int Character::calculateGoldFrom(Character *other) {
 
 int Character::calculateGoldFrom(Human *human) {
 	return 4;
+}
+
+int Character::calculateGoldFrom(Merchant *merchant) {
+	return 0;
 }

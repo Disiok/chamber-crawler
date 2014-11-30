@@ -11,7 +11,7 @@ void WoundAtk::resetRevealed() {
     revealed = false;
 }
 
-WoundAtk::WoundAtk(Tile *tile): Potion(tile, typeName) {}
+WoundAtk::WoundAtk(Tile *tile): Potion(tile, typeName), multiplier(1) {}
 
 bool WoundAtk::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {

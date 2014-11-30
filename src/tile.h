@@ -18,7 +18,7 @@ class Tile: public Cell {
 		// Tile methods
 		void spawnEnemy();
 		void spawnPotion();
-		void spawnTreasure();
+		bool spawnTreasure();
 		void spawnStair();
 		void spawnPlayer();
 

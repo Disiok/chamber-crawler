@@ -1,6 +1,7 @@
 #ifndef ___FLOOR_H___
 #define ___FLOOR_H___
 #include <string>
+#include <fstream>
 #include <vector>
 
 // Forward declaration
@@ -20,7 +21,7 @@ class Floor {
 		Floor();
 		~Floor();
 
-		void loadFromFile(std::string fileName);
+		void loadFromFile(std::ifstream *floorStream);
 		void displayFloor();
 		void performAction();
 		void spawn();
