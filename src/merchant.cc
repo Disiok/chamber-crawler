@@ -9,9 +9,9 @@
 using namespace std;
 
 bool Merchant::isHostile = false;
-const string Merchant::TYPE_NAME = "Merchant";
+const string Merchant::NAME_MERCHANT = "Merchant";
 
-Merchant::Merchant(Tile *tile): Enemy(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {}
+Merchant::Merchant(Tile *tile): Enemy(tile, HP, ATK, DEF) {}
 
 void Merchant::resetHostile() {
 	isHostile = false;
@@ -48,7 +48,14 @@ void Merchant::killedBy(Goblin *goblin) {
 
 void Merchant::addKilledAction() {
 	ostringstream oss;
-	oss << "PC killed " << getTypeId() << ". A pile of gold is dropped. ";
+	oss << "PC killed " << getSymbol() << ". A pile of gold is dropped. ";
 	Game::getInstance()->addAction(oss.str());
 }
 
+char Merchant::getSymbol() {
+	return SYMBOL_MERCHANT;
+}
+
+string Merchant::getName() {
+	return NAME_MERCHANT;
+}

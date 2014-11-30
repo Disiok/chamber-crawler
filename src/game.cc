@@ -287,7 +287,7 @@ void Game::display() {
 }
 
 void Game::displayInfo() {
-	cout << "Race: " << Player::getInstance()->getTypeName();
+	cout << "Race: " << Player::getInstance()->getName();
 	cout << " Gold: " << Player::getInstance()->getGold();
 	cout << "\t\t\t\t\t\t\tFloor " << level << endl;
 

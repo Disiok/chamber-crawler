@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-const string PoisonHealth::typeName = "Poison Health";
+const string PoisonHealth::NAME_PH = "Poison Health";
 const int PoisonHealth::EFFECT = -10;
 bool PoisonHealth::revealed = false;
 
@@ -12,7 +12,7 @@ void PoisonHealth::resetRevealed() {
     revealed = false;
 }
 
-PoisonHealth::PoisonHealth(Tile *tile): Potion(tile, typeName), multiplier(1) {}
+PoisonHealth::PoisonHealth(Tile *tile): Potion(tile), multiplier(1) {}
 
 bool PoisonHealth::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {
@@ -26,4 +26,8 @@ bool PoisonHealth::pickedUpBy(Character *character) {
 bool PoisonHealth::pickedUpBy(Drow *drow) {
     multiplier = 1.5;
     PoisonHealth::pickedUpBy(dynamic_cast<Character *>(drow));
+}
+
+string PoisonHealth::getName() {
+	return NAME_PH;
 }

@@ -18,11 +18,9 @@ class Merchant;
  */
 class Character: public Entity {
 	private:
-		const char typeIdentifier;
 		const int maxHP;
 
 	protected:
-		const std::string typeName;
 		int hp;
 		int atk;
 		int def;

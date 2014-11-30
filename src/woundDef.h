@@ -10,11 +10,14 @@ class WoundDef: public Potion {
         static const int EFFECT;
         double multiplier;
     public:
-        static const std::string typeName;
+        static const std::string NAME_WD;
         static void resetRevealed();
         WoundDef(Tile *tile);
         bool pickedUpBy(Character *character);
         bool pickedUpBy(Drow *drow);
         Player *getBarePlayer();
+
+	// Entity method
+	std::string getName();
 };
 #endif

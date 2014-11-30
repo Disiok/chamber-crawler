@@ -5,7 +5,7 @@
 using namespace std;
 
 const string Sword::NAME_SWORD = "Sword";
-Sword::Sword(Tile *tile): Equipment(tile, SYMBOL_SWORD) {
+Sword::Sword(Tile *tile): Equipment(tile) {
 	int rating = rand() % 100;
 	if (rating == 100) {
 		atk = 50;

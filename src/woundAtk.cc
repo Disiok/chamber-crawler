@@ -3,7 +3,7 @@
 #include <cmath>
 using namespace std;
 
-const string WoundAtk::typeName = "Wound Atk";
+const string WoundAtk::NAME_WA = "Wound Atk";
 const int WoundAtk::EFFECT = -5;
 bool WoundAtk::revealed = false;
 
@@ -11,7 +11,7 @@ void WoundAtk::resetRevealed() {
     revealed = false;
 }
 
-WoundAtk::WoundAtk(Tile *tile): Potion(tile, typeName), multiplier(1) {}
+WoundAtk::WoundAtk(Tile *tile): Potion(tile), multiplier(1) {}
 
 bool WoundAtk::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {
@@ -29,4 +29,8 @@ bool WoundAtk::pickedUpBy(Drow *drow) {
 Player *WoundAtk::getBarePlayer() {
     player->setAtk(player->getAtk() - ceil(EFFECT * multiplier));
     return Potion::getBarePlayer();
+}
+
+string WoundAtk::getName() {
+	return NAME_WA;
 }

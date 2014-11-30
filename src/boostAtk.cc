@@ -3,7 +3,7 @@
 #include <cmath>
 using namespace std;
 
-const string BoostAtk::typeName = "Boost Atk";
+const string BoostAtk::NAME_BA = "Boost Atk";
 const int BoostAtk::EFFECT = 5;
 bool BoostAtk::revealed = false;
 
@@ -11,7 +11,7 @@ void BoostAtk::resetRevealed() {
     revealed = false;
 }
 
-BoostAtk::BoostAtk(Tile *tile): Potion(tile, typeName), multiplier(1) {}
+BoostAtk::BoostAtk(Tile *tile): Potion(tile), multiplier(1) {}
 
 bool BoostAtk::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {
@@ -31,4 +31,8 @@ bool BoostAtk::pickedUpBy(Drow *drow) {
 Player *BoostAtk::getBarePlayer() {
     player->setAtk(player->getAtk() - ceil(EFFECT * multiplier));
     return Potion::getBarePlayer();
+}
+
+string BoostAtk::getName() {
+	return NAME_BA;
 }

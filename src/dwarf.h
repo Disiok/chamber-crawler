@@ -3,12 +3,16 @@
 #include "enemy.h"
 class Dwarf: public Enemy {
 	public:
-		static const std::string TYPE_NAME;
-		static const char TYPE_ID = 'W';
+		static const std::string NAME_DWARF;
+		static const char SYMBOL_DWARF = 'W';
 		static const int HP = 100;
 		static const int ATK = 20;
 		static const int DEF = 30;
 		Dwarf(Tile *tile);
         bool attackedBy(Character *other);
+
+	// Entity methods
+	char getSymbol();
+	std::string getName();
 };
 #endif

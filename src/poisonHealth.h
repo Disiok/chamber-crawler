@@ -10,10 +10,13 @@ class PoisonHealth: public Potion {
         static const int EFFECT;
         double multiplier;
     public:
-        static const std::string typeName;
+        static const std::string NAME_PH;
         static void resetRevealed();
         PoisonHealth(Tile *tile);
         bool pickedUpBy(Character *character);
         bool pickedUpBy(Drow *drow);
+
+	// Entity method
+	std::string getName();
 };
 #endif

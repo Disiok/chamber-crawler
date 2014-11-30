@@ -5,9 +5,9 @@
 #include <cstdlib>
 using namespace std;
 
-const string Dragon::TYPE_NAME = "Dragon";
+const string Dragon::NAME_DRAGON = "Dragon";
 
-Dragon::Dragon(Tile *tile, DragonTreasure *treasure): Enemy(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME), treasure(treasure) {}
+Dragon::Dragon(Tile *tile, DragonTreasure *treasure): Enemy(tile, HP, ATK, DEF), treasure(treasure) {}
 
 // Dragons don't move
 void Dragon::move() {}
@@ -37,4 +37,12 @@ void Dragon::killedBy(Character *other) {
 
 void Dragon::setTreasure(DragonTreasure *treasure) {
     this->treasure = treasure;
+}
+
+char Dragon::getSymbol() {
+	return SYMBOL_DRAGON;
+}
+
+string Dragon::getName() {
+	return NAME_DRAGON;
 }

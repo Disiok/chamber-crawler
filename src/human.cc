@@ -5,9 +5,9 @@
 #include <iostream>
 using namespace std;
 
-const string Human::TYPE_NAME = "Human";
+const string Human::NAME_HUMAN = "Human";
 
-Human::Human(Tile *tile): Enemy(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {}
+Human::Human(Tile *tile): Enemy(tile, HP, ATK, DEF) {}
 
 void Human::killedBy(Character *other) {
     int gold = other->calculateGoldFrom(this);
@@ -23,4 +23,12 @@ void Human::killedBy(Goblin *goblin) {
     getCell()->destroyEntity();
 
     addKilledAction(gold);
+}
+
+char Human::getSymbol() {
+	return SYMBOL_HUMAN;
+}
+
+string Human::getName() {
+	return NAME_HUMAN;
 }

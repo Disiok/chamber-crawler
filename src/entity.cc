@@ -6,7 +6,7 @@
 using namespace std;
 
 // Constructor & destructor
-Entity::Entity(Tile *tile, char symbol): cell(tile) {}
+Entity::Entity(Tile *tile): cell(tile) {}
 
 Entity::~Entity() {}
 

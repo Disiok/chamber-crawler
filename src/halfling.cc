@@ -3,9 +3,9 @@
 #include <cstdlib>
 using namespace std;
 
-const string Halfling::TYPE_NAME = "Halfling";
+const string Halfling::NAME_HALFLING = "Halfling";
 
-Halfling::Halfling(Tile *tile): Enemy(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {}
+Halfling::Halfling(Tile *tile): Enemy(tile, HP, ATK, DEF) {}
 
 bool Halfling::attackedBy(Character *other) {
 	if (rand() % 2) {
@@ -14,4 +14,12 @@ bool Halfling::attackedBy(Character *other) {
 		other->addMissAction(this);
 	}
 	return true;
+}
+
+char Halfling::getSymbol() {
+	return SYMBOL_HALFLING;
+}
+
+string Halfling::getName() {
+	return NAME_HALFLING;
 }

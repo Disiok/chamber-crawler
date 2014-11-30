@@ -17,7 +17,7 @@ class Potion: public Player {
 		static const char SYMBOL_POTION = 'P';
 		
 		// Constructor & destructor
-		Potion(Tile *tile, std::string typeName);
+		Potion(Tile *tile);
 		virtual ~Potion() = 0;
 
 		// Potion methods

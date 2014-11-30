@@ -11,8 +11,8 @@ class Dragon: public Enemy {
     private:
         DragonTreasure *treasure;
     public:
-        static const std::string TYPE_NAME;
-        static const char TYPE_ID = 'D';
+        static const std::string NAME_DRAGON;
+        static const char SYMBOL_DRAGON = 'D';
         static const int HP = 150;
         static const int ATK = 20;
         static const int DEF = 20;
@@ -22,6 +22,10 @@ class Dragon: public Enemy {
         bool isPlayerNearby();
         void killedBy(Character *other);
         void setTreasure(DragonTreasure *treasure);
+
+	// Entity methods
+	char getSymbol();
+	std::string getName();
 };
 
 #endif

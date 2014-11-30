@@ -9,7 +9,7 @@ using namespace std;
 
 
 // Constructor & destructor
-Potion::Potion(Tile *tile, const string typeName): Player(tile, 0, 0, 0) {
+Potion::Potion(Tile *tile): Player(tile, 0, 0, 0) {
     player = NULL;
     multiplier = 1;
 }
@@ -21,7 +21,7 @@ bool Potion::choosePickUp(bool revealed) {
     while (true) {
         cout << "Pick up ";
         if (revealed) {
-            cout << typeName << " potion";
+            cout << getName() << " potion";
         } else {
             cout << "Unknown potion";
         }
@@ -39,7 +39,7 @@ bool Potion::choosePickUp(bool revealed) {
 
 void Potion::addPickupAction() {
     ostringstream oss;
-    oss << "Drank a " << typeName << " potion. ";
+    oss << "Drank a " << getName() << " potion. ";
     Game::getInstance()->addAction(oss.str());
 }
 
