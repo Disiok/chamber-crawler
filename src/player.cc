@@ -91,87 +91,13 @@ Player::~Player() {
 	}
 }
 
-void Player::move(Cell *cell) {
-	if (cell->isSteppable(curPlayer)) {
-		Character::move(cell);
-	}
-}
-
+// Player methods
 void Player::pickUp(Cell *cell) {
 	cell->pickedUpBy(this);
 }
 
 void Player::engage(Cell *cell) {
 	cell->attackedBy(this);
-}
-
-void Player::killedBy(Character *) {
-	cout << endl;
-	cout << "You have been slain!" << endl;
-	cout << "Your score is: " << getScore() << endl;
-	cout << endl;
-	Game::getInstance()->restartOrQuit();
-}
-
-Player *Player::getBarePlayer() {
-	return curPlayer;
-}
-
-int Player::getScore() {
-	return getGold();
-}
-
-void Player::addAttackAction(Character *other, int damage) {
-	std::ostringstream oss;
-	oss << "PC deals " << damage <<  " damage to " << other->getTypeId() << " (" << other->getHP() << " HP). ";
-	Game::getInstance()->addAction(oss.str());
-}
-
-bool Player::attackedBy(Character *other) {
-	if (rand() % 2) {
-		Character::attackedBy(other);
-	} else {
-		other->addMissAction(this);
-	}
-	return true;
-}
-
-void Player::addMissAction(Character *other) {
-	ostringstream oss;
-	oss << "PC missed on " << other->getTypeId() << ". ";
-	Game::getInstance()->addAction(oss.str());
-}
-
-int Player::getAtk() {
-	if (sword) {
-		return Character::getAtk() + sword->getAtk();
-	} else  {
-		return Character::getAtk();
-	}
-}
-
-int Player::getDef() {
-	if (armor) {
-		return Character::getDef() + armor->getDef();
-	} else {
-		return Character::getDef();
-	}
-}
-
-Inventory *Player::getInventoryAt(int index) {
-	if (index >= 0 && index < MAX_INVENTORY) {
-		return inventory[index];
-	} else {
-		return NULL;
-	}
-}
-
-Sword *Player::getSword() {
-	return sword;
-}
-
-Armor *Player::getArmor() {
-	return armor;
 }
 
 void Player::equip(Sword *sword) {
@@ -209,5 +135,83 @@ void Player::addInventory(Inventory *item) {
 		} else {
 			delete item;
 		}
+	}
+}
+
+
+Player *Player::getBarePlayer() {
+	return curPlayer;
+}
+
+int Player::getScore() {
+	return getGold();
+}
+
+Inventory *Player::getInventoryAt(int index) {
+	if (index >= 0 && index < MAX_INVENTORY) {
+		return inventory[index];
+	} else {
+		return NULL;
+	}
+}
+
+Sword *Player::getSword() {
+	return sword;
+}
+
+Armor *Player::getArmor() {
+	return armor;
+}
+
+// Character methods
+void Player::move(Cell *cell) {
+	if (cell->isSteppable(curPlayer)) {
+		Character::move(cell);
+	}
+}
+
+bool Player::attackedBy(Character *other) {
+	if (rand() % 2) {
+		Character::attackedBy(other);
+	} else {
+		other->addMissAction(this);
+	}
+	return true;
+}
+
+void Player::killedBy(Character *) {
+	cout << endl;
+	cout << "You have been slain!" << endl;
+	cout << "Your score is: " << getScore() << endl;
+	cout << endl;
+	Game::getInstance()->restartOrQuit();
+}
+
+
+void Player::addAttackAction(Character *other, int damage) {
+	std::ostringstream oss;
+	oss << "PC deals " << damage <<  " damage to " << other->getTypeId() << " (" << other->getHP() << " HP). ";
+	Game::getInstance()->addAction(oss.str());
+}
+
+void Player::addMissAction(Character *other) {
+	ostringstream oss;
+	oss << "PC missed on " << other->getTypeId() << ". ";
+	Game::getInstance()->addAction(oss.str());
+}
+
+int Player::getAtk() {
+	if (sword) {
+		return Character::getAtk() + sword->getAtk();
+	} else  {
+		return Character::getAtk();
+	}
+}
+
+int Player::getDef() {
+	if (armor) {
+		return Character::getDef() + armor->getDef();
+	} else {
+		return Character::getDef();
 	}
 }

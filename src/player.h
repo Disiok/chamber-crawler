@@ -29,14 +29,14 @@ class Player: public Character {
 		// Player methods
 		virtual void pickUp(Cell *);
 		virtual void engage(Cell *);
-		virtual Player *getBarePlayer();
-
-		virtual int getScore();
 
 		virtual void equip(Sword *);
 		virtual void equip(Armor *);
 		virtual void useInventory(int index);
 		virtual void addInventory(Inventory *);
+		
+		virtual Player *getBarePlayer();
+		virtual int getScore();
 		Inventory *getInventoryAt(int index);
 		Sword *getSword();
 		Armor *getArmor();
