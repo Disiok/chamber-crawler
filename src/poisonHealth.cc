@@ -19,13 +19,14 @@ bool PoisonHealth::pickedUpBy(Character *character) {
         cout<<"yesh"<<endl;
         revealed = true;
         character->setHP(character->getHP() + ceil(EFFECT * multiplier));
-        Potion::pickedUpBy(character);
+        return Potion::pickedUpBy(character);
     }
+    return false;
 }
 
 bool PoisonHealth::pickedUpBy(Drow *drow) {
     multiplier = 1.5;
-    PoisonHealth::pickedUpBy(dynamic_cast<Character *>(drow));
+    return PoisonHealth::pickedUpBy(dynamic_cast<Character *>(drow));
 }
 
 string PoisonHealth::getName() {

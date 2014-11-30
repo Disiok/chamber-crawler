@@ -18,13 +18,14 @@ bool BoostDef::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {
         revealed = true;
         character->setDef(character->getDef() + ceil(EFFECT * multiplier));
-        Potion::pickedUpBy(character);
+        return Potion::pickedUpBy(character);
     }
+    return false;
 }
 
 bool BoostDef::pickedUpBy(Drow *drow) {
     multiplier = 1.5;
-    BoostDef::pickedUpBy(dynamic_cast<Character *>(drow));
+    return BoostDef::pickedUpBy(dynamic_cast<Character *>(drow));
 }
 
 

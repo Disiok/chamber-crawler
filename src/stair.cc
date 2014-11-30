@@ -35,6 +35,7 @@ bool Stair::steppedOnBy(Character *) {
 
 void Stair::cleanup() {
 	delete stair;
+	stair = NULL;
 }
 
 char Stair::getSymbol() {

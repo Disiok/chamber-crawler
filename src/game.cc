@@ -237,6 +237,7 @@ void Game::runEnemyTurn() {
 
 void Game::cleanup() {
 	delete game;
+	game = NULL;
 }
 
 /**

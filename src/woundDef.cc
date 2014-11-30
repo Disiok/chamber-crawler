@@ -17,13 +17,14 @@ bool WoundDef::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {
         revealed = true;
         character->setDef(character->getDef() + ceil(EFFECT * multiplier));
-        Potion::pickedUpBy(character);
+        return Potion::pickedUpBy(character);
     }
+    return false;
 }
 
 bool WoundDef::pickedUpBy(Drow *drow) {
     multiplier = 1.5;
-    WoundDef::pickedUpBy(dynamic_cast<Character *>(drow));
+    return WoundDef::pickedUpBy(dynamic_cast<Character *>(drow));
 }
 
 Player *WoundDef::getBarePlayer() {

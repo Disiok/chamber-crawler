@@ -73,6 +73,7 @@ void Player::setInstance(Player *p) {
 
 void Player::cleanup() {
     delete curPlayer;
+    curPlayer = NULL;
 }
 
 // Constructor & destructor

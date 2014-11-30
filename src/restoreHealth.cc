@@ -17,13 +17,14 @@ bool RestoreHealth::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {
         revealed = true;
         character->setHP(character->getHP() + ceil(EFFECT * multiplier));
-        Potion::pickedUpBy(character);
+        return Potion::pickedUpBy(character);
     }
+    return false;
 }
 
 bool RestoreHealth::pickedUpBy(Drow *drow) {
     multiplier = 1.5;
-    RestoreHealth::pickedUpBy(dynamic_cast<Character *>(drow));
+    return RestoreHealth::pickedUpBy(dynamic_cast<Character *>(drow));
 }
 
 string RestoreHealth::getName() {

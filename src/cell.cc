@@ -56,11 +56,11 @@ bool Cell::performAction() {
 	return false;
 }
 
-bool Cell::isSteppable(Player *player) {
+bool Cell::isSteppable(Player *) {
 	return false;
 }
 
-bool Cell::isSteppable(Enemy *enemy) {
+bool Cell::isSteppable(Enemy *) {
 	return false;
 }
 
