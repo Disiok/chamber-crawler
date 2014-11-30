@@ -35,6 +35,7 @@ class Cell {
 		bool hasEntity();
 		void clearEntity();
 		void destroyEntity();
+		Entity *getEntity();
 		void setEntity(Entity *entity);
 
 		bool steppedOnBy(Character *other);

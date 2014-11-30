@@ -21,6 +21,7 @@ class Dragon: public Enemy {
         void move();
         bool isPlayerNearby();
         void killedBy(Character *other);
+        void setTreasure(DragonTreasure *treasure);
 };
 
 #endif

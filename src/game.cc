@@ -21,6 +21,7 @@ bool Game::nextFloorFlag = false;
 bool Game::restartFlag = false;
 bool Game::quitFlag = false;
 ifstream *Game::floorStream = NULL;
+string Game::floorFile = "";
 bool Game::defaultFloor = true;
 
 // Static instance accessor
@@ -49,6 +50,7 @@ void Game::start(string floorFile) {
 #ifdef SEED
 	srand(SEED);
 #endif
+	this->floorFile = floorFile;
 	if (floorFile == "") {
 		floorStream = new ifstream(DEFAULT_FLOOR.c_str());
 	} else {
@@ -62,6 +64,7 @@ void Game::start(string floorFile) {
 
 void Game::restart() {
 	delete floor;
+	delete floorStream;
 	level = 1;
 	BoostAtk::resetRevealed();
     BoostDef::resetRevealed();
@@ -70,7 +73,7 @@ void Game::restart() {
     PoisonHealth::resetRevealed();
     RestoreHealth::resetRevealed();
 	Merchant::resetHostile();
-	start();
+	start(floorFile);
 }
 
 void Game::quit() {
@@ -188,8 +191,8 @@ void Game::runPlayerTurn() {
 	cin >> command;
 	Cell *cell = parseDirection(command);
 	if (cell != NULL) {
-		nextFloorFlag = true;
-		//Player::getInstance()->move(cell);
+		//nextFloorFlag = true;
+		Player::getInstance()->move(cell);
 	} else {
 		if (command == "u") {
 			cin >> command;

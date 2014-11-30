@@ -16,6 +16,7 @@ class Game {
 		static bool restartFlag;
 		static bool quitFlag;
 		static std::ifstream *floorStream;
+		static std::string floorFile;
 		static bool defaultFloor;
 
 		Floor *floor;

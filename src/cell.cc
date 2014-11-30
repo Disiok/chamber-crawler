@@ -114,7 +114,8 @@ Cell *Cell::getInstance(int i, int j, char id, Floor* floor) {
 		return tile;
 	} else if (id == '9') {
 		Tile *tile = new Tile(i, j, floor);
-		tile->setEntity(new DragonTreasure(tile));
+		// Spawn dragonTreasure without the dragon
+		tile->setEntity(new DragonTreasure(tile, true));
 		return tile;
 	}
 
@@ -173,6 +174,10 @@ void Cell::destroyEntity() {
 
 void Cell::clearEntity() {
 	entity = NULL;
+}
+
+Entity *Cell::getEntity() {
+	return entity;
 }
 
 void Cell::setEntity(Entity *entity) {

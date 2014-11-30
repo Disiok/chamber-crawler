@@ -110,16 +110,19 @@ void Tile::spawnPotion() {
  * 	Normal:	5/8
  * 	Dragon: 1/8
  *	Small: 	1/4 = 2/8
+ *  Returns whether DragonTreasure spawned
  */
-void Tile::spawnTreasure() {
+bool Tile::spawnTreasure() {
 	int roll = rand() % 8 + 1;
 	if (roll >= 1 && roll < 6) {
 		setEntity(new NormalTreasure(this));
+		return true;
 	} else if (roll == 6) {
 		setEntity(new DragonTreasure(this));
 	} else {
 		setEntity(new SmallTreasure(this));
 	}
+	return false;
 }
 
 /* *

@@ -34,10 +34,16 @@ DragonTreasure::DragonTreasure(Tile *tile): Treasure(tile, GOLD_DRAGON), isGuard
     }
 }
 
+DragonTreasure::DragonTreasure(Tile *tile, bool noDragon): Treasure(tile, GOLD_DRAGON), isGuarded(false) {}
+
 bool DragonTreasure::isSteppable(Player *player) {
 	return !isGuarded;
 }
 
 void DragonTreasure::unlock() {
     isGuarded = false;
+}
+
+void DragonTreasure::lock() {
+    isGuarded = true;
 }

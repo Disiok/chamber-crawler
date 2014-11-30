@@ -8,6 +8,8 @@
 #include <string>
 #include "stair.h"
 #include "player.h"
+#include "dragon.h"
+#include "dragonTreasure.h"
 using namespace std;
 
 Floor::Floor() {
@@ -79,6 +81,31 @@ void Floor::loadFromFile(std::ifstream *floorStream) {
 			map[i][j] = Cell::getInstance(i, j, line[j], this);
 		}
 	}
+
+	// If dragons and their respective treasures are not linked, link them
+	for (int i = 0; i < MAX_ROW; i ++) {
+		for (int j = 0; j < MAX_COLUMN; j ++) {
+			if (map[i][j]) {
+				Entity *e = map[i][j]->getEntity();
+				Dragon *d = dynamic_cast<Dragon *>(e);
+				if (d) {
+				    // Find an unlinked dragonTreasure
+					bool found = false;
+				    for (int a = -1 ; a <= 1 && !found ; a++) {
+				        for (int b = -1 ; b <= 1 && !found ; b++) {
+				        	DragonTreasure *dt = dynamic_cast<DragonTreasure *>(map[i+a][j+b]->getEntity());
+				            if (dt && dt->isSteppable(Player::getInstance())) {
+				                d->setTreasure(dt);
+				                dt->lock();
+				                found = true;
+				            }
+				        }
+				    }
+				}
+			}
+		}
+	}
+
 	// Going through every floor tile and flooding each chamber
 	int numChambers = 0;
 	for (int i = 0 ; i < MAX_ROW && numChambers < MAX_CHAMBERS; i++) {
@@ -136,11 +163,15 @@ void Floor::spawn() {
 		getRandomTile()->spawnPotion();
 	}
 	// Gold
+		// spawning a dragon beside the dragonTreasure counts towards enemy count
+	int numDragons = 0;
 	for (int i = 0 ; i < NUM_GOLD ; i++) {
-		getRandomTile()->spawnTreasure();
+		if (getRandomTile()->spawnTreasure()) {
+			numDragons++;
+		}
 	}
 	// Enemies
-	for (int i = 0 ; i < NUM_ENEMY ; i++) {
+	for (int i = 0 ; i < NUM_ENEMY - numDragons ; i++) {
 		getRandomTile()->spawnEnemy();
 	}
 }
