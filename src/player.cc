@@ -72,7 +72,13 @@ Player::Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, 
 	}	
 }
 
-Player::~Player() {}
+Player::~Player() {
+	delete sword;
+	delete armor;
+	for (int i = 0; i < MAX_INVENTORY; i ++){
+		delete inventory[i];
+	}
+}
 
 void Player::move(Cell *cell) {
 	if (cell->isSteppable(curPlayer)) {
@@ -171,4 +177,34 @@ void Player::equip(Sword *sword) {
 
 void Player::equip(Armor *armor) {
 	this->armor = armor;
+}
+
+void Player::useInventory(int index) {
+	Inventory *item = inventory[index];
+	if (item) {
+		inventory[index] = NULL;
+		item->usedBy(this);
+	}
+}
+
+void Player::addInventory(Inventory *item) {
+	bool added = false;
+	for (int i = 0; i < MAX_INVENTORY; i ++) {
+		if (!inventory[i]) {
+			inventory[i] = item;
+			added = true;
+			break;
+		}
+	}
+	if (!added) {
+		cout << "Inventory full, choose an item to discard: ";
+		int index;
+		cin >> index;
+		if (index >= 0 && index < MAX_INVENTORY) {
+			delete inventory[index];
+			inventory[index] = item;
+		} else {
+			delete item;
+		}
+	}
 }

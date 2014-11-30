@@ -9,5 +9,7 @@ class Sword: public Equipment {
 		Sword(Tile *tile);
 		
 		int getAtk();
+
+		void usedBy(Player *player);
 };
 #endif

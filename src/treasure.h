@@ -4,6 +4,9 @@
 class Treasure: public Entity {
 	private:
 		const int gold;
+
+		void addGoldAction(int gold);
+
 	public:
 		static const char SYMBOL_TREASURE = 'G';
 		
@@ -13,5 +16,6 @@ class Treasure: public Entity {
 		virtual bool isSteppable(Player *player);
 		virtual bool isSteppable(Enemy *enemy);
 		virtual bool steppedOnBy(Character *character);
+
 };
 #endif

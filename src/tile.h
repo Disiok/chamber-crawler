@@ -21,6 +21,7 @@ class Tile: public Cell {
 		bool spawnTreasure();
 		void spawnStair();
 		void spawnPlayer();
+		void spawnEquipment();
 
 		// Override methods
 		bool isSteppable(Player *player);

@@ -37,7 +37,7 @@ bool Entity::pickedUpBy(Drow *drow) {
 }
 
 bool Entity::isSteppable(Player *player) {
-	return true;
+	return false;
 }
 
 bool Entity::isSteppable(Enemy *enemy) {

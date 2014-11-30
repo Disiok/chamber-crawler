@@ -31,7 +31,7 @@ class Potion: public Player {
 
 		void equip(Sword *sword);
 		void equip(Armor *armor);
-
+		void useInventory(int index);
 
 		// Delegating Character methods
 		void attack(Character *other);

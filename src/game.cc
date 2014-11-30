@@ -13,6 +13,7 @@
 #include "sword.h"
 #include "armor.h"
 #include "player.h"
+#include <sstream>
 #include <iostream>
 using namespace std;
 
@@ -179,6 +180,9 @@ void Game::runGameLoop() {
 		runEnemyTurn();
 		// Show board if game continues as normal, else clear action text for new floor
 		if (!nextFloorFlag && !restartFlag && !quitFlag) {
+			if (action == "") {
+				addAction("Nothing happened. ");
+			}
 			display();
 		} else {
 			clearAction();
@@ -200,7 +204,14 @@ void Game::runPlayerTurn() {
 		if (command == "u") {
 			cin >> command;
 			cell = parseDirection(command);
-			Player::getInstance()->pickUp(cell);
+			if (cell) {
+				Player::getInstance()->pickUp(cell);
+			} else {
+				int inventoryIndex = parseInventoryIndex(command);
+				if (inventoryIndex != -1) {
+					Player::getInstance()->useInventory(inventoryIndex);
+				}
+			}
 		} else if (command == "a") {
 			cin >> command;
 			cell = parseDirection(command);
@@ -250,6 +261,19 @@ Cell *Game::parseDirection(string direction) {
 	}
 }
 
+int Game::parseInventoryIndex(string index) {
+	istringstream iss(index);
+	int i;
+	if (iss << i) {
+		if (i >= 0 && i <= Player::MAX_INVENTORY) {
+			return i;
+		} else {
+			return -1;
+		}
+	} else {
+		return -1;
+	}
+}
 void Game::display() {
 	floor->displayFloor();
 	displayInfo();
@@ -265,13 +289,13 @@ void Game::displayInfo() {
 	cout << "Atk: " << Player::getInstance()->getAtk();
 	Sword *sword = Player::getInstance()->getSword();
 	if (sword) {
-		cout << "(" << sword->getAtk() << " from "  << sword->getName();
+		cout << "(" << sword->getAtk() << " from "  << sword->getName() << ")";
 	} 
 	cout << endl;
 	cout << "Def: " << Player::getInstance()->getDef();
 	Armor *armor = Player::getInstance()->getArmor();
  	if (armor) {
-		cout << "(" << armor->getDef() << " from " << armor->getName();
+		cout << "(" << armor->getDef() << " from " << armor->getName() << ")";
 	}	
 	cout << endl;
 	cout << "Inventory: ";
@@ -290,7 +314,6 @@ void Game::displayInfo() {
 }
 
 void Game::displayAction() {
-	// TODO: print previous action
 	cout << "Action: " << action << endl;
 }
 

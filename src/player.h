@@ -46,7 +46,8 @@ class Player: public Character {
 
 		virtual void equip(Sword *sword);
 		virtual void equip(Armor *armor);
-
+		virtual void useInventory(int index);
+		virtual void addInventory(Inventory *inventory);
 	private:
 		static Player *curPlayer;
 		static char race;

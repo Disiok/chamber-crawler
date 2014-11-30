@@ -1,9 +1,12 @@
 #include "tile.h"
 
+// Abstract
 #include "entity.h"
 #include "character.h"
 #include "enemy.h"
 #include "player.h"
+
+// Stair
 #include "stair.h"
 
 // Treasures
@@ -26,6 +29,10 @@
 #include "woundAtk.h"
 #include "boostDef.h"
 #include "woundDef.h"
+
+// Equipments
+#include "armor.h"
+#include "sword.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -142,4 +149,13 @@ void Tile::spawnStair() {
 void Tile::spawnPlayer() {
 	Player::spawn(this);
 	setEntity(Player::getInstance());
+}
+
+void Tile::spawnEquipment() {
+	int roll = rand() % 2;
+	if (roll == 0) {
+		setEntity(new Sword(this));	
+	} else {
+		setEntity(new Armor(this));
+	}
 }

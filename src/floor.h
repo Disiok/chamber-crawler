@@ -17,6 +17,7 @@ class Floor {
 		static const int NUM_GOLD = 10;
 		static const int NUM_POTION = 10;
 		static const int NUM_ENEMY = 20;
+		static const int NUM_EQUIP = 10;
 
 		Floor();
 		~Floor();

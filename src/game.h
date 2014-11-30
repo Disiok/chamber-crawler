@@ -2,10 +2,11 @@
 #define ___GAME_H___
 #include <string>
 #include <fstream>
-#include "cell.h"
 
 // Forward declaration
 class Floor;
+class Cell;
+class Inventory;
 
 class Game {
 	private:
@@ -40,10 +41,13 @@ class Game {
 		void displayInfo();
 		void displayAction();
 		void clearAction();
+
+		Cell *parseDirection(std::string direction);
+		int parseInventoryIndex(std::string index);
+
 	public:
 		static const std::string DEFAULT_FLOOR;
 		static Game *getInstance();
-		Cell *parseDirection(std::string direction);
 
 		~Game();
 

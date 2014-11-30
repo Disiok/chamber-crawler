@@ -56,7 +56,9 @@ bool Potion::pickedUpBy(Character *character) {
     return true;
 }
 
-bool Potion::pickedUpBy(Drow *drow) {}
+bool Potion::pickedUpBy(Drow *drow) {
+	return true;
+}
 
 // Player methods
 void Potion::move(Cell *cell) {
@@ -74,9 +76,11 @@ void Potion::pickUp(Cell *cell) {
 Inventory *Potion::getInventoryAt(int index) {
 	return player->getInventoryAt(index);
 }
+
 Sword *Potion::getSword() {
 	return player->getSword();
 }
+
 Armor *Potion::getArmor() {
 	return player->getArmor();
 }
@@ -88,6 +92,9 @@ void Potion::equip(Armor *armor) {
 	player->equip(armor);
 }
 
+void Potion::useInventory(int index) {
+	player->useInventory(index);
+}
 // Character methods
 void Potion::attack(Character *other) {
     player->attack(other);

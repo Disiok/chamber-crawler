@@ -17,13 +17,15 @@ bool BoostAtk::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {
         revealed = true;
         character->setAtk(character->getAtk() + ceil(EFFECT * multiplier));
-        Potion::pickedUpBy(character);
+        return Potion::pickedUpBy(character);
+    } else {
+    	return false;
     }
 }
 
 bool BoostAtk::pickedUpBy(Drow *drow) {
     multiplier = 1.5;
-    BoostAtk::pickedUpBy(dynamic_cast<Character *>(drow));
+    return BoostAtk::pickedUpBy(dynamic_cast<Character *>(drow));
 }
 
 Player *BoostAtk::getBarePlayer() {
