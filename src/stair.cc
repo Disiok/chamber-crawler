@@ -34,9 +34,11 @@ bool Stair::steppedOnBy(Character *) {
 }
 
 void Stair::cleanup() {
-	Cell *cell = stair->getCell();
-	if (cell) {
-		cell->clearEntity();
+	if (stair) {
+		Cell *cell = stair->getCell();
+		if (cell) {
+			cell->clearEntity();
+		}
 	}
 	delete stair;
 	stair = NULL;

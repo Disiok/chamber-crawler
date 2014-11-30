@@ -72,9 +72,11 @@ void Player::setInstance(Player *p) {
 }
 
 void Player::cleanup() {
-	Cell *cell = curPlayer->getCell();
-	if (cell) {
-		cell->clearEntity();
+	if (curPlayer) {
+		Cell *cell = curPlayer->getCell();
+		if (cell) {
+			cell->clearEntity();
+		}
 	}
 	delete curPlayer;
 	curPlayer = NULL;
