@@ -6,16 +6,16 @@ class Treasure: public Entity {
 		const int gold;
 
 		void addGoldAction(int gold);
-
 	public:
 		static const char SYMBOL_TREASURE = 'G';
 		
+		// Constructor & destructor
 		Treasure(Tile *tile, int gold);
 		virtual ~Treasure() = 0;
 		
-		virtual bool isSteppable(Player *player);
-		virtual bool isSteppable(Enemy *enemy);
-		virtual bool steppedOnBy(Character *character);
+		// Entity methods
+		bool isSteppable(Player *);
+		bool steppedOnBy(Character *);
 
 };
 #endif

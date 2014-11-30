@@ -11,20 +11,23 @@ class Inventory;
 class Game {
 	private:
 		static const int MAX_LEVEL;
+		
 		static Game *game;
 		static void cleanup();
-		static bool nextFloorFlag;
-		static bool restartFlag;
-		static bool quitFlag;
-		static std::ifstream *floorStream;
-		static std::string floorFile;
-		static bool defaultFloor;
+
+		bool nextFloorFlag;
+		bool restartFlag;
+		bool quitFlag;
+		std::ifstream *floorStream;
+		std::string floorFile;
+		bool defaultFloor;
 
 		Floor *floor;
 		int level;
 		std::string action;
 
 		Game();
+		~Game();
 
 		void chooseRace();
 		void runGameLoop();
@@ -48,9 +51,7 @@ class Game {
 	public:
 		static const std::string DEFAULT_FLOOR;
 		static Game *getInstance();
-
-		~Game();
-
+		
 		void start(std::string floorFile="");
 		void signalNextFloor();
 		void restartOrQuit();

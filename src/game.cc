@@ -27,12 +27,6 @@ using namespace std;
 const int Game::MAX_LEVEL = 5;
 const string Game::DEFAULT_FLOOR = "default.floor";
 Game *Game::game = NULL;
-bool Game::nextFloorFlag = false;
-bool Game::restartFlag = false;
-bool Game::quitFlag = false;
-ifstream *Game::floorStream = NULL;
-string Game::floorFile = "";
-bool Game::defaultFloor = true;
 
 // Static instance accessor
 Game *Game::getInstance() {
@@ -44,7 +38,14 @@ Game *Game::getInstance() {
 }
 
 // Constructor
-Game::Game(): floor(NULL), level(1), action("") {};
+Game::Game(): floor(NULL), level(1), action("") {
+	nextFloorFlag = false;
+	restartFlag = false;
+	quitFlag = false;
+	floorStream = NULL;
+	floorFile = "";
+	defaultFloor = true;
+};
 
 // Destructor
 Game::~Game() {

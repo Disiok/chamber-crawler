@@ -1,20 +1,19 @@
 #include "treasure.h"
 #include "character.h"
+#include "game.h"
 #include <iostream>
 #include <sstream>
-#include "game.h"
+
 using namespace std;
 
+// Constuctor & destructor
 Treasure::Treasure(Tile *tile, int gold): Entity(tile, SYMBOL_TREASURE), gold(gold) {}
 
 Treasure::~Treasure() {};
 
-bool Treasure::isSteppable(Player *player) {
+// Entity methods
+bool Treasure::isSteppable(Player *) {
 	return true;
-}
-
-bool Treasure::isSteppable(Enemy *enemy) {
-	return false;
 }
 
 bool Treasure::steppedOnBy(Character *character) {
@@ -26,6 +25,7 @@ bool Treasure::steppedOnBy(Character *character) {
 	return true;
 }
 
+// Private Treasure method
 void Treasure::addGoldAction(int gold) {
     ostringstream oss;
     oss << "Picked up " << gold << " gold. ";
