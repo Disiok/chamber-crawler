@@ -16,10 +16,8 @@
 using namespace std;
 
 // Constructor & destructor
-Character::Character(Tile *tile, char symbol, int hp, int atk, int def, int gold, const char typeIdentifier, const string typeName):
-	Entity(tile, symbol),
-	typeIdentifier(typeIdentifier),
-	typeName(typeName),
+Character::Character(Tile *tile,int hp, int atk, int def, int gold) :
+	Entity(tile),
 	maxHP(hp),
 	hp(hp),
 	atk(atk),
@@ -60,8 +58,8 @@ bool Character::attackedBy(Character *other) {
 	return true;
 }
 
-bool Character::attackedBy(Goblin *goblin) {
-	return false;
+bool Character::attackedBy(Goblin *) {
+	return true;
 }
 
 bool Character::isDead() {
@@ -116,14 +114,6 @@ int Character::getDef() {
 
 int Character::getGold() {
 	return gold;
-}
-
-char Character::getTypeId() {
-	return typeIdentifier;
-}
-
-string Character::getTypeName() {
-	return typeName;
 }
 
 // Mutators

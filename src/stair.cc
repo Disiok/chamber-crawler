@@ -5,10 +5,11 @@
 #include "game.h"
 #include "character.h"
 #include <cstdlib>
-
+using namespace std;
 Stair *Stair::stair = NULL;
+const string Stair::NAME_STAIR = "Stair";
 
-Stair::Stair(Tile *tile): Entity(tile, SYMBOL_STAIR) {}
+Stair::Stair(Tile *tile): Entity(tile) {}
 
 void Stair::spawn(Tile *tile) {
     if (!stair) {
@@ -23,15 +24,23 @@ Stair *Stair::getInstance() {
 	return stair;
 }
 
-bool Stair::isSteppable(Player *player) {
+bool Stair::isSteppable(Player *) {
 	return true;
 }
 
-bool Stair::steppedOnBy(Character *character) {
+bool Stair::steppedOnBy(Character *) {
 	Game::getInstance()->signalNextFloor();
 	return true;
 }
 
 void Stair::cleanup() {
 	delete stair;
+}
+
+char Stair::getSymbol() {
+	return SYMBOL_STAIR;
+}
+
+string Stair::getName() {
+	return NAME_STAIR;
 }

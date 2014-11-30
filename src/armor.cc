@@ -6,7 +6,7 @@ using namespace std;
 
 const string Armor::NAME_ARMOR = "Armor";
 
-Armor::Armor(Tile *tile): Equipment(tile, SYMBOL_ARMOR) {
+Armor::Armor(Tile *tile): Equipment(tile) {
 	int rating = rand() % 100;
 	if (rating == 100) {
 		def = 50;
@@ -25,6 +25,9 @@ void Armor::usedBy(Player *player) {
 	player->equip(this);
 }
 
+char Armor::getSymbol() {
+	return SYMBOL_ARMOR;
+}
 string Armor::getName() {
 	return NAME_ARMOR;
 }

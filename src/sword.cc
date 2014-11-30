@@ -27,3 +27,7 @@ void Sword::usedBy(Player *player) {
 string Sword::getName() {
 	return NAME_SWORD;
 }
+
+char Sword::getSymbol() {
+	return SYMBOL_SWORD;
+}

@@ -14,6 +14,8 @@ class Treasure: public Entity {
 		virtual ~Treasure() = 0;
 		
 		// Entity methods
+		char getSymbol();
+		
 		bool isSteppable(Player *);
 		bool steppedOnBy(Character *);
 

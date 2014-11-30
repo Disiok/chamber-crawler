@@ -7,9 +7,9 @@
 #include <iostream>
 using namespace std;
 
-const string Goblin::TYPE_NAME = "Goblin";
+const string Goblin::NAME_GOBLIN = "Goblin";
 
-Goblin::Goblin(Tile *tile): Player(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
+Goblin::Goblin(Tile *tile): Player(tile, HP, ATK, DEF) {
 #ifdef DEBUG
 	cout << "Goblin::Goblin" << endl;
 #endif
@@ -37,4 +37,8 @@ bool Goblin::attackedBy(Character *other) {
 
 void Goblin::engage(Cell *cell) {
     cell->attackedBy(this);
+}
+
+string Goblin::getName() {
+	return NAME_GOBLIN;
 }

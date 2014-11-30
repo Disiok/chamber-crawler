@@ -37,19 +37,19 @@ void Player::spawn(Tile *tile) {
 #endif
 	delete curPlayer;
 	switch (race) {
-		case Shade::TYPE_ID:
+		case Shade::SYMBOL_SHADE:
 			curPlayer = new Shade(tile);
 			break;
-		case Drow::TYPE_ID:
+		case Drow::SYMBOL_DROW:
 			curPlayer = new Drow(tile);
 			break;
-		case Vampire::TYPE_ID:
+		case Vampire::SYMBOL_VAMPIRE:
 			curPlayer = new Vampire(tile);
 			break;
-		case Troll::TYPE_ID:
+		case Troll::SYMBOL_TROLL:
 			curPlayer =  new Troll(tile);
 			break;
-		case Goblin::TYPE_ID:
+		case Goblin::SYMBOL_GOBLIN:
 			curPlayer =  new Goblin(tile);
 			break;
 		default:
@@ -76,8 +76,8 @@ void Player::cleanup() {
 }
 
 // Constructor & destructor
-Player::Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName):
-	Character(tile, SYMBOL_PLAYER, hp, atk, def, 0, typeIdentifier, typeName), sword(NULL), armor(NULL) {
+Player::Player(Tile *tile, int hp, int atk, int def):
+	Character(tile, hp, atk, def, 0), sword(NULL), armor(NULL) {
 	for (int i = 0; i < MAX_INVENTORY; i ++) {
 		inventory[i] = NULL;
 	}	
@@ -190,13 +190,13 @@ void Player::killedBy(Character *) {
 
 void Player::addAttackAction(Character *other, int damage) {
 	std::ostringstream oss;
-	oss << "PC deals " << damage <<  " damage to " << other->getTypeId() << " (" << other->getHP() << " HP). ";
+	oss << "PC deals " << damage <<  " damage to " << other->getSymbol() << " (" << other->getHP() << " HP). ";
 	Game::getInstance()->addAction(oss.str());
 }
 
 void Player::addMissAction(Character *other) {
 	ostringstream oss;
-	oss << "PC missed on " << other->getTypeId() << ". ";
+	oss << "PC missed on " << other->getSymbol() << ". ";
 	Game::getInstance()->addAction(oss.str());
 }
 
@@ -214,4 +214,8 @@ int Player::getDef() {
 	} else {
 		return Character::getDef();
 	}
+}
+
+char Player::getSymbol() {
+	return SYMBOL_PLAYER;
 }

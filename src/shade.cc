@@ -6,9 +6,9 @@
 #include <string>
 using namespace std;
 
-const string Shade::TYPE_NAME = "Shade";
+const string Shade::NAME_SHADE = "Shade";
 
-Shade::Shade(Tile *tile): Player(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
+Shade::Shade(Tile *tile): Player(tile, HP, ATK, DEF) {
 #ifdef DEBUG
 	cout << "Shade::Shade" << endl;
 #endif
@@ -16,4 +16,8 @@ Shade::Shade(Tile *tile): Player(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
 
 int Shade::getScore() {
     return ceil(1.5 * Player::getScore());
+}
+
+string Shade::getName() {
+	return NAME_SHADE;
 }

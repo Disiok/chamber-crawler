@@ -3,7 +3,7 @@
 #include "inventory.h"
 class Equipment: public Inventory {
 	public:
-		Equipment(Tile *tile, char symbol);
+		Equipment(Tile *tile);
 	
 };
 #endif

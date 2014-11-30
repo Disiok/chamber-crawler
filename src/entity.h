@@ -1,5 +1,6 @@
 #ifndef ___ENTITY_H___
 #define ___ENTITY_H___
+#include <string>
 
 // Forward declarations
 class Cell;
@@ -17,10 +18,9 @@ class Goblin;
 class Entity {
 	protected:
 		Cell *cell;
-		char symbol;
 	public:
 		// Constructor & destructor
-		Entity(Tile *tile, char symbol);
+		Entity(Tile *tile);
 		virtual ~Entity() = 0;
 		
 		// Methods
@@ -39,7 +39,8 @@ class Entity {
 		
 		// Accessors
 		virtual Cell *getCell();
-		virtual char getSymbol();
+		virtual char getSymbol() = 0;
+		virtual std::string getName() = 0;
 
 		// Mutator
 		void setCell(Cell *);

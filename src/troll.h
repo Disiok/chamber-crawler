@@ -8,8 +8,8 @@ class Tile;
 
 class Troll: public Player {
 	public:
-		static const std::string TYPE_NAME;
-		static const char TYPE_ID = 'T';
+		static const std::string NAME_TROLL;
+		static const char SYMBOL_TROLL = 'T';
 		static const int HP = 120;
 		static const int ATK = 25;
 		static const int DEF = 15;
@@ -18,5 +18,7 @@ class Troll: public Player {
 
 		void invokeAbility();
 
+		// Entity method
+		std::string getName();
 };
 #endif

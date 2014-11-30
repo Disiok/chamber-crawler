@@ -10,11 +10,13 @@ class Sword: public Equipment {
 		static const char SYMBOL_SWORD = 'S';
 		// Constructor
 		Sword(Tile *tile);
-		
-		// Inventory method
-		std::string getName();
-		
+				
 		int getAtk();
 		void usedBy(Player *player);
+
+		// Entity method
+		std::string getName();
+		char getSymbol();
+
 };
 #endif

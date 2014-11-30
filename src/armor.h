@@ -16,6 +16,9 @@ class Armor: public Equipment {
 		int getDef();
 
 		void usedBy(Player *player);
+
+		// Entity methods
+		char getSymbol();
 		std::string getName();
 };
 #endif

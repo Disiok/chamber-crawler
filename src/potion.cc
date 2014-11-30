@@ -9,9 +9,7 @@ using namespace std;
 
 
 // Constructor & destructor
-Potion::Potion(Tile *tile, const string typeName): Player(tile, 0, 0, 0, SYMBOL_POTION, typeName) {
-    tile->setEntity(this);
-    symbol = SYMBOL_POTION;
+Potion::Potion(Tile *tile, const string typeName): Player(tile, 0, 0, 0) {
     player = NULL;
     multiplier = 1;
 }
@@ -157,11 +155,6 @@ int Potion::getGold() {
     return player->getGold();
 }
 
-string Potion::getTypeName() {
-    return player->getTypeName();
-}
-
-
 void Potion::setHP(int hp) {
     player->setHP(hp);
 }
@@ -187,6 +180,6 @@ char Potion::getSymbol() {
     if (player) {
         return player->getSymbol();
     }
-    return symbol;
+    return SYMBOL_POTION;
 }
 

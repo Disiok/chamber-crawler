@@ -40,7 +40,6 @@ class Potion: public Player {
 		int getAtk();
 		int getDef();
 		int getGold();
-		std::string getTypeName();
 
 		void setHP(int hp);
 		void setAtk(int atk);

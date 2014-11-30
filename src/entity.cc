@@ -6,48 +6,44 @@
 using namespace std;
 
 // Constructor & destructor
-Entity::Entity(Tile *tile, char symbol): cell(tile), symbol(symbol) {}
+Entity::Entity(Tile *tile, char symbol): cell(tile) {}
 
 Entity::~Entity() {}
 
 // Methods
 void Entity::performAction() {}
 
-bool Entity::steppedOnBy(Character *character) {
+bool Entity::steppedOnBy(Character *) {
 	return false;
 }
 
-bool Entity::attackedBy(Character *character) {
+bool Entity::attackedBy(Character *) {
 	return false;
 }
 
-bool Entity::attackedBy(Goblin *goblin) {
+bool Entity::attackedBy(Goblin *) {
 	return false;
 }
 
-bool Entity::pickedUpBy(Character *character) {
+bool Entity::pickedUpBy(Character *) {
 	return false;
 }
 
-bool Entity::pickedUpBy(Drow *drow) {
+bool Entity::pickedUpBy(Drow *) {
 	return false;
 }
 
-bool Entity::isSteppable(Player *player) {
+bool Entity::isSteppable(Player *) {
 	return false;
 }
 
-bool Entity::isSteppable(Enemy *enemy) {
+bool Entity::isSteppable(Enemy *) {
 	return false;
 }
 
 // Accessors
 Cell *Entity::getCell() {
 	return cell;
-}
-
-char Entity::getSymbol() {
-	return symbol;
 }
 
 // Mutator

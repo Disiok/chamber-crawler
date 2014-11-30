@@ -13,7 +13,7 @@ class Tile;
 class Enemy: public Character {
 	public:
 		// Constructor & destructor
-		Enemy(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
+		Enemy(Tile *tile, int hp, int atk, int def);
 		virtual ~Enemy() = 0;
 
 		// Entity method

@@ -30,7 +30,7 @@ class Character: public Entity {
 
 	public:
 		// Constructor & destructor
-		Character(Tile *tile, char symbol, int hp, int atk, int def, int gold, const char typeIdentifier, const std::string typeName);
+		Character(Tile *tile, int hp, int atk, int def, int gold);
 		virtual ~Character() = 0;
 
 		// Combat methods
@@ -65,9 +65,6 @@ class Character: public Entity {
 		virtual int getAtk();
 		virtual int getDef();
 		virtual int getGold();
-
-		char getTypeId();
-		virtual std::string getTypeName();
 
 		// Mutators
 		virtual void setHP(int);

@@ -7,7 +7,7 @@
 using namespace std;
 
 // Constuctor & destructor
-Treasure::Treasure(Tile *tile, int gold): Entity(tile, SYMBOL_TREASURE), gold(gold) {}
+Treasure::Treasure(Tile *tile, int gold): Entity(tile), gold(gold) {}
 
 Treasure::~Treasure() {};
 
@@ -30,4 +30,8 @@ void Treasure::addGoldAction(int gold) {
     ostringstream oss;
     oss << "Picked up " << gold << " gold. ";
     Game::getInstance()->addAction(oss.str());
+}
+
+char Treasure::getSymbol() {
+	return SYMBOL_TREASURE;
 }

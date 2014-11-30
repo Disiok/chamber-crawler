@@ -14,8 +14,8 @@
 using namespace std;
 
 // Constructor & destructor
-Enemy::Enemy(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const string typeName):
-	Character(tile, typeIdentifier, hp, atk, def, 0, typeIdentifier, typeName) {}
+Enemy::Enemy(Tile *tile, int hp, int atk, int def):
+	Character(tile, hp, atk, def, 0) {}
 
 Enemy::~Enemy() {}
 
@@ -34,13 +34,13 @@ void Enemy::performAction() {
 // Character method
 void Enemy::addMissAction(Character *) {
 	ostringstream oss;
-	oss << getTypeId() << " missed on PC. ";
+	oss << getSymbol() << " missed on PC. ";
 	Game::getInstance()->addAction(oss.str());
 }
 
 void Enemy::addAttackAction(Character *, int damage) {
 	ostringstream oss;
-	oss << getTypeId() << " deals " << damage <<  " damage to PC. ";
+	oss << getSymbol() << " deals " << damage <<  " damage to PC. ";
 	Game::getInstance()->addAction(oss.str());
 }
 
@@ -71,7 +71,7 @@ void Enemy::killedBy(Goblin *goblin) {
 
 void Enemy::addKilledAction(int gold) {
 	ostringstream oss;
-	oss << "PC killed " << getTypeId() << " for " << gold << " gold. ";
+	oss << "PC killed " << getSymbol() << " for " << gold << " gold. ";
 	Game::getInstance()->addAction(oss.str());
 }
 

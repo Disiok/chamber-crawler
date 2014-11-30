@@ -23,7 +23,7 @@ class Player: public Character {
         	static void setInstance(Player *);
 
 		// Constructor & destructor
-		Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
+		Player(Tile *tile, int hp, int atk, int def);
 		virtual ~Player() = 0;
 		
 		// Player methods
@@ -50,6 +50,9 @@ class Player: public Character {
 
 		int getAtk();
 		int getDef();
+
+		// Entity methods
+		char getSymbol();
 
 		
 	private:

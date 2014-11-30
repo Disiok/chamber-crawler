@@ -7,7 +7,7 @@
 #include <sstream>
 using namespace std;
 
-Inventory::Inventory(Tile *tile, char symbol): Entity(tile, symbol) {}
+Inventory::Inventory(Tile *tile): Entity(tile) {}
 
 Inventory::~Inventory() {};
 

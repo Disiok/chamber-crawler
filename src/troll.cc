@@ -4,9 +4,9 @@
 #include "tile.h"
 using namespace std;
 
-const string Troll::TYPE_NAME = "Troll";
+const string Troll::NAME_TROLL = "Troll";
 
-Troll::Troll(Tile *tile): Player(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
+Troll::Troll(Tile *tile): Player(tile, HP, ATK, DEF) {
 #ifdef DEBUG
 	cout << "Troll::Troll" << endl;
 #endif
@@ -14,4 +14,8 @@ Troll::Troll(Tile *tile): Player(tile, HP, ATK, DEF, TYPE_ID, TYPE_NAME) {
 
 void Troll::invokeAbility() {
 	setHP(getHP() + 5);
+}
+
+string Troll::getName() {
+	return NAME_TROLL;
 }
