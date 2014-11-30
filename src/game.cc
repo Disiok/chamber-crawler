@@ -270,9 +270,9 @@ Cell *Game::parseDirection(string direction) {
 int Game::parseInventoryIndex(string index) {
 	istringstream iss(index);
 	int i;
-	if (iss << i) {
-		if (i >= 0 && i <= Player::MAX_INVENTORY) {
-			return i;
+	if (iss >> i) {
+		if (i >= 1 && i <= Player::MAX_INVENTORY) {
+			return i - 1;
 		} else {
 			return -1;
 		}
