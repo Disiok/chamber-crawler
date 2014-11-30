@@ -1,13 +1,18 @@
 #include "player.h"
+#include "game.h"
 #include "tile.h"
+
+// Special characters
 #include "shade.h"
 #include "drow.h"
 #include "vampire.h"
 #include "troll.h"
 #include "goblin.h"
-#include "game.h"
+
+// Equipments
 #include "sword.h"
 #include "armor.h"
+
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -17,6 +22,7 @@ using namespace std;
 Player *Player::curPlayer = NULL;
 char Player::race = '\0';
 
+// Static functions
 void Player::setRace(char race) {
 	Player::race = race;
 }
@@ -65,6 +71,11 @@ void Player::setInstance(Player *p) {
     curPlayer = p;
 }
 
+void Player::cleanup() {
+    delete curPlayer;
+}
+
+// Constructor & destructor
 Player::Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName):
 	Character(tile, SYMBOL_PLAYER, hp, atk, def, 0, typeIdentifier, typeName), sword(NULL), armor(NULL) {
 	for (int i = 0; i < MAX_INVENTORY; i ++) {
@@ -94,20 +105,12 @@ void Player::engage(Cell *cell) {
 	cell->attackedBy(this);
 }
 
-void Player::killedBy(Character *other) {
+void Player::killedBy(Character *) {
 	cout << endl;
 	cout << "You have been slain!" << endl;
 	cout << "Your score is: " << getScore() << endl;
 	cout << endl;
 	Game::getInstance()->restartOrQuit();
-}
-
-bool Player::isSteppable(Player *player) {
-	return false;
-}
-
-void Player::cleanup() {
-    delete curPlayer;
 }
 
 Player *Player::getBarePlayer() {

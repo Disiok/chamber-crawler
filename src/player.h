@@ -1,13 +1,13 @@
 #ifndef ___PLAYER_H___
 #define ___PLAYER_H___
 #include "character.h"
-#include "tile.h"
 #include <string>
 
 // Forward declarations
 class Sword;
 class Armor;
 class Inventory;
+class Tile;
 /**
  * Player:
  * 	controllable Character
@@ -17,43 +17,48 @@ class Player: public Character {
 		static const int MAX_INVENTORY = 5;
 		static const char SYMBOL_PLAYER = '@';
 
-		static void setRace(char race);
-		static void spawn(Tile *tile);
+		static void setRace(char);
+		static void spawn(Tile *);
        		static Player *getInstance();
-        	static void setInstance(Player *p);
+        	static void setInstance(Player *);
 
+		// Constructor & destructor
 		Player(Tile *tile, int hp, int atk, int def, const char typeIdentifier, const std::string typeName);
 		virtual ~Player() = 0;
-
-		virtual void move(Cell *cell);
-		virtual void pickUp(Cell *cell);
-		virtual void engage(Cell *cell);
-		virtual void killedBy(Character *other);
-		bool isSteppable(Player *player);
+		
+		// Player methods
+		virtual void pickUp(Cell *);
+		virtual void engage(Cell *);
 		virtual Player *getBarePlayer();
 
 		virtual int getScore();
-		virtual bool attackedBy(Character *other);
-		void addAttackAction(Character *other, int damage);
-		void addMissAction(Character *other);
 
-		int getAtk();
-		int getDef();
-
+		virtual void equip(Sword *);
+		virtual void equip(Armor *);
+		virtual void useInventory(int index);
+		virtual void addInventory(Inventory *);
 		Inventory *getInventoryAt(int index);
 		Sword *getSword();
 		Armor *getArmor();
 
-		virtual void equip(Sword *sword);
-		virtual void equip(Armor *armor);
-		virtual void useInventory(int index);
-		virtual void addInventory(Inventory *inventory);
+		// Character methods
+		void move(Cell *);
+		bool attackedBy(Character *);
+		void killedBy(Character *);
+		void addAttackAction(Character *other, int damage);
+		void addMissAction(Character *);
+
+		int getAtk();
+		int getDef();
+
+		
 	private:
 		static Player *curPlayer;
 		static char race;
 
 		static void cleanup();
-
+		
+		// Player fields
 		Sword *sword;
 		Armor *armor;
 		Inventory *inventory[MAX_INVENTORY];
