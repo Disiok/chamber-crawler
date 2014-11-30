@@ -8,6 +8,7 @@ class Character;
 class Player;
 class Enemy;
 class Drow;
+class Goblin;
 
 /**
  * Entity:
@@ -24,6 +25,7 @@ class Entity {
 		void destroy();
 		virtual void performAction();
 		virtual bool attackedBy(Character *character);
+		virtual bool attackedBy(Goblin *goblin);
 		virtual bool pickedUpBy(Character *character);
 		virtual bool pickedUpBy(Drow *drow);
 		virtual bool steppedOnBy(Character *character);

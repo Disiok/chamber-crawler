@@ -8,6 +8,7 @@ class Player;
 class Enemy;
 class Floor;
 class Drow;
+class Goblin;
 
 class Cell {
 	private:
@@ -42,6 +43,7 @@ class Cell {
 		bool pickedUpBy(Character *other);
 		bool pickedUpBy(Drow *drow);
 		bool attackedBy(Character *other);
+		bool attackedBy(Goblin *goblin);
 
 		char getSymbol();
 		Floor *getFloor();

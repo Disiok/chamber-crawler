@@ -23,10 +23,12 @@ class Potion: public Player {
 		// Delegating Player methods
 		void move(Cell *cell);
 		void killedBy(Character *other);
+		void pickUp(Cell *cell);
 
 		// Delegating Character methods
 		void attack(Character *other);
 		bool attackedBy(Character *other);
+		void invokeAbility();
 
 		bool isDead();
 

@@ -11,7 +11,7 @@ void RestoreHealth::resetRevealed() {
     revealed = false;
 }
 
-RestoreHealth::RestoreHealth(Tile *tile): Potion(tile, typeName) {}
+RestoreHealth::RestoreHealth(Tile *tile): Potion(tile, typeName), multiplier(1) {}
 
 bool RestoreHealth::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {

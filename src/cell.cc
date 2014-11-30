@@ -25,6 +25,7 @@
 #include "orc.h"
 #include "human.h"
 #include "dwarf.h"
+#include "goblin.h"
 #include "elf.h"
 #include "merchant.h"
 #include "dragon.h"
@@ -211,6 +212,14 @@ bool Cell::pickedUpBy(Drow *drow) {
 bool Cell::attackedBy(Character *other) {
 	if (entity) {
 		return entity->attackedBy(other);
+	} else {
+		return false;
+	}
+}
+
+bool Cell::attackedBy(Goblin *goblin) {
+	if (entity) {
+		return entity->attackedBy(goblin);
 	} else {
 		return false;
 	}

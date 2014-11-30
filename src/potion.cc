@@ -44,7 +44,11 @@ bool Potion::pickedUpBy(Character *character) {
     cell->clearEntity();
 
     // Wrapping player with this potion
-    player = dynamic_cast<Player *>(character);
+    if (dynamic_cast<Potion *>(Player::getInstance())) {
+        player = dynamic_cast<Potion *>(Player::getInstance());
+    } else {
+        player = Player::getInstance();
+    }
     Player::setInstance(this);
 
     // Show pickup message
@@ -63,6 +67,10 @@ void Potion::killedBy(Character *other) {
     player->killedBy(other);
 }
 
+void Potion::pickUp(Cell *cell) {
+    player->pickUp(cell);
+}
+
 // Character methods
 void Potion::attack(Character *other) {
     player->attack(other);
@@ -73,6 +81,10 @@ bool Potion::attackedBy(Character *other) {
         return player->attackedBy(other);
     }
     return false;
+}
+
+void Potion::invokeAbility() {
+    player->invokeAbility();
 }
 
 bool Potion::isDead() {

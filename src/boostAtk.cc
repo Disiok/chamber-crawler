@@ -11,7 +11,7 @@ void BoostAtk::resetRevealed() {
     revealed = false;
 }
 
-BoostAtk::BoostAtk(Tile *tile): Potion(tile, typeName) {}
+BoostAtk::BoostAtk(Tile *tile): Potion(tile, typeName), multiplier(1) {}
 
 bool BoostAtk::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {

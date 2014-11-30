@@ -7,6 +7,7 @@
 #include "floor.h"
 #include <cstdlib>
 #include "game.h"
+#include "goblin.h"
 #include <vector>
 #include <sstream>
 #include <iostream>
@@ -63,6 +64,14 @@ void Enemy::killedBy(Character *other) {
 	addKilledAction(gold);
 }
 
+void Enemy::killedBy(Goblin *goblin) {
+    int gold = goblin->calculateGoldFrom(this);
+    goblin->setGold(goblin->getGold() + gold);
+    getCell()->destroyEntity();
+
+    addKilledAction(gold);
+}
+
 bool Enemy::isPlayerNearby() {
 	Cell *current = getCell();
 	Cell *other = Player::getInstance()->getCell();
@@ -94,4 +103,3 @@ void Enemy::addMissAction(Character *other) {
 	oss << getTypeId() << " missed on PC. ";
 	Game::getInstance()->addAction(oss.str());
 }
-

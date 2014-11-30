@@ -72,6 +72,14 @@ bool Character::attackedBy(Character *other) {
 	return true;
 }
 
+bool Character::attackedBy(Goblin *goblin) {
+	cout<<"ok.."<<endl;
+	goblin->attack(this);
+	if (isDead()) {
+		killedBy(goblin);
+	}
+	return true;
+}
 
 int Character::getHP() {
 	return hp;

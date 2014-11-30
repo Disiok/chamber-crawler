@@ -11,7 +11,7 @@ void WoundDef::resetRevealed() {
     revealed = false;
 }
 
-WoundDef::WoundDef(Tile *tile): Potion(tile, typeName) {}
+WoundDef::WoundDef(Tile *tile): Potion(tile, typeName), multiplier(1) {}
 
 bool WoundDef::pickedUpBy(Character *character) {
     if (choosePickUp(revealed)) {
