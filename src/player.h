@@ -21,6 +21,8 @@ class Player: public Character {
 		static void spawn(Tile *);
        		static Player *getInstance();
         	static void setInstance(Player *);
+		static void cleanup();
+
 
 		// Constructor & destructor
 		Player(Tile *tile, int hp, int atk, int def);
@@ -58,8 +60,6 @@ class Player: public Character {
 	private:
 		static Player *curPlayer;
 		static char race;
-
-		static void cleanup();
 		
 		// Player fields
 		Sword *sword;

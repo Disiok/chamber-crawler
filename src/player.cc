@@ -35,28 +35,31 @@ void Player::spawn(Tile *tile) {
 #ifdef DEBUG
 	cout << "Player::spawn(Tile *)" << endl;
 #endif
-	delete curPlayer;
-	switch (race) {
-		case Shade::SYMBOL_SHADE:
-			curPlayer = new Shade(tile);
-			break;
-		case Drow::SYMBOL_DROW:
-			curPlayer = new Drow(tile);
-			break;
-		case Vampire::SYMBOL_VAMPIRE:
-			curPlayer = new Vampire(tile);
-			break;
-		case Troll::SYMBOL_TROLL:
-			curPlayer =  new Troll(tile);
-			break;
-		case Goblin::SYMBOL_GOBLIN:
-			curPlayer =  new Goblin(tile);
-			break;
-		default:
-			break;
+	if (curPlayer) {
+	
+	} else {
+		switch (race) {
+			case Shade::SYMBOL_SHADE:
+				curPlayer = new Shade(tile);
+				break;
+			case Drow::SYMBOL_DROW:
+				curPlayer = new Drow(tile);
+				break;
+			case Vampire::SYMBOL_VAMPIRE:
+				curPlayer = new Vampire(tile);
+				break;
+			case Troll::SYMBOL_TROLL:
+				curPlayer =  new Troll(tile);
+				break;
+			case Goblin::SYMBOL_GOBLIN:
+				curPlayer =  new Goblin(tile);
+				break;
+			default:
+				break;
+		}
+		atexit(cleanup);
+		Game::getInstance()->addAction("Player character has spawned.");
 	}
-	atexit(cleanup);
-	Game::getInstance()->addAction("Player character has spawned.");
 }
 
 /* *
@@ -108,10 +111,16 @@ void Player::engage(Cell *cell) {
 }
 
 void Player::equip(Sword *sword) {
+	if (this->sword) {
+		delete this->sword;
+	}
 	this->sword = sword;
 }
 
 void Player::equip(Armor *armor) {
+	if (this->armor) {
+		delete this->armor;
+	}
 	this->armor = armor;
 }
 

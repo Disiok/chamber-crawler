@@ -6,10 +6,10 @@ using namespace std;
 
 const string Sword::NAME_SWORD = "Sword";
 Sword::Sword(Tile *tile): Equipment(tile) {
-	int rating = rand() % 100;
-	if (rating == 100) {
+	int rating = rand() % 10;
+	if (rating >= 90) {
 		atk = 50;
-	} else if (rating >= 75) {
+	} else if (rating >= 6) {
 		atk = 20;
 	} else {
 		atk = 10;

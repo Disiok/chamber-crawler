@@ -7,10 +7,10 @@ using namespace std;
 const string Armor::NAME_ARMOR = "Armor";
 
 Armor::Armor(Tile *tile): Equipment(tile) {
-	int rating = rand() % 100;
-	if (rating == 100) {
+	int rating = rand() % 10;
+	if (rating >= 9) {
 		def = 50;
-	} else if (rating >= 75) {
+	} else if (rating >= 6) {
 		def = 20;
 	} else {
 		def = 10;

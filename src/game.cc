@@ -84,11 +84,12 @@ void Game::restart() {
     PoisonHealth::resetRevealed();
     RestoreHealth::resetRevealed();
 	Merchant::resetHostile();
+	Player::cleanup();
 	start(floorFile);
 }
 
 void Game::quit() {
-	// TODO: run w. valgrind
+	// Intentionally blank
 }
 
 void Game::signalNextFloor() {
@@ -114,7 +115,6 @@ void Game::nextFloor() {
 #ifdef DEBUG
 	cout << "Game::nextFloor" << endl;
 #endif
-	// TODO: unwind potions
 	level ++;
 	if (level > MAX_LEVEL) {
 		cout << endl;
@@ -125,13 +125,9 @@ void Game::nextFloor() {
 	} else {
 		// Carry over stats for next floor.
 		Player *player = Player::getInstance()->getBarePlayer();
-		int atk = player->getAtk();
-		int def = player->getDef();
-		int hp = player->getHP();
-		int gold = player->getGold();
+		Player::setInstance(player);
 
 		delete floor;
-		srand(rand()%300);
 
 		// setup floor
 		floor = new Floor();
@@ -139,11 +135,6 @@ void Game::nextFloor() {
 		if (defaultFloor) {
 			floor->spawn();
 		}
-
-		Player::getInstance()->setAtk(atk);
-		Player::getInstance()->setDef(def);
-		Player::getInstance()->setHP(hp);
-		Player::getInstance()->setGold(gold);
 		display();
 	}
 }
