@@ -153,8 +153,11 @@ void Floor::spawn() {
 
 	// Stairs
 	Chamber *stairsChamber = getRandomChamber();
-	// TODO Change this back!!!
+#ifdef DEBUG
 	while (stairsChamber != playerChamber) {
+#else
+	while (stairsChamber == playerChamber) {
+#endif
 		stairsChamber = getRandomChamber();
 	}
 	stairsChamber->getRandomTile()->spawnStair();

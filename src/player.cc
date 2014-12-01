@@ -188,7 +188,7 @@ void Player::addInventory(Inventory *item) {
 
 
 Player *Player::getBarePlayer() {
-	return curPlayer;
+	return this;
 }
 
 int Player::getScore() {
