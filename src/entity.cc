@@ -13,6 +13,8 @@ Entity::~Entity() {}
 // Methods
 void Entity::performAction() {}
 
+void Entity::resetMoved() {}
+
 bool Entity::steppedOnBy(Character *) {
 	return false;
 }

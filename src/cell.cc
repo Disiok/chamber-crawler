@@ -48,12 +48,16 @@ Cell::Cell(int i, int j, char symbol, Floor *floor):
 
 Cell::~Cell() {}
 
-bool Cell::performAction() {
+void Cell::performAction() {
 	if (entity) {
 		entity->performAction();
-		return true;
 	}
-	return false;
+}
+
+void Cell::resetMoved() {
+	if (entity) {
+		entity->resetMoved();
+	}
 }
 
 bool Cell::isSteppable(Player *) {

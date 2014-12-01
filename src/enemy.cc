@@ -15,20 +15,27 @@ using namespace std;
 
 // Constructor & destructor
 Enemy::Enemy(Tile *tile, int hp, int atk, int def):
-	Character(tile, hp, atk, def, 0) {}
+	Character(tile, hp, atk, def, 0), moved(false) {}
 
 Enemy::~Enemy() {}
 
 // Entity method
 void Enemy::performAction() {
-	invokeAbility();
+	if (!moved) {
+		invokeAbility();
 
     // Only attack if player is till alive, preventing 'double deaths'
-	if (isPlayerNearby() && !Player::getInstance()->isDead()) {
-		Player::getInstance()->attackedBy(this);
-	} else {
-		move();
+		if (isPlayerNearby() && !Player::getInstance()->isDead()) {
+			Player::getInstance()->attackedBy(this);
+		} else {
+			move();
+		}
+		moved = true;
 	}
+}
+
+void Enemy::resetMoved() {
+	moved = false;
 }
 
 // Character method

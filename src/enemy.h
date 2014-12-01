@@ -18,6 +18,7 @@ class Enemy: public Character {
 
 		// Entity method
 		void performAction();
+		void resetMoved();
 
 		// Character method
 		void addAttackAction(Character *other, int damage);
@@ -28,6 +29,8 @@ class Enemy: public Character {
 		// Enemy method
 		virtual void killedBy(Goblin *);
 	protected:
+		bool moved;
+		
 		// Enemy method
 		virtual void addKilledAction(int gold);
 		virtual void move();

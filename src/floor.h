@@ -25,6 +25,7 @@ class Floor {
 		void loadFromFile(std::ifstream *floorStream);
 		void displayFloor();
 		void performAction();
+		void resetMoved();
 		void spawn();
         Cell *getCell(int i, int j);
 	private:

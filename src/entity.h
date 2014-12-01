@@ -25,6 +25,7 @@ class Entity {
 		
 		// Methods
 		virtual void performAction();
+		virtual void resetMoved();
 		
 		virtual bool attackedBy(Character *);
 		virtual bool attackedBy(Goblin *);

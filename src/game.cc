@@ -249,6 +249,7 @@ void Game::runPlayerTurn() {
 }
 
 void Game::runEnemyTurn() {
+	floor->resetMoved();
 	floor->performAction();
 }
 

@@ -29,7 +29,8 @@ class Cell {
 		virtual ~Cell() = 0;
 
 		// Methods
-		virtual bool performAction();
+		virtual void performAction();
+		virtual void resetMoved();
 		virtual bool isSteppable(Player *player);
 		virtual bool isSteppable(Enemy *enemy);
 

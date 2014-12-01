@@ -204,3 +204,13 @@ void Floor::performAction() {
 		}
 	}
 }
+
+void Floor::resetMoved() {
+	for (int i = 0; i < MAX_ROW; i++) {
+		for (int j = 0; j < MAX_COLUMN; j++) {
+			if (map[i][j] != NULL) {
+				map[i][j]->resetMoved();
+			}
+		}
+	}
+}
