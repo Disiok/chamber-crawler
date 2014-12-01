@@ -20,8 +20,8 @@ bool Drow::attackedBy(Character *other) {
     return true;
 }
 
-void Drow::pickUp(Cell *cell) {
-    cell->pickedUpBy(this);
+bool Drow::pickUp(Cell *cell) {
+    return cell->pickedUpBy(this);
 }
 
 string Drow::getName() {

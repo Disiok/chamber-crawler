@@ -29,12 +29,12 @@ class Player: public Character {
 		virtual ~Player() = 0;
 		
 		// Player methods
-		virtual void pickUp(Cell *);
-		virtual void engage(Cell *);
+		virtual bool pickUp(Cell *);
+		virtual bool engage(Cell *);
 
 		virtual void equip(Sword *);
 		virtual void equip(Armor *);
-		virtual void useInventory(int index);
+		virtual bool useInventory(int index);
 		virtual void addInventory(Inventory *);
 		
 		virtual Player *getBarePlayer();
@@ -44,7 +44,7 @@ class Player: public Character {
 		virtual Armor *getArmor();
 
 		// Character methods
-		void move(Cell *);
+		bool move(Cell *);
 		bool attackedBy(Character *);
 		void killedBy(Character *);
 		void addAttackAction(Character *other, int damage);

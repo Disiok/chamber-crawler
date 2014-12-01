@@ -35,8 +35,8 @@ bool Goblin::attackedBy(Character *other) {
     return true;
 }
 
-void Goblin::engage(Cell *cell) {
-    cell->attackedBy(this);
+bool Goblin::engage(Cell *cell) {
+    return cell->attackedBy(this);
 }
 
 string Goblin::getName() {

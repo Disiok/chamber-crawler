@@ -90,11 +90,12 @@ int Character::calculateGoldFrom(Merchant *) {
 }
 
 // Other methods
-void Character::move(Cell *cell) {
+bool Character::move(Cell *cell) {
 	getCell()->clearEntity();
 	setCell(cell);
 	cell->steppedOnBy(this);
 	cell->setEntity(this);
+	return true;
 }
 
 void Character::invokeAbility() {}

@@ -112,12 +112,12 @@ Player::~Player() {
 }
 
 // Player methods
-void Player::pickUp(Cell *cell) {
-	cell->pickedUpBy(this);
+bool Player::pickUp(Cell *cell) {
+	return cell->pickedUpBy(this);
 }
 
-void Player::engage(Cell *cell) {
-	cell->attackedBy(this);
+bool Player::engage(Cell *cell) {
+	return cell->attackedBy(this);
 }
 
 void Player::equip(Sword *sword) {
@@ -134,11 +134,14 @@ void Player::equip(Armor *armor) {
 	this->armor = armor;
 }
 
-void Player::useInventory(int index) {
+bool Player::useInventory(int index) {
 	Inventory *item = inventory[index];
 	if (item) {
 		inventory[index] = NULL;
 		item->usedBy(this);
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -190,9 +193,12 @@ Armor *Player::getArmor() {
 }
 
 // Character methods
-void Player::move(Cell *cell) {
+bool Player::move(Cell *cell) {
 	if (cell->isSteppable(curPlayer)) {
 		Character::move(cell);
+		return true;
+	} else {
+		return false;
 	}
 }
 

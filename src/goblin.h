@@ -22,7 +22,7 @@ class Goblin: public Player {
         	int calculateGoldFrom(Merchant *merchant);
         	int calculateGoldFrom(Human *human);
         	bool attackedBy(Character *other);
-        	void engage(Cell *cell);
+        	bool engage(Cell *cell);
 
 		std::string getName();
 };

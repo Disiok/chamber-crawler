@@ -55,7 +55,7 @@ class Character: public Entity {
 		virtual int calculateGoldFrom(Merchant *);
 		
 		// Other methods
-		virtual void move(Cell *);
+		virtual bool move(Cell *);
 		virtual void invokeAbility();
 
 		// Accessors

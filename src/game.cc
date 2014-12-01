@@ -201,21 +201,23 @@ void Game::runPlayerTurn() {
 	cout << "Enter command: ";
 	string command;
 	cin >> command;
+	bool validCommand = false;
+	while (!validCommand) {
 	Cell *cell = parseDirection(command);
 	if (cell != NULL) {
 		//nextFloorFlag = true;
-		Player::getInstance()->move(cell);
+		validCommand = Player::getInstance()->move(cell);
 	} else {
 		if (command == "u") {
 			cin >> command;
 			cell = parseDirection(command);
 			if (cell) {
-				Player::getInstance()->pickUp(cell);
+				validCommand = Player::getInstance()->pickUp(cell);
 			} else {
 #ifdef DLC
 				int inventoryIndex = parseInventoryIndex(command);
 				if (inventoryIndex != -1) {
-					Player::getInstance()->useInventory(inventoryIndex);
+					validCommand = Player::getInstance()->useInventory(inventoryIndex);
 				}
 #endif
 			}
@@ -223,13 +225,20 @@ void Game::runPlayerTurn() {
 			cin >> command;
 			cell = parseDirection(command);
 			if (cell) {
-				Player::getInstance()->engage(cell);
+				validCommand = Player::getInstance()->engage(cell);
 			}
 		} else if (command == "r") {
 			restartFlag = true;
+			validCommand = true;
 		} else if (command == "q") {
 			quitFlag = true;
+			validCommand = true;
 		}
+	}
+	if (!validCommand) {
+		cout << "Invalid input, please try again: ";
+		cin >> command;
+	}
 	}
 }
 

@@ -26,9 +26,8 @@ bool Inventory::pickedUpBy(Drow *drow) {
 
 }
 void Inventory::addPickupAction() {
-	// TODO: Add name of inventory
 	ostringstream oss;
-	oss << "Picked up an inventory. ";
+	oss << "Picked up a " << getName() << " . ";
 	Game::getInstance()->addAction(oss.str());
 
 }

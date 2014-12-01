@@ -70,12 +70,12 @@ void Potion::killedBy(Character *other) {
     player->killedBy(other);
 }
 
-void Potion::pickUp(Cell *cell) {
-    player->pickUp(cell);
+bool Potion::pickUp(Cell *cell) {
+    return player->pickUp(cell);
 }
 
-void Potion::engage(Cell *cell) {
-	player->engage(cell);
+bool Potion::engage(Cell *cell) {
+	return player->engage(cell);
 }
 
 void Potion::equip(Sword *sword) {
@@ -85,8 +85,8 @@ void Potion::equip(Armor *armor) {
 	player->equip(armor);
 }
 
-void Potion::useInventory(int index) {
-	player->useInventory(index);
+bool Potion::useInventory(int index) {
+	return player->useInventory(index);
 }
 
 void Potion::addInventory(Inventory *item) {
@@ -131,7 +131,7 @@ bool Potion::isDead() {
 }
 
 
-void Potion::move(Cell *cell) {
+bool Potion::move(Cell *cell) {
     player->move(cell);
 }
 

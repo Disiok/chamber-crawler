@@ -33,7 +33,7 @@ class Potion: public Player {
 		bool attackedBy(Character *other);
 		bool isDead();
 
-		void move(Cell *cell);
+		bool move(Cell *cell);
 		void invokeAbility();
 
 		int getHP();
@@ -50,12 +50,12 @@ class Potion: public Player {
 		// Delegating Player methods
 		void killedBy(Character *other);
 
-		void pickUp(Cell *);
-		void engage(Cell *);
+		bool pickUp(Cell *);
+		bool engage(Cell *);
 
 		void equip(Sword *);
 		void equip(Armor *);
-		void useInventory(int index);
+		bool useInventory(int index);
 		void addInventory(Inventory *);
 
 		Player *getBarePlayer();
