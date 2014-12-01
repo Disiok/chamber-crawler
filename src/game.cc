@@ -101,14 +101,16 @@ void Game::signalNextFloor() {
 }
 
 void Game::restartOrQuit() {
+	string flush;
+	getline(cin, flush);
 	while (true) {
 		cout << "Restart (r) or Quit (q)?" << endl;
 		string choice;
-		cin >> choice;
-		if (choice == "r") {
+		getline(cin, choice);
+		if (tolower(choice[0]) == 'r') {
 			restartFlag = true;
 			break;
-		} else if (choice == "q") {
+		} else if (tolower(choice[0]) == 'q') {
 			quitFlag = true;
 			break;
 		}
@@ -139,6 +141,7 @@ void Game::nextFloor() {
 		if (defaultFloor) {
 			floor->spawn();
 		}
+		addAction("Entered a new floor!");
 		display();
 	}
 }

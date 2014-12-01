@@ -4,7 +4,7 @@
 class Dwarf: public Enemy {
 	public:
 		static const std::string NAME_DWARF;
-		static const char SYMBOL_DWARF = 'W';
+		static const char SYMBOL_DWARF = 'D';
 		static const int HP = 100;
 		static const int ATK = 20;
 		static const int DEF = 30;

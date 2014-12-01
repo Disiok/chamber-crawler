@@ -88,7 +88,6 @@ void Tile::spawnEnemy() {
  *     1/6 for each potion
  */
 void Tile::spawnPotion() {
-	// TODO: uncomment once .h and .cc for each potion is added
 	int roll = rand() % 6 + 1;
 	switch(roll) {
 		case 1:

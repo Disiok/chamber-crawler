@@ -230,9 +230,9 @@ bool Player::attackedBy(Character *other) {
 	return true;
 }
 
-void Player::killedBy(Character *) {
+void Player::killedBy(Character *character) {
 	cout << endl;
-	cout << "You have been slain!" << endl;
+	cout << "You have been slain by " << character->getSymbol() << "!" << endl;
 	cout << "Your score is: " << getScore() << endl;
 	cout << endl;
 	Game::getInstance()->restartOrQuit();
