@@ -132,7 +132,7 @@ bool Potion::isDead() {
 
 
 bool Potion::move(Cell *cell) {
-    player->move(cell);
+    return player->move(cell);
 }
 
 void Potion::invokeAbility() {

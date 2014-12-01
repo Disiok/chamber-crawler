@@ -207,6 +207,9 @@ void Game::runPlayerTurn() {
 	if (cell != NULL) {
 		//nextFloorFlag = true;
 		validCommand = Player::getInstance()->move(cell);
+		if (validCommand) {
+			addAction("PC moves " + parseLongDirection(command) + ". ");
+		}
 	} else {
 		if (command == "u") {
 			cin >> command;
@@ -292,6 +295,27 @@ int Game::parseInventoryIndex(string index) {
 		return -1;
 	}
 }
+string Game::parseLongDirection(string direction) {
+	if (direction == "no") {
+		return "Noth";
+	} else if (direction == "so") {
+		return "South";
+	} else if (direction == "ea") {
+		return "East";
+	} else if (direction == "we") {
+		return "West";
+	} else if (direction == "ne") {
+		return "North East";
+	} else if (direction == "nw") {
+		return "North West";
+	} else if (direction == "se") {
+		return "South East";
+	} else if (direction == "sw") {
+		return "South West";
+	} else {
+		return "Nowhere";
+	}
+}
 void Game::display() {
 	floor->displayFloor();
 	displayInfo();
@@ -307,13 +331,13 @@ void Game::displayInfo() {
 	cout << "Atk: " << Player::getInstance()->getAtk();
 	Sword *sword = Player::getInstance()->getSword();
 	if (sword) {
-		cout << "(" << sword->getAtk() << " from "  << sword->getName() << ")";
+		cout << "(" << sword->getName() << ")";
 	} 
 	cout << endl;
 	cout << "Def: " << Player::getInstance()->getDef();
 	Armor *armor = Player::getInstance()->getArmor();
  	if (armor) {
-		cout << "(" << armor->getDef() << " from " << armor->getName() << ")";
+		cout << "(" << armor->getName() << ")";
 	}	
 	cout << endl;
 #ifdef DLC

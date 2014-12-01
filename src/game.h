@@ -47,6 +47,7 @@ class Game {
 
 		Cell *parseDirection(std::string direction);
 		int parseInventoryIndex(std::string index);
+		std::string parseLongDirection(std::string direction);
 
 	public:
 		static const std::string DEFAULT_FLOOR;

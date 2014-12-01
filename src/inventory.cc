@@ -25,9 +25,10 @@ bool Inventory::pickedUpBy(Drow *drow) {
 	return Inventory::pickedUpBy(dynamic_cast<Character *>(drow));
 
 }
+
 void Inventory::addPickupAction() {
 	ostringstream oss;
-	oss << "Picked up a " << getName() << " . ";
+	oss << "Picked up a " << getName() << ". ";
 	Game::getInstance()->addAction(oss.str());
 
 }

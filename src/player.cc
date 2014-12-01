@@ -123,15 +123,34 @@ bool Player::engage(Cell *cell) {
 void Player::equip(Sword *sword) {
 	if (this->sword) {
 		delete this->sword;
+
+		ostringstream oss;
+		oss << "Discarded a " << this->sword->getName() << ". ";
+		Game::getInstance()->addAction(oss.str());
+
 	}
 	this->sword = sword;
+	
+	ostringstream oss;
+	oss << "Equipped a " << this->sword->getName() << ". ";
+	Game::getInstance()->addAction(oss.str());
 }
 
 void Player::equip(Armor *armor) {
 	if (this->armor) {
 		delete this->armor;
+
+		ostringstream oss;
+		oss << "Equipped a " << this->armor->getName() << ". ";
+		Game::getInstance()->addAction(oss.str());
+
 	}
 	this->armor = armor;
+
+	ostringstream oss;
+	oss << "Equipped a " << this->armor->getName() << ". ";
+	Game::getInstance()->addAction(oss.str());
+
 }
 
 bool Player::useInventory(int index) {
