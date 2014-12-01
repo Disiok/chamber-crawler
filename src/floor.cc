@@ -153,7 +153,6 @@ void Floor::spawn() {
 
 	// Stairs
 	Chamber *stairsChamber = getRandomChamber();
-	// TODO remove this
 #ifdef DEBUG
 	while (stairsChamber != playerChamber) {
 #else
