@@ -301,7 +301,7 @@ int Game::parseInventoryIndex(string index) {
 }
 string Game::parseLongDirection(string direction) {
 	if (direction == "no") {
-		return "Noth";
+		return "North";
 	} else if (direction == "so") {
 		return "South";
 	} else if (direction == "ea") {
