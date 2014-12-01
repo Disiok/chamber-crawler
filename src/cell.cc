@@ -25,7 +25,6 @@
 #include "orc.h"
 #include "human.h"
 #include "dwarf.h"
-#include "goblin.h"
 #include "elf.h"
 #include "merchant.h"
 #include "dragon.h"
@@ -125,29 +124,33 @@ Cell *Cell::getInstance(int i, int j, char id, Floor* floor) {
 	}
 
 	// Returning enemies
-	if (id == 'H') {
+	if (id == Human::SYMBOL_HUMAN) {
 		Tile *tile = new Tile(i, j, floor);
 		tile->setEntity(new Human(tile));
 		return tile;
-	} else if (id == 'W') {
+	} else if (id == Dwarf::SYMBOL_DWARF) {
 		Tile *tile = new Tile(i, j, floor);
 		tile->setEntity(new Dwarf(tile));
 		return tile;
-	} else if (id == 'E') {
+	} else if (id == Elf::SYMBOL_ELF) {
 		Tile *tile = new Tile(i, j, floor);
 		tile->setEntity(new Elf(tile));
 		return tile;
-	} else if (id == 'O') {
+	} else if (id == Orc::SYMBOL_ORC) {
 		Tile *tile = new Tile(i, j, floor);
 		tile->setEntity(new Orc(tile));
 		return tile;
-	} else if (id == 'M') {
+	} else if (id == Merchant::SYMBOL_MERCHANT) {
 		Tile *tile = new Tile(i, j, floor);
 		tile->setEntity(new Merchant(tile));
 		return tile;
-	} else if (id == 'D') {
+	} else if (id == Dragon::SYMBOL_DRAGON) {
 		Tile *tile = new Tile(i, j, floor);
 		tile->setEntity(new Dragon(tile, NULL));
+		return tile;
+	} else if (id == Halfling::SYMBOL_HALFLING) {
+		Tile *tile = new Tile(i, j, floor);
+		tile->setEntity(new Halfling(tile));
 		return tile;
 	}
 
