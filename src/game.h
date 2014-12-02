@@ -2,6 +2,7 @@
 #define ___GAME_H___
 #include <string>
 #include <fstream>
+#include <ncurses.h>
 
 // Forward declaration
 class Floor;
@@ -11,7 +12,7 @@ class Inventory;
 class Game {
 	private:
 		static const int MAX_LEVEL;
-		
+
 		static Game *game;
 		static void cleanup();
 
@@ -26,6 +27,7 @@ class Game {
 		int level;
 		std::string action;
 
+		WINDOW *win;
 		Game();
 		~Game();
 
@@ -51,7 +53,7 @@ class Game {
 	public:
 		static const std::string DEFAULT_FLOOR;
 		static Game *getInstance();
-		
+
 		void start(std::string floorFile="");
 		void signalNextFloor();
 		void restartOrQuit();

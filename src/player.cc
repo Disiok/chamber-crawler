@@ -85,7 +85,7 @@ Player::Player(Tile *tile, int hp, int atk, int def):
 	Character(tile, hp, atk, def, 0), sword(NULL), armor(NULL) {
 	for (int i = 0; i < MAX_INVENTORY; i ++) {
 		inventory[i] = NULL;
-	}	
+	}
 }
 
 Player::~Player() {

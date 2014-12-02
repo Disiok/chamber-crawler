@@ -21,6 +21,9 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <cctype>
+#include <ctime>
+#include <unistd.h>
 using namespace std;
 
 // Initializing static fields
@@ -60,6 +63,8 @@ void Game::start(string floorFile) {
 
 #ifdef SEED
 	srand(SEED);
+#else
+	srand(time(NULL));
 #endif
 	this->floorFile = floorFile;
 	if (floorFile == "") {
@@ -84,11 +89,12 @@ void Game::restart() {
     PoisonHealth::resetRevealed();
     RestoreHealth::resetRevealed();
 	Merchant::resetHostile();
+	Player::cleanup();
 	start(floorFile);
 }
 
 void Game::quit() {
-	// TODO: run w. valgrind
+	// Intentionally blank
 }
 
 void Game::signalNextFloor() {
@@ -96,14 +102,16 @@ void Game::signalNextFloor() {
 }
 
 void Game::restartOrQuit() {
+	string flush;
+	getline(cin, flush);
 	while (true) {
 		cout << "Restart (r) or Quit (q)?" << endl;
 		string choice;
-		cin >> choice;
-		if (choice == "r") {
+		getline(cin, choice);
+		if (tolower(choice[0]) == 'r') {
 			restartFlag = true;
 			break;
-		} else if (choice == "q") {
+		} else if (tolower(choice[0]) == 'q') {
 			quitFlag = true;
 			break;
 		}
@@ -114,7 +122,6 @@ void Game::nextFloor() {
 #ifdef DEBUG
 	cout << "Game::nextFloor" << endl;
 #endif
-	// TODO: unwind potions
 	level ++;
 	if (level > MAX_LEVEL) {
 		cout << endl;
@@ -125,31 +132,23 @@ void Game::nextFloor() {
 	} else {
 		// Carry over stats for next floor.
 		Player *player = Player::getInstance()->getBarePlayer();
-		int atk = player->getAtk();
-		int def = player->getDef();
-		int hp = player->getHP();
-		int gold = player->getGold();
+		Player::setInstance(player);
 
 		delete floor;
-		srand(rand()%300);
 
 		// setup floor
-		floor = new Floor();
+		floor = new Floor(win);
 		floor->loadFromFile(floorStream);
 		if (defaultFloor) {
 			floor->spawn();
 		}
-
-		Player::getInstance()->setAtk(atk);
-		Player::getInstance()->setDef(def);
-		Player::getInstance()->setHP(hp);
-		Player::getInstance()->setGold(gold);
+		addAction("Entered a new floor!");
 		display();
 	}
 }
 
 void Game::setupFloor() {
-	floor = new Floor();
+	floor = new Floor(win);
 	floor->loadFromFile(floorStream);
 	if (defaultFloor) {
 		floor->spawn();
@@ -159,9 +158,12 @@ void Game::setupFloor() {
 
 void Game::chooseRace() {
 	cout << "Choose race: ";
-	char race;
-	cin >> race;
-	Player::setRace(race);
+	string race;
+	getline(cin, race);
+	while (!Player::setRace(toupper(race[0]))) {
+		cout << "Invalid input, please try again: ";
+		cin >> race;
+	}
 }
 
 void Game::runGameLoop() {
@@ -199,39 +201,55 @@ void Game::runGameLoop() {
 
 void Game::runPlayerTurn() {
 	Player::getInstance()->invokeAbility();
-
 	cout << "Enter command: ";
 	string command;
 	cin >> command;
+	bool validCommand = false;
+	while (!validCommand) {
 	Cell *cell = parseDirection(command);
 	if (cell != NULL) {
 		//nextFloorFlag = true;
-		Player::getInstance()->move(cell);
+		validCommand = Player::getInstance()->move(cell);
+		if (validCommand) {
+			addAction("PC moves " + parseLongDirection(command) + ". ");
+		}
 	} else {
 		if (command == "u") {
 			cin >> command;
 			cell = parseDirection(command);
 			if (cell) {
-				Player::getInstance()->pickUp(cell);
+				validCommand = Player::getInstance()->pickUp(cell);
 			} else {
+#ifdef DLC
 				int inventoryIndex = parseInventoryIndex(command);
 				if (inventoryIndex != -1) {
-					Player::getInstance()->useInventory(inventoryIndex);
+					validCommand = Player::getInstance()->useInventory(inventoryIndex);
 				}
+#endif
 			}
 		} else if (command == "a") {
 			cin >> command;
 			cell = parseDirection(command);
-			Player::getInstance()->engage(cell);
+			if (cell) {
+				validCommand = Player::getInstance()->engage(cell);
+			}
 		} else if (command == "r") {
 			restartFlag = true;
+			validCommand = true;
 		} else if (command == "q") {
 			quitFlag = true;
+			validCommand = true;
 		}
+	}
+	if (!validCommand) {
+		cout << "Invalid input, please try again: ";
+		cin >> command;
+	}
 	}
 }
 
 void Game::runEnemyTurn() {
+	floor->resetMoved();
 	floor->performAction();
 }
 
@@ -281,6 +299,27 @@ int Game::parseInventoryIndex(string index) {
 		return -1;
 	}
 }
+string Game::parseLongDirection(string direction) {
+	if (direction == "no") {
+		return "North";
+	} else if (direction == "so") {
+		return "South";
+	} else if (direction == "ea") {
+		return "East";
+	} else if (direction == "we") {
+		return "West";
+	} else if (direction == "ne") {
+		return "North East";
+	} else if (direction == "nw") {
+		return "North West";
+	} else if (direction == "se") {
+		return "South East";
+	} else if (direction == "sw") {
+		return "South West";
+	} else {
+		return "Nowhere";
+	}
+}
 void Game::display() {
 	floor->displayFloor();
 	displayInfo();
@@ -288,23 +327,36 @@ void Game::display() {
 }
 
 void Game::displayInfo() {
-	cout << "Race: " << Player::getInstance()->getName();
-	cout << " Gold: " << Player::getInstance()->getGold();
+	wmove(win, 26, 0);
+    waddstr(win, ("Race: " + Player::getInstance()->getName()).c_str());
+    waddstr(win, " Gold: " + Player::getInstance()->getGold());
+    waddstr(win, " Gold: " + Player::getInstance()->getGold());
+	/*cout << ;
+	cout << ;
 	cout << "\t\t\t\t\t\t\tFloor " << level << endl;
 
 	cout << "HP: " << Player::getInstance()->getHP() << endl;
 	cout << "Atk: " << Player::getInstance()->getAtk();
 	Sword *sword = Player::getInstance()->getSword();
 	if (sword) {
+<<<<<<< Updated upstream
+		cout << "(" << sword->getName() << ")";
+=======
 		cout << "(" << sword->getAtk() << " from "  << sword->getName() << ")";
-	} 
+>>>>>>> Stashed changes
+	}
 	cout << endl;
 	cout << "Def: " << Player::getInstance()->getDef();
 	Armor *armor = Player::getInstance()->getArmor();
  	if (armor) {
+<<<<<<< Updated upstream
+		cout << "(" << armor->getName() << ")";
+=======
 		cout << "(" << armor->getDef() << " from " << armor->getName() << ")";
-	}	
+>>>>>>> Stashed changes
+	}
 	cout << endl;
+#ifdef DLC
 	cout << "Inventory: ";
 	for (int i = 0; i < Player::MAX_INVENTORY; i ++) {
 		Inventory *inventory = Player::getInstance()->getInventoryAt(i);
@@ -316,12 +368,17 @@ void Game::displayInfo() {
 		}
 		cout << "]";
 	}
+<<<<<<< Updated upstream
 	cout << endl;
-	
+#endif
+
+=======
+	cout << endl;*/
+>>>>>>> Stashed changes
 }
 
 void Game::displayAction() {
-	cout << "Action: " << action << endl;
+	//cout << "Action: " << action << endl;
 }
 
 void Game::addAction(string action) {

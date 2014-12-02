@@ -12,7 +12,7 @@
 #include "dragonTreasure.h"
 using namespace std;
 
-Floor::Floor() {
+Floor::Floor(WINDOW *win) {
 	for (int i = 0; i < MAX_ROW; i ++) {
 		for (int j = 0; j < MAX_COLUMN; j ++) {
 			map[i][j] = NULL;
@@ -21,6 +21,10 @@ Floor::Floor() {
 	for (int i = 0; i < MAX_CHAMBERS; i ++) {
 		chambers[i] = NULL;
 	}
+
+	this->win = win;
+	win = newwin(MAX_ROW, MAX_COLUMN, 1, 1);
+	wmove(win, 0, 0);
 }
 
 Floor::~Floor() {
@@ -128,14 +132,13 @@ void Floor::displayFloor() {
 	for (int i = 0; i < MAX_ROW; i ++) {
 		for (int j = 0; j < MAX_COLUMN; j ++) {
 			if (map[i][j]) {
-				cout << map[i][j]->getSymbol();
+				waddch(win, map[i][j]->getSymbol() | A_NORMAL);
 			} else {
-				cout << ' ';
+				waddch(win, ' ' | A_NORMAL);
 			}
 		}
-		cout << endl;
 	}
-
+	wrefresh(win);
 }
 
 /* *

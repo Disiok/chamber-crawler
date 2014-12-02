@@ -5,7 +5,7 @@ OBJECTS = armor.o boostAtk.o boostDef.o cell.o chamber.o character.o door.o drag
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
+	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lncurses
 
 -include ${DEPENDS}
 

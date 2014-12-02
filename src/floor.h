@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <ncurses.h>
 
 // Forward declaration
 class Cell;
@@ -19,7 +20,8 @@ class Floor {
 		static const int NUM_ENEMY = 20;
 		static const int NUM_EQUIP = 10;
 
-		Floor();
+		WINDOW * win;
+		Floor(WINDOW *win);
 		~Floor();
 
 		void loadFromFile(std::ifstream *floorStream);
